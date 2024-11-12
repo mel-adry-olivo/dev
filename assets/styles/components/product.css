@@ -1,0 +1,104 @@
+.product__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product__image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  aspect-ratio: 1 / 1;
+  background-color: var(--clr-surface);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.product__favorite-button {
+  display: inline-flex;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product__card:hover .product__favorite-button {
+  opacity: 1;
+}
+
+/* TODO: REFACTOR */
+.product__favorite-button::after {
+  content: attr(data-tooltip);
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--clr-gray-300);
+  color: var(--clr-bg);
+  padding: 0.4em 0.8em;
+  border-radius: 0.5rem;
+  text-wrap: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product__favorite-button:hover::after {
+  opacity: 0.8;
+}
+
+.product__favorite-icon {
+  display: inline-flex;
+  color: var(--clr-gray-200);
+}
+
+.product__favorite-icon--checked {
+  display: none;
+}
+
+.product__favorite-icon > svg {
+  width: 26px;
+  height: 26px;
+}
+
+.product__image {
+  mix-blend-mode: multiply;
+}
+
+.product__text-wrapper {
+  /* display: grid;
+  grid-template-rows: repeat(3, 1fr); */
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.product__text-wrapper > * {
+  display: flex;
+  align-items: center;
+  padding-inline: 0.5rem;
+}
+
+.product__brand {
+  font-size: 0.7rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: var(--clr-gray-200);
+}
+
+.product__name {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--clr-gray-300);
+}
+
+.product__price {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--clr-gray-400);
+}

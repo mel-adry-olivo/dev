@@ -1,0 +1,21 @@
+to refactor:
+    favorites function in product cards
+
+
+to do:
+
+
+    fix wrapper width (1400px)
+    bag content
+    mobile nav menu
+        sunglasses
+        eyeglasses
+        about
+    products page 
+        product list
+        product filters
+
+    soon:
+        drop down menus in header  
+        footer
+        hover effects in product cards

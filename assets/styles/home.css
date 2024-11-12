@@ -1,0 +1,211 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 100vh;
+  padding-bottom: var(--wrapper-padding);
+  padding-inline: 2rem;
+}
+.hero__media-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 1rem;
+  padding: var(--default-gap);
+  height: calc(100% - 6rem);
+}
+.hero__media {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  filter: brightness(85%) saturate(85%);
+}
+.hero__media-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.hero__media-content > * {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+.hero__headline-wrapper {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.hero__cta {
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.hero__headline-primary {
+  letter-spacing: -1px;
+  font-weight: 400;
+}
+.hero__headline-secondary {
+  font-family: 'Source Serif Pro', 'Times New Roman', serif;
+  font-weight: 400;
+}
+.hero__cta-text {
+  font-weight: 300;
+}
+.hero__cta-button {
+  font-size: 1.5rem;
+  border-radius: 2rem;
+}
+.shapes__grid {
+  display: grid;
+  gap: var(--default-gap);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 30rem;
+}
+.shapes__item {
+  position: relative;
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.shapes__item-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  z-index: -1;
+  will-change: transform;
+  filter: brightness(80%) saturate(85%);
+  transition: transform 0.3s ease, filter 0.4s ease;
+}
+.shapes__item-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 2rem;
+  transition: all 0.4s ease;
+}
+.shapes__item-icon {
+  height: 32px;
+  color: var(--clr-gray-300);
+  position: absolute;
+  border-radius: 1rem;
+  justify-content: flex-start;
+  padding-inline: 6px;
+  z-index: -1;
+  transition: all 0.4s cubic-bezier(0.65, 0, 0.076, 1);
+}
+.shapes__item-text {
+  color: var(--clr-bg);
+  margin-left: 2.45rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 1;
+  transition: opacity 0.3s ease, color 0.6s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.shapes__item-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  opacity: 0;
+  color: var(--clr-bg);
+  transition: all 0.4s ease;
+}
+.shapes__item:hover > .shapes__item-link > .shapes__item-icon {
+  width: 125%;
+}
+.shapes__item:hover > .shapes__item-link > .shapes__item-arrow {
+  right: -1.25rem;
+  opacity: 1;
+  color: var(--clr-gray-300);
+}
+.shapes__item:hover > .shapes__item-link > .shapes__item-text {
+  opacity: 1;
+  color: var(--clr-gray-300);
+}
+.shapes__item:hover > .shapes__item-image {
+  transform: scale(1.01);
+  filter: brightness(75%) saturate(80%);
+}
+
+.products__showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: var(--clr-bg);
+}
+.products__carousel {
+  display: flex;
+  gap: var(--default-gap);
+  transition: transform 0.5s ease;
+}
+.products__carousel > * {
+  width: calc(25% - 1rem);
+  /* flex: 0 0 calc(25% - 2rem); */
+}
+.products__carousel-see-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 82%;
+}
+.products__carousel-control-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+.products__carousel-control {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--clr-gray-300);
+}
+.products__carousel-control:hover {
+  background-color: var(--clr-gray-300);
+  color: var(--clr-bg);
+}
+
+@media (max-width: 1200px) {
+  .products__carousel > * {
+    flex-basis: calc(33.333% - 1.33rem);
+  }
+}
+
+@media (max-width: 724px) {
+  .hero__cta {
+    align-items: center;
+  }
+  .hero__cta-button {
+    width: 100%;
+  }
+
+  .shapes__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 45vh);
+  }
+
+  .products__carousel > * {
+    flex-basis: calc(50% - 1rem);
+  }
+
+  .products__carousel-controls {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .products__carousel > * {
+    flex-basis: 100%;
+  }
+}

@@ -1,0 +1,321 @@
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  background-color: hsla(0, 0%, 0%, 0.3);
+  backdrop-filter: blur(15px);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.page-overlay.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.action-menu {
+  position: fixed;
+  inset: 1rem;
+  left: auto;
+  width: 50%;
+  z-index: 999;
+  display: flex;
+  transform: translateX(calc(100% + 1rem));
+  transition: all 0.4s ease;
+  color: var(--clr-gray-300);
+}
+.action-menu.show {
+  transform: translateX(0);
+}
+.action-menu__wrapper {
+  width: 100%;
+  background-color: var(--clr-bg);
+  border-radius: 1rem;
+  padding-inline: 3rem;
+  padding-block: 1rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.action-menu__wrapper::-webkit-scrollbar {
+  display: none;
+}
+.action-menu__header {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--clr-gray-100);
+}
+.action-menu__close-button {
+  color: var(--clr-gray-200);
+}
+.action-menu__close-button:hover {
+  color: var(--clr-gray-400);
+}
+.action-menu__actions {
+  display: flex;
+}
+.action-menu__button {
+  transition: color 0.2s ease;
+}
+.action-menu__button.active {
+  color: var(--clr-gray-400);
+}
+.action-menu__button:not(.action-menu__button.active) {
+  color: var(--clr-gray-200);
+}
+.action-menu__actions:hover .action-menu__button {
+  color: var(--clr-gray-100);
+}
+.action-menu__actions:hover .action-menu__button:hover {
+  color: var(--clr-gray-300);
+}
+.action-menu__content-wrapper {
+  padding-inline: 1rem;
+  padding-block: 1.5rem;
+}
+.action-menu__content {
+  position: relative;
+}
+.action-menu__content > .action-menu__content-item {
+  position: absolute;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
+  pointer-events: none;
+  height: auto;
+}
+.action-menu__content > .action-menu__content-item.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.profile__welcome {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-gray-300);
+}
+
+.auth[data-state='login'] > .auth-register,
+.auth[data-state='register'] > .auth-login {
+  visibility: hidden;
+  opacity: 0;
+}
+.auth > .auth-login,
+.auth > .auth-register {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  visibility: visible;
+  opacity: 1;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.auth__header {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.auth__title {
+  font-weight: 500;
+  color: var(--clr-gray-400);
+}
+.auth__subtitle,
+.auth__register-text {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--clr-gray-200);
+}
+.auth__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.auth__field-group {
+  position: relative;
+  padding-block: 1rem;
+  width: 100%;
+}
+.auth__field {
+  border-bottom: 1px solid var(--clr-gray-100);
+  color: var(--clr-gray-400);
+  padding-block: 0.45rem;
+}
+.auth__field::placeholder {
+  color: transparent;
+}
+.auth__field:placeholder-shown ~ .auth__label {
+  cursor: text;
+  top: 1.25rem;
+}
+.auth__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.9rem;
+  color: var(--clr-gray-300);
+}
+.auth__field:focus ~ .auth__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 0.75rem;
+  color: var(--clr-gray-200);
+}
+.auth__submit {
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  padding-block: 1rem;
+}
+.auth__footer {
+  padding-block: 2rem;
+  overflow: hidden;
+}
+.auth__cta-button {
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.search {
+  overflow-y: hidden;
+}
+.search__form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: text;
+
+  border-bottom: 1px solid var(--clr-gray-100);
+  padding-block-end: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+.search__form:hover,
+.search__form.focused {
+  border-color: var(--clr-gray-200);
+}
+.search__field {
+  display: flex;
+  position: relative;
+  gap: 0.5rem;
+}
+#search__input::placeholder {
+  font-size: 0.9rem;
+}
+.search__icon,
+.search__submit {
+  color: var(--clr-gray-100);
+  transition: color 0.3s ease;
+}
+.search__icon.focused,
+.search__submit.focused {
+  color: var(--clr-gray-200);
+}
+.search__submit[disabled] {
+  cursor: default;
+}
+.search__suggestions-wrapper {
+  margin-top: 1rem;
+}
+.search__suggestions-label,
+.search__suggestion-item {
+  display: inline-flex;
+}
+.search__suggestions-label {
+  color: var(--clr-gray-100);
+  padding-block: 1rem;
+  font-size: 0.9rem;
+}
+.search__suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.search__suggestion-item {
+  font-size: 0.9rem;
+}
+.search__recommendations-wrapper {
+  margin-top: 2rem;
+}
+.search__recommendations-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding-block: 1rem;
+}
+.search__recommendations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.favorites {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+.favorites__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.favorites__empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  gap: 0.8rem;
+  width: fit-content;
+  padding-bottom: 1rem;
+}
+
+.favorites__empty-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-gray-300);
+}
+
+.favorites__not-logged-button,
+.favorites__explore {
+  font-size: 0.92rem;
+  color: var(--clr-gray-200);
+}
+
+.favorites__explore {
+  width: fit-content;
+}
+
+.bag {
+}
+
+@media (max-width: 1200px) {
+  .action-menu {
+    width: 75%;
+  }
+}
+
+@media (max-width: 900px) {
+  .action-menu {
+    width: auto;
+    inset: 1rem;
+  }
+}
