@@ -1,16 +1,19 @@
 <?php
 
 // table names
-$categories = ['brand', 'frame_type', 'shape'];
+$categories = getAllCategories();
+
+
+
 
 ?>
 
 <div class="shop__filter">
     <ul class="shop__filter-categories">
-        <?php foreach($categories as $category) {
-            $categoryItems = retrieveAllFrom($category);
-            createFilterCategory($category, $categoryItems);
-        }
+        <?php 
+            foreach($categories as $category => $categoryItems) {
+                createFilterCategory($category, $categoryItems);
+            }
         ?>
     </ul>
 </div>
