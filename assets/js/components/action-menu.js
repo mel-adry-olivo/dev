@@ -16,13 +16,18 @@ const initActionMenu = () => {
   setActionEvent(headerActionButtons, toggleActionMenu);
   setActionEvent(actionMenuButtons, updateActionMenuContent);
   actionMenuCloseButton.addEventListener('click', toggleActionMenu);
-  pageOverlay.addEventListener('click', (e) => e.target === pageOverlay && toggleActionMenu());
   authCtaButtons.forEach((btn) =>
     btn.addEventListener('click', () => {
       const isLogin = authForm.getAttribute('data-state') === 'login';
       authForm.setAttribute('data-state', isLogin ? 'register' : 'login');
     }),
   );
+  pageOverlay.addEventListener('click', (e) => {
+    if (e.target === pageOverlay && actionMenu.classList.contains('show')) {
+      toggleActionMenu();
+    }
+  });
+
   initSearch();
 };
 
