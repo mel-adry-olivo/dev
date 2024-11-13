@@ -1,0 +1,124 @@
+PRODUCTS
+
+----------------------------
+
+Brand
+Name
+Type [e.g., sunglasses, eyeglasses]
+Gender
+Price
+Stocks
+Shape
+Color
+Material [e.g., acetate, metal]
+Frame Type [e.g., full-rim, semi-rim, rimless]
+Lens Width
+Bridge Width
+Temple Length
+Ratings
+Reserve Count
+Image1
+Image2
+
+----------------------------
+
+Dior
+CD Link A1U
+Sunglasses
+Men
+37000
+45
+Round
+Silver
+Metal
+Full-Rim
+61mm
+13mm
+145mm
+4.5
+12
+./assets/images/products/dior-cd-link-a1u-0.png
+./assets/images/products/dior-cd-link-a1u-1.png
+
+---------------------------
+
+Gucci
+GG1509O
+Eyeglasses
+Men
+21000
+20
+Square
+Black
+Acetate
+Full-Rim
+54mm
+20mm
+145mm
+4.2
+8
+./assets/images/products/gucci-gg1509o-0.png
+./assets/images/products/gucci-gg1509o-1.png
+
+---------------------------
+
+Cartier
+CT03710 - Panthère De Cartier
+Eyeglasses
+Women
+75000
+35
+Square
+Gold
+Metal
+Full-Rim
+56mm
+18mm
+140mm
+4.8
+12
+./assets/images/products/cartier-ct0371o-0.png
+./assets/images/products/cartier-ct0371o-1.png
+
+---------------------------
+
+Guess
+GU7538
+Sunglasses
+Women
+3500
+60
+Rectangle
+Shiny Black
+Plastic
+Full-Rim
+54mm
+16mm
+140mm
+4.6
+32
+./assets/images/products/guess-gu7538-0.png
+./assets/images/products/guess-gu7538-1.png
+
+---------------------------
+
+Cartier
+CT0058O - Panthère De Cartier
+Eyeglasses
+Unisex
+70000
+15
+Rectangle
+Silver
+Metal
+Rimless
+52mm
+18mm
+130mm
+4.7
+8
+./assets/images/products/cartier-ct0058o-0.png
+./assets/images/products/cartier-ct0058o-1.png
+
+---------------------------
+

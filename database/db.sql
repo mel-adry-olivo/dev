@@ -9,12 +9,6 @@ CREATE TABLE `user` (
     UNIQUE `user_email_unique` (`email`)
 );
 
-CREATE TABLE `shape` (
-    `shape_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL UNIQUE,
-    `image` VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE `brand` (
     `brand_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL UNIQUE

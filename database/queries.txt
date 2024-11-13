@@ -1,0 +1,73 @@
+// PRODUCTS with ATTRIBUTES
+SELECT 
+    p.name AS product_name,
+    p.price,
+    p.type,
+	MAX(CASE WHEN c.name = 'Color' THEN a.name END) AS color,
+    MAX(CASE WHEN c.name = 'Frame Type' THEN a.name END) AS frame_type,
+    MAX(CASE WHEN c.name = 'Shape' THEN a.name END) AS shape,
+    MAX(CASE WHEN c.name = 'Material' THEN a.name END) AS material,
+    MAX(CASE WHEN c.name = 'Gender' THEN a.name END) AS gender,
+    p.lens_width,
+    p.bridge_width,
+    p.temple_length,
+    p.image_main,
+    p.image_alternate
+FROM 
+    products p
+JOIN 
+    product_attributes pa ON p.product_id = pa.product_id
+JOIN 
+    attributes a ON pa.attribute_id = a.attribute_id
+JOIN 
+    categories c ON a.category_id = c.category_id
+GROUP BY 
+    p.product_id, p.name, p.price, p.type, p.lens_width, p.bridge_width, p.temple_length, p.image_main, p.image_alternate
+ORDER BY 
+    p.name;
+
+
+
+// PRODUCT INSERT TEMPLATE
+INSERT INTO products (
+    brand_id, 
+    name,
+    type, 
+    price,
+    gender, 
+    reserve_count,
+    stock_quantity,
+    lens_width,
+    bridge_width,
+    temple_length,
+    image_main,
+    image_alternate
+)
+VALUES (
+    [1=Dior, 2=Gucci, 3=Cartier, 4=Guess],
+    [Name],
+    ['Sunglasses', 'Eyeglasses'],
+    30000,
+    ['Men', 'Women', 'Unisex'],
+    5,
+    20,
+    62,
+    14,
+    150,
+    './assets/images/products/new-gucci-product-0.png',
+    './assets/images/products/new-gucci-product-1.png'
+);
+
+SET @product_id = LAST_INSERT_ID();
+
+INSERT INTO product_attributes (
+    product_id,
+    attribute_id
+)
+
+VALUES [Shape, Color, Material, Frame Type, Gender]
+    (@product_id, 1),  -- Round 
+    (@product_id, 6),  -- Silver 
+    (@product_id, 8),  -- Metal
+    (@product_id, 11),  -- Full-Rim 
+    (@product_id, 14);  -- Men
