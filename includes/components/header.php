@@ -1,5 +1,5 @@
 <header class="header__wrapper">
-    <div class="wrapper header">
+    <div class="header">
         <nav class="header__nav">
             <button class="header__nav-button">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="iconify iconify--iconoir" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5h18M3 12h18M3 19h18"></path></svg>
