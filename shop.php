@@ -5,17 +5,17 @@ require './includes/icons.php';
 require './includes/db-connect.php';
 require './includes/db-utils.php';
 
+session_start();
+
 $title = "INSPEC®"; 
 if(isset($_GET['type'])) {
     $type = $_GET['type'];
     $shopHeader = ucfirst($type);
-    $shopSubtitle = $type === 'sunglasses' ? 
-    'Elevate your style while protecting your eyes with our premium sunglasses.' 
-    : 
-    'Discover our collection of eyeglasses, crafted with precision lenses for crystal-clear vision.';
+    $sunglassesSubtitle = 'Discover our collection of sunglasses, crafted with precision lenses for crystal-clear vision.';
+    $eyeglassesSubtitle = 'Elevate your style while protecting your eyes with our premium eyeglasses.';
+    $shopSubtitle = $type === 'sunglasses' ? $sunglassesSubtitle : $eyeglassesSubtitle;
 }
 
-session_start();
 ?>
 
 <!DOCTYPE html>
