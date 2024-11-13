@@ -3,17 +3,17 @@ const initCarousel = () => {
   const prevButton = document.querySelector('.products__carousel-control--prev');
   const nextButton = document.querySelector('.products__carousel-control--next');
   const carouselItems = Array.from(carousel.children);
-  const ITEM_GAP = 32;
-  let itemWidth = getElementWidth(carouselItems[0]);
+  const itemGap = 32;
+
+  let itemWidth = 0;
   let currentOffset = 0;
   let maxOffset = 0;
 
-  const updateCarouselLimits = () => {
-    const containerWidth = getElementWidth(carousel.parentElement);
+  const calculateCarouselLimits = () => {
+    const containerWidth = carousel.parentElement.clientWidth;
     const totalItemWidth = itemWidth * carouselItems.length;
-    const totalGapWidth = ITEM_GAP * (carouselItems.length - 1);
-    const totalWidth = totalItemWidth + totalGapWidth;
-    maxOffset = -(totalWidth - containerWidth);
+    const totalGapWidth = itemGap * (carouselItems.length - 1);
+    maxOffset = -(totalItemWidth + totalGapWidth - containerWidth);
   };
 
   const updateCarouselPosition = () => {
@@ -21,42 +21,34 @@ const initCarousel = () => {
   };
 
   const shiftCarousel = (direction) => {
-    currentOffset += direction * (itemWidth + ITEM_GAP);
+    currentOffset += direction * (itemWidth + itemGap);
     currentOffset = Math.max(maxOffset, Math.min(currentOffset, 0));
     updateCarouselPosition();
     updateCarouselControls();
   };
 
   const updateCarouselControls = () => {
-    if (currentOffset === 0) {
-      prevButton.classList.add('disabled');
-    } else {
-      prevButton.classList.remove('disabled');
-    }
+    prevButton.disabled = currentOffset === 0;
+    nextButton.disabled = currentOffset === maxOffset;
+  };
 
-    if (currentOffset === maxOffset) {
-      nextButton.classList.add('disabled');
-    } else {
-      nextButton.classList.remove('disabled');
-    }
+  const handleResize = () => {
+    itemWidth = carouselItems[0].clientWidth;
+    currentOffset = 0;
+    calculateCarouselLimits();
+    updateCarouselPosition();
+    updateCarouselControls();
   };
 
   prevButton.addEventListener('click', () => shiftCarousel(1));
   nextButton.addEventListener('click', () => shiftCarousel(-1));
+  window.addEventListener('resize', handleResize);
 
-  window.addEventListener('resize', () => {
-    itemWidth = getElementWidth(carouselItems[0]);
-    currentOffset = 0;
-    updateCarouselLimits();
-    updateCarouselPosition();
-    updateCarouselControls();
-  });
-
-  updateCarouselLimits();
+  // Initial setup
+  itemWidth = carouselItems[0].clientWidth;
+  calculateCarouselLimits();
   updateCarouselPosition();
   updateCarouselControls();
 };
-
-const getElementWidth = (element) => parseFloat(globalThis.getComputedStyle(element).width);
 
 export default initCarousel;

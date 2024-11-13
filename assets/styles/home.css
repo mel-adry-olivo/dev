@@ -175,7 +175,7 @@
   background-color: var(--clr-gray-300);
   color: var(--clr-bg);
 }
-.products__carousel-control.disabled {
+.products__carousel-control[disabled] {
   opacity: 0.5;
   pointer-events: none;
 }
