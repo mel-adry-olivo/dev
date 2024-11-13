@@ -4,9 +4,6 @@ const initProductCard = () => {
   productFavoriteButton.forEach((button) => {
     const productFavoriteIconUnchecked = button.querySelector('.product__favorite-icon--unchecked');
     const productFavoriteIconChecked = button.querySelector('.product__favorite-icon--checked');
-
-    console.log(button);
-
     button.addEventListener('mouseenter', () => {
       productFavoriteIconUnchecked.style.display = 'none';
       productFavoriteIconChecked.style.display = 'inline-flex';
