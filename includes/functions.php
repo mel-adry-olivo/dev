@@ -20,7 +20,7 @@ function createShapeItem($shape) {
 }
 
 function createProductCard($product) {
-    $imagePath = $product["imagePath"];
+    $imagePath = $product["image_main"];
     $brand = $product["brand"];
     $name = $product["name"];
     $price = $product["price"];
@@ -54,7 +54,7 @@ function createFilterCategory($category, $items) {
     $itemsHTML = '';
 
     foreach($items as $item) {
-        $itemsHTML .= "<li class='shop__filter-item'>
+        $itemsHTML .= "<li class='shop__dropdown-item'>
                           <button>". $item . "</button>
                        </li>";
     }
@@ -62,12 +62,12 @@ function createFilterCategory($category, $items) {
     echo
     <<<HTML
     <li class="shop__filter-category">
-        <button class="shop__filter-button">$formattedCategory
-            <span class="icon-container shop__filter-icon">$downArrow</span>
+        <button class="shop__dropdown-button">$formattedCategory
+            <span class="icon-container shop__dropdown-icon">$downArrow</span>
         </button>
-        <div class="shop__filter-dropdown">
-        <div class="shop__filter-dropdown-content">
-                <ul class="shop__filter-items">
+        <div class="shop__dropdown-container">
+            <div class="shop__dropdown-content">
+                <ul class="shop__dropdown-items">
                     $itemsHTML
                 </ul>
             </div>

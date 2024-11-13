@@ -1,10 +1,4 @@
 <?php 
-function retrieveAllFrom($tableName) {
-    global $conn;
-    $sql = "SELECT * FROM $tableName ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
-}
 
 function getUserByEmail($email) {
     global $conn;
@@ -31,4 +25,32 @@ function getAllCategories() {
         $categories[$categoryName][] = $attributeName;
     }
     return $categories;
+}
+
+function getAllProducts() {
+    global $conn;
+    $sql = "
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN brands ON products.brand_id = brands.brand_id
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getProductsByType($type) {
+    global $conn;
+    $formattedType = ucfirst($type);
+    $sql = "
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN brands ON products.brand_id = brands.brand_id
+        WHERE products.type = '$formattedType'
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
 }

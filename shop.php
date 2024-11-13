@@ -14,6 +14,8 @@ if(isset($_GET['type'])) {
     $sunglassesSubtitle = 'Discover our collection of sunglasses, crafted with precision lenses for crystal-clear vision.';
     $eyeglassesSubtitle = 'Elevate your style while protecting your eyes with our premium eyeglasses.';
     $shopSubtitle = $type === 'sunglasses' ? $sunglassesSubtitle : $eyeglassesSubtitle;
+    $products = getProductsByType($type);
+    
 }
 
 ?>
@@ -38,10 +40,13 @@ if(isset($_GET['type'])) {
                     <span class="shop__header-subtitle"><?php echo $shopSubtitle; ?></span>
                 </div>
             </header>
-            <?php require './includes/components/shop-filter.php'?>
+            <?php require './includes/components/shop-toolbar.php'?>
             <main class="product-catalog">
-                <!-- Where product card goes  -->
-                <?php include './includes/test-products-list.php'; ?>
+                <?php 
+                    foreach($products as $product) {
+                        createProductCard($product);
+                    }
+                ?>
             </main>
         </section>
     </div>

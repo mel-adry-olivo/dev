@@ -47,3 +47,4 @@
         </div>
     </div>
 </header>
+<div class="page-overlay"></div>

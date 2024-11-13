@@ -5,7 +5,7 @@
   --clr-gray-100: hsl(0, 0%, 72%);
   --clr-bg: hsl(0, 0%, 98%);
   --clr-bg-hover: hsl(0, 0%, 96%);
-  --clr-surface: hsl(0, 0%, 94%);
+  --clr-surface: hsl(240, 8%, 95%);
   --clr-surface-hover: hsl(0, 0%, 86%);
 
   --default-gap: 2rem;
