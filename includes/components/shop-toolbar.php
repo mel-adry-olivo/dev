@@ -13,6 +13,7 @@ $categories = getAllCategories();
         <div class="shop__filter-container">
             <header class="shop__filter-header">
                 <button class="shop__filter-close-button"><?php echo getIcon("close"); ?></button>
+                <button class="button-link shop__filter-reset shop__filter-reset-mobile">Reset Filters</button>
             </header>
             <div class="shop__filter-content">
                 <ul class="shop__filter-items">
@@ -22,6 +23,7 @@ $categories = getAllCategories();
                         }
                     ?>
                 </ul>
+                <button class="button-link shop__filter-reset shop__filter-reset-desktop">Reset Filters</button>
             </div>
         </div>
     </div>

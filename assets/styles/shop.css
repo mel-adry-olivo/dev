@@ -42,11 +42,29 @@
 .shop__toolbar-filter {
   display: flex;
 }
+.shop__filter-content {
+  display: flex;
+}
 .shop__filter-items {
   display: flex;
   gap: 1rem;
 }
-
+.shop__filter-reset {
+  font-size: var(--font-size);
+  margin-left: 1rem;
+}
+.shop__filter-reset-desktop {
+  display: none;
+}
+.shop__filter-reset-mobile {
+  display: none;
+}
+.shop__filter-reset-desktop.show {
+  display: inline;
+}
+.shop__filter-reset-mobile.show {
+  display: none;
+}
 .shop__filter-close-button {
   display: none;
 }
@@ -113,11 +131,33 @@
   gap: 1rem;
 }
 .shop__dropdown-item {
+  position: relative;
   display: inline-flex;
 }
+.shop__dropdown-item.active button,
+.shop__dropdown-item.active span {
+  color: var(--clr-gray-400);
+}
+.shop__dropdown-item.active span {
+  opacity: 1;
+}
+.shop__dropdown-item.active button {
+  transform: translateX(24px);
+}
+.shop__dropdown-item span {
+  height: 24px;
+  width: 24px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
 .shop__dropdown-item button {
+  position: absolute;
   color: var(--clr-gray-200);
   font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+.shop__dropdown-button-text {
+  color: inherit;
 }
 .shop__filter-button-mobile {
   display: none;
@@ -131,6 +171,10 @@
 }
 
 @media (max-width: 900px) {
+  .shop__dropdown-item {
+    width: 100%;
+  }
+
   .shop__filter-button-mobile {
     display: inline-flex;
   }
@@ -140,13 +184,13 @@
     inset: 1rem;
     top: 6rem;
     z-index: 999;
-    padding: 1rem;
+    padding-block: 1rem;
+    padding-inline: 3rem;
     transform: translateY(calc(100% + 1rem));
     border-radius: 1rem;
     transition: all 0.4s ease;
     overflow-y: auto;
     background-color: var(--clr-bg);
-    visibility: hidden;
     scrollbar-width: none;
   }
 
@@ -155,14 +199,32 @@
   }
 
   .shop__filter-container.show {
-    visibility: visible;
     transform: translateY(0);
+  }
+
+  .shop__filter-content {
+    flex-direction: column;
   }
 
   .shop__filter-header {
     display: flex;
+    justify-content: space-between;
     padding-block: 2rem;
     border-bottom: 1px solid var(--clr-gray-100);
+  }
+
+  .shop__filter-reset-desktop {
+    display: none;
+  }
+  .shop__filter-reset-mobile {
+    display: none;
+  }
+
+  .shop__filter-reset-desktop.show {
+    display: none;
+  }
+  .shop__filter-reset-mobile.show {
+    display: inline;
   }
 
   .shop__filter-close-button {
@@ -194,7 +256,7 @@
     align-self: flex-start;
   }
 
-  .shop__filter-items button {
+  .shop__filter-items .shop__dropdown-button {
     width: 100%;
     justify-content: space-between;
   }

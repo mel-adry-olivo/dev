@@ -51,10 +51,12 @@ function createFilterCategory($category, $items) {
 
     $formattedCategory = ucwords(str_replace('_', ' ', $category));
     $downArrow = getIcon("arrow-down");
+    $check = getIcon("check");
     $itemsHTML = '';
 
     foreach($items as $item) {
         $itemsHTML .= "<li class='shop__dropdown-item'>
+                          <span class='icon-container shop__dropdown-icon'>$check</span>
                           <button>". $item . "</button>
                        </li>";
     }
@@ -62,7 +64,8 @@ function createFilterCategory($category, $items) {
     echo
     <<<HTML
     <li class="shop__filter-category">
-        <button class="shop__dropdown-button">$formattedCategory
+        <button class="shop__dropdown-button">
+            <span class="shop__dropdown-button-text">$formattedCategory</span>
             <span class="icon-container shop__dropdown-icon">$downArrow</span>
         </button>
         <div class="shop__dropdown-container">
