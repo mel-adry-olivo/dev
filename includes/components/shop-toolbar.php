@@ -7,7 +7,8 @@ $categories = getAllCategories();
 
 <div class="shop__toolbar">
     <div class="shop__toolbar-filter">
-        <button class="shop__dropdown-button shop__filter-button-mobile">Filter by
+        <button class="shop__dropdown-button shop__filter-button-mobile">
+            <span class="shop__dropdown-button-text">Filter by</span>
             <span class="icon-container shop__dropdown-icon"><?php echo getIcon("arrow-down"); ?></span>
         </button>
         <div class="shop__filter-container">
@@ -32,18 +33,21 @@ $categories = getAllCategories();
             <span class="shop__toolbar-count"><?php echo count($products); ?> Products</span>
         </div>
         <div class="shop__toolbar-sort">
-            <button class="shop__dropdown-button">Sort by
+            <button class="shop__dropdown-button">
+                <span class="shop__dropdown-button-text">Sort By</span>
                 <span class="icon-container shop__dropdown-icon"><?php echo getIcon("arrow-down"); ?></span>
             </button>
             <div class="shop__dropdown-container">
                 <div class="shop__dropdown-content">
                     <ul class="shop__dropdown-items">
-                        <li class="shop__dropdown-item">
-                            <button class="shop__toolbar-sort-button">Price: High to Low</button>
-                        </li>
-                        <li class="shop__dropdown-item">
-                            <button class="shop__toolbar-sort-button">Price: Low to High</button>
-                        </li>
+                        <li class='shop__dropdown-item shop__sort-item'>
+                          <span class='icon-container shop__dropdown-icon'><?php echo getIcon("check"); ?></span>
+                          <button>Price: High to Low</button>
+                       </li>
+                       <li class='shop__dropdown-item shop__sort-item'>
+                          <span class='icon-container shop__dropdown-icon'><?php echo getIcon("check"); ?></span>
+                          <button>Price: Low to High</button>
+                       </li>
                     </ul>
                 </div>
             </div>

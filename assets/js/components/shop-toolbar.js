@@ -1,54 +1,45 @@
-// Utility function to toggle a CSS class
-
-// Get all the required elements
-const filterButtons = document.querySelectorAll('.shop__dropdown-button');
-const filterCategories = document.querySelectorAll('.shop__filter-category');
+const filterCategoryButtons = document.querySelectorAll('.shop__dropdown-button');
 const filterButtonMobile = document.querySelector('.shop__filter-button-mobile');
 const filterContainer = document.querySelector('.shop__filter-container');
 const filterItems = document.querySelectorAll('.shop__dropdown-item');
 const filterCloseButton = document.querySelector('.shop__filter-close-button');
 const filterResetButtonMobile = document.querySelector('.shop__filter-reset-mobile');
 const filterResetButton = document.querySelector('.shop__filter-reset-desktop');
+const sortItems = document.querySelectorAll('.shop__sort-item');
 const pageOverlay = document.querySelector('.page-overlay');
 const body = document.body;
 
-function initFilter() {
-  addFunctionToItems(filterButtons, handleFilterButtonClick);
-  addFunctionToItems(filterItems, handleFilterItemClick);
-  document.addEventListener('click', handleOutsideClick);
-  filterButtonMobile.addEventListener('click', handleToggleDropdown);
-  filterCloseButton.addEventListener('click', handleToggleDropdown);
+export default function initFilter() {
+  filterCategoryButtons.forEach((category) => {
+    category.addEventListener('click', () => toggleFilterDropdown(category));
+  });
+
+  filterItems.forEach((item) => {
+    item.addEventListener('click', () => handleFilterItemClick(item));
+  });
+
+  sortItems.forEach((item) => {
+    item.addEventListener('click', () => handleSortItemClick(item));
+  });
+
+  filterButtonMobile.addEventListener('click', toggleMobileFilters);
+  filterCloseButton.addEventListener('click', toggleMobileFilters);
   filterResetButton.addEventListener('click', handleResetFilterClick);
-  filterResetButtonMobile.addEventListener('click', handleResetFilterClick);
+  filterResetButtonMobile.addEventListener('click', () => {
+    handleResetFilterClick();
+    toggleMobileFilters();
+  });
   pageOverlay.addEventListener('click', handlePageOverlayClick);
-  window.addEventListener('resize', () => {
-    if (pageOverlay.classList.contains('show')) {
-      handleToggleDropdown();
-    }
-  });
+
+  document.addEventListener('click', handleOutsideClick);
+  window.addEventListener('resize', () => handleResize());
 }
-
-const toggleClass = (element, className) => {
-  element.classList.toggle(className);
-};
-
-const addFunctionToItems = (items, handler) => {
-  items.forEach((item) => {
-    item.addEventListener('click', handler);
-  });
-};
-
-const handleFilterButtonClick = (event) => {
-  const filterButton = event.target.closest('.shop__dropdown-button');
-  toggleFilterDropdown(filterButton);
-};
 
 const toggleFilterDropdown = (filterButton) => {
   toggleClass(filterButton, 'active');
-
-  // If screen is larger than 900px, close other dropdowns
+  // If screen is larger than 900px, do not auto close other dropdowns
   if (window.innerWidth > 900) {
-    filterButtons.forEach((btn) => {
+    filterCategoryButtons.forEach((btn) => {
       if (btn !== filterButton) {
         btn.classList.remove('active');
       }
@@ -56,31 +47,7 @@ const toggleFilterDropdown = (filterButton) => {
   }
 };
 
-const closeFilterDropdowns = () => {
-  filterCategories.forEach((category) => {
-    const dropdown = category.querySelector('.shop__dropdown-container');
-    dropdown.classList.remove('active');
-  });
-
-  filterButtons.forEach((button) => {
-    button.classList.remove('active');
-  });
-};
-
-const handleOutsideClick = (event) => {
-  if (!event.target.closest('.shop__toolbar')) {
-    closeFilterDropdowns();
-  }
-};
-
-const handleToggleDropdown = () => {
-  toggleClass(pageOverlay, 'show');
-  toggleClass(filterContainer, 'show');
-  toggleClass(body, 'no-scroll');
-};
-
-const handleFilterItemClick = (event) => {
-  const item = event.target.closest('.shop__dropdown-item');
+const handleFilterItemClick = (item) => {
   toggleClass(item, 'active');
 
   const container = item.closest('.shop__dropdown-container');
@@ -88,16 +55,45 @@ const handleFilterItemClick = (event) => {
     '.shop__dropdown-button-text',
   );
 
-  const baseText = categoryText.dataset.baseText || categoryText.textContent.split(' ')[0];
-  const activeCount = container.querySelectorAll('.shop__dropdown-item.active').length;
-  categoryText.textContent = activeCount > 0 ? `${baseText} (${activeCount})` : baseText;
-  categoryText.dataset.baseText = baseText;
+  if (categoryText.hasAttribute('filter')) {
+    const baseText = categoryText.dataset.baseText || categoryText.textContent.split(' ')[0];
+    const activeCount = container.querySelectorAll('.shop__dropdown-item.active').length;
+    categoryText.textContent = activeCount > 0 ? `${baseText} (${activeCount})` : baseText;
+    categoryText.dataset.baseText = baseText;
+    checkResetFilter();
+  }
+};
 
-  checkResetFilter();
+const handleSortItemClick = (item) => {
+  item.addEventListener('click', () => {
+    sortButtons.forEach((it) => {
+      it.classList.remove('active');
+    });
+    item.classList.add('active');
+  });
+};
+
+const closeAllDropdowns = () => {
+  filterCategoryButtons.forEach((category) => {
+    const dropdown = category.querySelector('.shop__dropdown-container');
+    if (dropdown) dropdown.classList.remove('active');
+  });
+};
+
+const handleResize = () => {
+  if (pageOverlay.classList.contains('show')) {
+    toggleMobileFilters();
+  }
+};
+
+const handleOutsideClick = (event) => {
+  if (!event.target.closest('.shop__toolbar')) {
+    closeAllDropdowns();
+  }
 };
 
 const checkResetFilter = () => {
-  const activeCount = document.querySelectorAll('.shop__dropdown-item.active').length;
+  const activeCount = document.querySelectorAll('.shop__dropdown-item.active[filter]').length;
   if (activeCount > 0) {
     filterResetButtonMobile.classList.add('show');
     filterResetButton.classList.add('show');
@@ -108,8 +104,8 @@ const checkResetFilter = () => {
 };
 
 const resetCategoryButtonTexts = () => {
-  filterCategories.forEach((category) => {
-    const categoryText = category.querySelector('.shop__dropdown-button-text');
+  filterCategoryButtons.forEach((btn) => {
+    const categoryText = btn.querySelector('.shop__dropdown-button-text');
     const baseText = categoryText.dataset.baseText || categoryText.textContent;
     categoryText.textContent = baseText;
     categoryText.dataset.baseText = baseText;
@@ -122,13 +118,20 @@ const handleResetFilterClick = () => {
   });
   resetCategoryButtonTexts();
   checkResetFilter();
-  closeFilterDropdowns();
+  closeAllDropdowns();
 };
 
 const handlePageOverlayClick = (event) => {
   if (event.target === pageOverlay && filterContainer.classList.contains('show')) {
-    handleToggleDropdown();
+    toggleMobileFilters();
   }
 };
+const toggleMobileFilters = () => {
+  toggleClass(pageOverlay, 'show');
+  toggleClass(filterContainer, 'show');
+  toggleClass(body, 'no-scroll');
+};
 
-export default initFilter;
+const toggleClass = (element, className) => {
+  element.classList.toggle(className);
+};
