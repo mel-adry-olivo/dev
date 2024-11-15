@@ -55,7 +55,7 @@ function createFilterCategory($category, $items) {
     $itemsHTML = '';
 
     foreach($items as $item) {
-        $itemsHTML .= "<li class='shop__dropdown-item' filter>
+        $itemsHTML .= "<li class='shop__dropdown-item' filter='$category'>
                           <span class='icon-container shop__dropdown-icon'>$check</span>
                           <button>". $item . "</button>
                        </li>";

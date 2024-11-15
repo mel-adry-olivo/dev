@@ -133,6 +133,7 @@
 .shop__dropdown-item {
   position: relative;
   display: inline-flex;
+  cursor: pointer;
 }
 .shop__dropdown-item.active button,
 .shop__dropdown-item.active span {

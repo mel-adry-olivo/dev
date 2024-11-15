@@ -40,11 +40,11 @@ $categories = getAllCategories();
             <div class="shop__dropdown-container">
                 <div class="shop__dropdown-content">
                     <ul class="shop__dropdown-items">
-                        <li class='shop__dropdown-item shop__sort-item'>
+                        <li class='shop__dropdown-item shop__sort-item active' data-direction="DESC">
                           <span class='icon-container shop__dropdown-icon'><?php echo getIcon("check"); ?></span>
                           <button>Price: High to Low</button>
                        </li>
-                       <li class='shop__dropdown-item shop__sort-item'>
+                       <li class='shop__dropdown-item shop__sort-item' data-direction="ASC">
                           <span class='icon-container shop__dropdown-icon'><?php echo getIcon("check"); ?></span>
                           <button>Price: Low to High</button>
                        </li>

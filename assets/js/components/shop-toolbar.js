@@ -1,3 +1,5 @@
+import productCard from './product-card.js';
+
 const filterCategoryButtons = document.querySelectorAll('.shop__dropdown-button');
 const filterButtonMobile = document.querySelector('.shop__filter-button-mobile');
 const filterContainer = document.querySelector('.shop__filter-container');
@@ -62,22 +64,102 @@ const handleFilterItemClick = (item) => {
     categoryText.dataset.baseText = baseText;
     checkResetFilter();
   }
+
+  applyFilters();
+};
+
+const applyFilters = () => {
+  const activeFilters = document.querySelectorAll('.shop__dropdown-item.active[filter]');
+  const filteredItems = {};
+
+  activeFilters.forEach((item) => {
+    const container = item.closest('.shop__dropdown-container');
+    const categoryText = container.previousElementSibling.querySelector(
+      '.shop__dropdown-button-text',
+    );
+
+    if (item.hasAttribute('filter')) {
+      const baseText = item.getAttribute('filter');
+      console.log(baseText);
+      const activeCount = container.querySelectorAll('.shop__dropdown-item.active').length;
+      categoryText.textContent = activeCount > 0 ? `${baseText} (${activeCount})` : baseText;
+      if (!filteredItems[baseText]) {
+        filteredItems[baseText] = [];
+      }
+      filteredItems[baseText].push(item.querySelector('button').textContent);
+      checkResetFilter();
+    }
+  });
+
+  if (Object.keys(filteredItems).length >= 0) {
+    console.log(filteredItems);
+    requestFilteredProducts(filteredItems);
+  }
+};
+const requestFilteredProducts = async (items) => {
+  try {
+    const response = await fetch(window.location.href, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(items),
+    });
+
+    const data = await response.json();
+    const productContainer = document.querySelector('.product-catalog');
+
+    productContainer.innerHTML = '';
+    data.forEach((product) => {
+      productContainer.innerHTML += productCard.createProductCard(product);
+    });
+  } catch (error) {
+    console.error('Error fetching sorted products:', error);
+  }
 };
 
 const handleSortItemClick = (item) => {
-  item.addEventListener('click', () => {
-    sortButtons.forEach((it) => {
-      it.classList.remove('active');
-    });
-    item.classList.add('active');
+  if (item.hasAttribute('data-direction')) {
+    const direction = item.getAttribute('data-direction');
+    requestSortedProducts(direction);
+  }
+
+  sortItems.forEach((it) => {
+    it.classList.remove('active');
   });
+  item.classList.add('active');
 };
 
-const closeAllDropdowns = () => {
-  filterCategoryButtons.forEach((category) => {
-    const dropdown = category.querySelector('.shop__dropdown-container');
-    if (dropdown) dropdown.classList.remove('active');
+const requestSortedProducts = async (direction) => {
+  try {
+    const response = await fetch(window.location.href, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+      body: direction,
+    });
+
+    const data = await response.json();
+    const productContainer = document.querySelector('.product-catalog');
+
+    productContainer.innerHTML = '';
+    data.forEach((product) => {
+      productContainer.innerHTML += productCard.createProductCard(product);
+    });
+  } catch (error) {
+    console.error('Error fetching sorted products:', error);
+  }
+};
+
+const handleResetFilterClick = () => {
+  filterItems.forEach((item) => {
+    item.classList.remove('active');
   });
+  resetCategoryButtonTexts();
+  checkResetFilter();
+  closeAllDropdowns();
+  requestFilteredProducts({});
 };
 
 const handleResize = () => {
@@ -90,6 +172,12 @@ const handleOutsideClick = (event) => {
   if (!event.target.closest('.shop__toolbar')) {
     closeAllDropdowns();
   }
+};
+
+const closeAllDropdowns = () => {
+  filterCategoryButtons.forEach((category) => {
+    if (category) category.classList.remove('active');
+  });
 };
 
 const checkResetFilter = () => {
@@ -110,15 +198,6 @@ const resetCategoryButtonTexts = () => {
     categoryText.textContent = baseText;
     categoryText.dataset.baseText = baseText;
   });
-};
-
-const handleResetFilterClick = () => {
-  filterItems.forEach((item) => {
-    item.classList.remove('active');
-  });
-  resetCategoryButtonTexts();
-  checkResetFilter();
-  closeAllDropdowns();
 };
 
 const handlePageOverlayClick = (event) => {

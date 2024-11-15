@@ -14,8 +14,36 @@ if(isset($_GET['type'])) {
     $sunglassesSubtitle = 'Discover our collection of sunglasses, crafted with precision lenses for crystal-clear vision.';
     $eyeglassesSubtitle = 'Elevate your style while protecting your eyes with our premium eyeglasses.';
     $shopSubtitle = $type === 'sunglasses' ? $sunglassesSubtitle : $eyeglassesSubtitle;
-    $products = getProductsByType($type);
+    $products = getSortedProducts($type, 'DESC'); // DESC by default
+}
+
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = file_get_contents('php://input');
+    $decodedData = json_decode($data, true);
+
+
+    if($decodedData !== null && is_array($decodedData)) {
+        $filterItems = json_decode($data, true);
+        if(!empty($filterItems)) {
+            $filteredProducts = getFilteredProducts($type, $filterItems);
+            http_response_code(200);
+            header('Content-Type: application/json');
+            echo json_encode($filteredProducts);
+        } else {
+            if(isset($_GET['type'])) {
+                echo json_encode(getProducts($_GET['type'])); 
+            }
+        }
+        die();
+    }
     
+    if($decodedData === null) {
+        http_response_code(200);
+        header('Content-Type: application/json');
+        echo json_encode(getSortedProducts($type, $data));
+        die();
+    }
 }
 
 ?>
