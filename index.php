@@ -1,7 +1,7 @@
 <?php 
 
 include './includes/test-data.php';
-require './includes/functions.php';
+require './includes/templates.php';
 require './includes/icons.php';
 require './includes/db-connect.php';
 require './includes/db-utils.php';
@@ -31,20 +31,20 @@ session_start();
     <?php require './includes/components/header.php'?>
     <?php require './includes/components/action-menu.php'?>
     <section class="hero">
-            <div class="hero__media-container">
-                <video playsinline autoplay loop muted src="./assets/images/hero-video.webm" class="hero__media" poster="./assets/images/hero-image.png"></video>
-                <div class="hero__media-content">
-                    <div class="hero__headline-wrapper">
-                        <h1 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h1>
-                        <h2 class="hero__headline-secondary"><?php echo $heroHeadlineSecondary; ?> </h2>
-                    </div>
-                    <div class="hero__text-block-right hero__cta">
-                        <h3 class="hero__cta-text"><?php echo $heroCtaText; ?></h3>
-                        <button class="button button--filled hero__cta-button"><?php echo $heroCtaButtonText; ?></button>
-                    </div>
+        <div class="hero__media-container">
+            <video playsinline autoplay loop muted src="./assets/images/hero-video.webm" class="hero__media" poster="./assets/images/hero-image.png"></video>
+            <div class="hero__media-content">
+                <div class="hero__headline-wrapper">
+                    <h1 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h1>
+                    <h2 class="hero__headline-secondary"><?php echo $heroHeadlineSecondary; ?> </h2>
+                </div>
+                <div class="hero__text-block-right hero__cta">
+                    <h3 class="hero__cta-text"><?php echo $heroCtaText; ?></h3>
+                    <button class="button button--filled hero__cta-button"><?php echo $heroCtaButtonText; ?></button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     <div class="wrapper">
         <section class="standard">
             <header class="standard__header">

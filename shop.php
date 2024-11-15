@@ -1,6 +1,6 @@
 <?php 
 
-require './includes/functions.php';
+require './includes/templates.php';
 require './includes/icons.php';
 require './includes/db-connect.php';
 require './includes/db-utils.php';
