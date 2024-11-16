@@ -10,14 +10,19 @@ $source_serif = '<link href="https://fonts.cdnfonts.com/css/source-serif-pro" re
 $root = '<link href="./assets/styles/global/root.css" rel="stylesheet"/>';
 $global = '<link href="./assets/styles/global/global.css" rel="stylesheet"/>';
 $header = '<link href="./assets/styles/components/header.css" rel="stylesheet"/>';
-$product = '<link href="./assets/styles/components/product.css" rel="stylesheet"/>';
+$productCard = '<link href="./assets/styles/components/product-card.css" rel="stylesheet"/>';
 $actionOverlay = '<link href="./assets/styles/components/action-menu.css" rel="stylesheet"/>';
 
 $home = '<link href="./assets/styles/home.css" rel="stylesheet"/>';
 $shop = '<link href="./assets/styles/shop.css" rel="stylesheet"/>';
+$productPage = '<link href="./assets/styles/product.css" rel="stylesheet"/>';
+
+echo $satoshi, $source_serif, $root, $global, $header, $productCard, $actionOverlay;
 
 if($currentPage == 'index') {
-    echo $satoshi, $source_serif, $root, $global, $header, $home, $product, $actionOverlay;
+    echo $home;
 } else if ($currentPage == 'shop') {
-    echo $satoshi, $source_serif, $root, $global, $header, $shop, $product, $actionOverlay;
+    echo $shop;
+} else if ($currentPage == 'product') {
+    echo $productPage;
 }

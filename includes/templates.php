@@ -20,6 +20,7 @@ function createShapeItem($shape) {
 }
 
 function createProductCard($product) {
+    $productId = $product["product_id"];
     $imagePath = $product["image_main"];
     $brand = $product["brand"];
     $name = $product["name"];
@@ -29,7 +30,7 @@ function createProductCard($product) {
 
     echo
     <<<HTML
-        <a href="#" class="product__card">  
+        <a href="./product.php?id=$productId" class="product__card">  
             <div class="product__image-container">
                 <img src="$imagePath" alt="" class="product__image" width="316" height="">
                 <button class="product__favorite-button" data-tooltip="Add to favorites">

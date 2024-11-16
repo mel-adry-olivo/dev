@@ -13,6 +13,7 @@ function getAllCategories() {
         SELECT
             'Brand' as category_name,
             name as attribute_name
+            
         FROM brands
         UNION ALL
         SELECT  
@@ -44,7 +45,7 @@ function getAllProducts() {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
-function getProducts($type) {
+function getProductsbyType($type) {
     global $conn;
     $formattedType = ucfirst($type);
     $sql = "
@@ -57,6 +58,47 @@ function getProducts($type) {
     ";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getProductById($id) {
+    global $conn;
+    $sql = "     
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN brands ON products.brand_id = brands.brand_id
+        WHERE products.product_id = $id
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_assoc();
+}
+
+function getProductAttributesByID($id) {
+    global $conn;
+    $sql = "
+        SELECT  
+            c.name AS category_name, 
+            a.name AS attribute_name
+        FROM 
+            categories c
+        JOIN 
+            attributes a ON c.category_id = a.category_id
+        JOIN 
+            product_attributes pa ON a.attribute_id = pa.attribute_id
+        JOIN 
+            products p ON pa.product_id = p.product_id
+        WHERE 
+            p.product_id = $id
+    ";
+    $result = $conn->query($sql);
+    $categories = [];
+    while ($row = $result->fetch_assoc()) {
+        $categoryName = $row['category_name'];
+        $attributeName = $row['attribute_name'];
+        $categories[$categoryName] = $attributeName;
+    }
+    return $categories;
 }
 
 

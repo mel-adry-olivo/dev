@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     // filter
     if($decodedData !== null) {
         if(empty($decodedData)) {
-            echo json_encode(getProducts($_GET['type']));
+            echo json_encode(getProductsbyType($_GET['type']));
             die();
         }
 
@@ -52,6 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $title; ?></title>
     <script type="module" src="./assets/js/shop.js" defer></script>
+    <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <?php require './includes/style-loader.php'?>
 </head>
 <body>

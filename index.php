@@ -24,6 +24,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $title; ?></title>
     <script type="module" src="./assets/js/home.js" defer></script>
+    <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <?php require './includes/style-loader.php'?>
 </head>
 <body>
@@ -84,9 +85,9 @@ session_start();
                 <div class="products__showcase">
                     <div class="products__carousel">
                         <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
-                        <div class="products__carousel-see-all">
+                        <!-- <div class="products__carousel-see-all">
                             <a href="#">See all products</a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="products__carousel-control-group">
                         <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>
