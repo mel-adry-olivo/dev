@@ -45,6 +45,20 @@ function getAllProducts() {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
+function getLimitedProducts($limit) {
+    global $conn;
+    $sql = "     
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN brands ON products.brand_id = brands.brand_id
+        LIMIT $limit
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 function getProductsbyType($type) {
     global $conn;
     $formattedType = ucfirst($type);

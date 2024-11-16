@@ -34,10 +34,10 @@ if(isset($_GET['id'])) {
         <?php require './includes/components/action-menu.php'?>
         <section class="product">
             <div class="product__images">
-                <div class="product__image-container product__image-container--main">
+                <div class="product__image-container--main">
                     <img src="<?php echo $product['image_main']; ?>" alt="">
                 </div>
-                <div class="product__image-container product__image-container--alternate">
+                <div class="product__image-container--alternate">
                     <img src="<?php echo $product['image_alternate']; ?>" alt="">
                 </div>
             </div>  
@@ -71,18 +71,96 @@ if(isset($_GET['id'])) {
                 <button class="button button--filled-dark product__add-button">Add to bag</button>
                 <span class="product__info-reservation-count"><?php echo $product['reserve_count']; ?> Reserved</span>
                 <div class="product__info-others">
-                    <div class="product__info-sizes-wrapper">
-                        <span class="product__info-sizes-title">Size & Fit</span>
+                    <div class="product__info-others-item">
+                        <span class="product__info-other-title">Size & Fit</span>
                         <span class="product__info-sizes">
                             <?php echo "Lens Width: " . $product['lens_width'] . " mm, Bridge Width: " . $product['bridge_width'] . " mm, Temple Length: " . $product['temple_length'] . " mm"; ?>
                         </span>
                     </div>
+                    <div class="product__info-others-item">
+                        <header class="product__info-others-header">
+                            <span class="product__info-other-title">User Reviews</span>
+                            <button class="button-link product__info-other-button">Write a Review</button>
+                        </header>
+                        <div class="product__info-reviews">
+                            <div class="product__review-card">
+                                <div class="product__review-card-header">
+                                    <div class="product__review-card-text">
+                                        <span class="product__review-card-name">John Doe</span>
+                                        <span class="product__review-card-date">11/17/24</span></span>
+                                    </div>
+                                    <div class="product__review-card-stars">
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>  
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span> 
+                                    </div>
+                                </div>
+                                <div class="product__review-card-body">
+                                    <p class="product__review-card-text">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="product__review-card">
+                                <div class="product__review-card-header">
+                                    <div class="product__review-card-text">
+                                        <span class="product__review-card-name">John Doe</span>
+                                        <span class="product__review-card-date">11/17/24</span></span>
+                                    </div>
+                                    <div class="product__review-card-stars">
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>  
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
+                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span> 
+                                    </div>
+                                </div>
+                                <div class="product__review-card-body">
+                                    <p class="product__review-card-text">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="review">
-            
-        </section>
+        <section class="section section--related">
+            <header class="section__header">
+                <h5 class="section__header-text">More from the same brand</h5>
+            </header>
+            <main class="section__content">
+            <div class="products__showcase">
+                <div class="products__carousel">
+                    <?php foreach(getLimitedProducts(4) as $product) createProductCard($product); ?>
+                    
+                </div>
+                <div class="products__carousel-control-group">
+                    <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>
+                    <button class="icon-container products__carousel-control products__carousel-control--next"><?php echo getIcon('arrow-right'); ?></button>
+                </div>
+            </div>
+            </main>
+        </section>  
+        <section class="section section--recommended">
+            <header class="section__header">
+                <h5 class="section__header-text">You may also like</h5>
+            </header>
+            <main class="section__content">
+            <div class="products__showcase">
+                <div class="products__carousel">
+                    <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
+                </div>
+                <div class="products__carousel-control-group">
+                    <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>
+                    <button class="icon-container products__carousel-control products__carousel-control--next"><?php echo getIcon('arrow-right'); ?></button>
+                </div>
+            </div>
+            </main>
+        </section>  
     </div>
 </body>
 </html>
