@@ -31,6 +31,19 @@ function getAllCategories() {
     return $categories;
 }
 
+function getAllProducts() {
+    global $conn;
+    $sql = "     
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN brands ON products.brand_id = brands.brand_id
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 function getProducts($type) {
     global $conn;
     $formattedType = ucfirst($type);

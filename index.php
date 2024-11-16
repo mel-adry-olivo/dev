@@ -1,6 +1,5 @@
 <?php 
 
-include './includes/test-data.php';
 require './includes/templates.php';
 require './includes/icons.php';
 require './includes/db-connect.php';
@@ -84,7 +83,7 @@ session_start();
             <main class="standard__content">
                 <div class="products__showcase">
                     <div class="products__carousel">
-                        <?php foreach ($products as $product) { createProductCard($product); }?>   
+                        <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
                         <div class="products__carousel-see-all">
                             <a href="#">See all products</a>
                         </div>
