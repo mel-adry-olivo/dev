@@ -1,10 +1,3 @@
-<?php
-
-// table names
-$categories = getAllCategories();
-
-?>
-
 <div class="shop__toolbar">
     <div class="shop__toolbar-filter">
         <button class="shop__dropdown-button shop__filter-button-mobile">
@@ -19,6 +12,7 @@ $categories = getAllCategories();
             <div class="shop__filter-content">
                 <ul class="shop__filter-items">
                     <?php 
+                        $categories = getAllCategories();
                         foreach($categories as $category => $categoryItems) {
                             createFilterCategory($category, $categoryItems);
                         }
@@ -40,11 +34,11 @@ $categories = getAllCategories();
             <div class="shop__dropdown-container">
                 <div class="shop__dropdown-content">
                     <ul class="shop__dropdown-items">
-                        <li class='shop__dropdown-item shop__sort-item active' data-direction="DESC">
+                        <li class='shop__dropdown-item active' sort-order="DESC">
                           <span class='icon-container shop__dropdown-icon'><?php echo getIcon("check"); ?></span>
                           <button>Price: High to Low</button>
                        </li>
-                       <li class='shop__dropdown-item shop__sort-item' data-direction="ASC">
+                       <li class='shop__dropdown-item' sort-order="ASC">
                           <span class='icon-container shop__dropdown-icon'><?php echo getIcon("check"); ?></span>
                           <button>Price: Low to High</button>
                        </li>

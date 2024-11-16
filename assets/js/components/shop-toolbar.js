@@ -3,13 +3,14 @@ import productCard from './product-card.js';
 const filterCategoryButtons = document.querySelectorAll('.shop__dropdown-button');
 const filterButtonMobile = document.querySelector('.shop__filter-button-mobile');
 const filterContainer = document.querySelector('.shop__filter-container');
-const filterItems = document.querySelectorAll('.shop__dropdown-item');
+const filterItems = document.querySelectorAll('.shop__dropdown-item[filter]');
 const filterCloseButton = document.querySelector('.shop__filter-close-button');
 const filterResetButtonMobile = document.querySelector('.shop__filter-reset-mobile');
 const filterResetButton = document.querySelector('.shop__filter-reset-desktop');
-const sortItems = document.querySelectorAll('.shop__sort-item');
+const sortItems = document.querySelectorAll('.shop__dropdown-item[sort-order]');
 const pageOverlay = document.querySelector('.page-overlay');
 const body = document.body;
+const CURRENT_URL = window.location.href;
 
 export default function initFilter() {
   filterCategoryButtons.forEach((category) => {
@@ -37,137 +38,106 @@ export default function initFilter() {
   window.addEventListener('resize', () => handleResize());
 }
 
-const toggleFilterDropdown = (filterButton) => {
-  toggleClass(filterButton, 'active');
-  // If screen is larger than 900px, do not auto close other dropdowns
-  if (window.innerWidth > 900) {
-    filterCategoryButtons.forEach((btn) => {
-      if (btn !== filterButton) {
-        btn.classList.remove('active');
-      }
-    });
-  }
-};
-
 const handleFilterItemClick = (item) => {
   toggleClass(item, 'active');
-
-  const container = item.closest('.shop__dropdown-container');
-  const categoryText = container.previousElementSibling.querySelector(
-    '.shop__dropdown-button-text',
-  );
-
-  if (categoryText.hasAttribute('filter')) {
-    const baseText = categoryText.dataset.baseText || categoryText.textContent.split(' ')[0];
-    const activeCount = container.querySelectorAll('.shop__dropdown-item.active').length;
-    categoryText.textContent = activeCount > 0 ? `${baseText} (${activeCount})` : baseText;
-    categoryText.dataset.baseText = baseText;
-    checkResetFilter();
-  }
-
+  updateCategoryText(item);
+  checkResetFilter();
   applyFilters();
 };
 
 const applyFilters = () => {
-  const activeFilters = document.querySelectorAll('.shop__dropdown-item.active[filter]');
+  const activeFilterItems = document.querySelectorAll('.shop__dropdown-item.active[filter]');
   const filteredItems = {};
 
-  activeFilters.forEach((item) => {
-    const container = item.closest('.shop__dropdown-container');
-    const categoryText = container.previousElementSibling.querySelector(
-      '.shop__dropdown-button-text',
-    );
+  // create object [category][array of items]
+  // ex. { Shape: [Square, Rectangle] }
+  activeFilterItems.forEach((item) => {
+    const itemCategory = item.getAttribute('filter');
+    const itemName = item.getAttribute('data-value');
 
-    if (item.hasAttribute('filter')) {
-      const baseText = item.getAttribute('filter');
-      console.log(baseText);
-      const activeCount = container.querySelectorAll('.shop__dropdown-item.active').length;
-      categoryText.textContent = activeCount > 0 ? `${baseText} (${activeCount})` : baseText;
-      if (!filteredItems[baseText]) {
-        filteredItems[baseText] = [];
-      }
-      filteredItems[baseText].push(item.querySelector('button').textContent);
-      checkResetFilter();
+    if (!filteredItems[itemCategory]) {
+      filteredItems[itemCategory] = [];
     }
+    filteredItems[itemCategory].push(itemName);
   });
 
-  if (Object.keys(filteredItems).length >= 0) {
-    console.log(filteredItems);
-    requestFilteredProducts(filteredItems);
-  }
-};
-const requestFilteredProducts = async (items) => {
-  try {
-    const response = await fetch(window.location.href, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(items),
-    });
-
-    const data = await response.json();
-    const productContainer = document.querySelector('.product-catalog');
-
-    productContainer.innerHTML = '';
-    data.forEach((product) => {
-      productContainer.innerHTML += productCard.createProductCard(product);
-    });
-  } catch (error) {
-    console.error('Error fetching sorted products:', error);
-  }
+  requestFilteredProducts(filteredItems).then(updateProductUI);
 };
 
 const handleSortItemClick = (item) => {
-  if (item.hasAttribute('data-direction')) {
-    const direction = item.getAttribute('data-direction');
-    requestSortedProducts(direction);
-  }
+  if (!item.hasAttribute('sort-order')) return;
+  if (item.classList.contains('active')) return;
 
-  sortItems.forEach((it) => {
-    it.classList.remove('active');
-  });
-  item.classList.add('active');
-};
-
-const requestSortedProducts = async (direction) => {
-  try {
-    const response = await fetch(window.location.href, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain',
-      },
-      body: direction,
-    });
-
-    const data = await response.json();
-    const productContainer = document.querySelector('.product-catalog');
-
-    productContainer.innerHTML = '';
-    data.forEach((product) => {
-      productContainer.innerHTML += productCard.createProductCard(product);
-    });
-  } catch (error) {
-    console.error('Error fetching sorted products:', error);
-  }
+  sortItems.forEach((it) => it.classList.toggle('active', it === item));
+  const sortOrder = item.getAttribute('sort-order');
+  requestSortedProducts(sortOrder).then(updateProductUI);
 };
 
 const handleResetFilterClick = () => {
-  filterItems.forEach((item) => {
-    item.classList.remove('active');
-  });
+  filterItems.forEach((item) => item.classList.remove('active'));
   resetCategoryButtonTexts();
   checkResetFilter();
   closeAllDropdowns();
   requestFilteredProducts({});
 };
 
+const requestFilteredProducts = async (items) => {
+  try {
+    const response = await fetch(CURRENT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(items),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const requestSortedProducts = async (direction) => {
+  try {
+    const response = await fetch(CURRENT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: direction,
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const updateProductUI = (data) => {
+  const productCount = document.querySelector('.shop__toolbar-count');
+  const productContainer = document.querySelector('.product-catalog');
+
+  let productHTML = '';
+  data.forEach((product) => (productHTML += productCard.createProductCard(product)));
+  productContainer.innerHTML = productHTML;
+
+  productCount.textContent = data.length > 1 ? `${data.length} Products` : `${data.length} Product`;
+};
+
+// adding '(a number)' to the category text if there are active items
+const updateCategoryText = (item) => {
+  const itemsContainer = item.closest('.shop__dropdown-container');
+  const categoryButton = itemsContainer.parentElement.querySelector('.shop__dropdown-button-text');
+  const categoryName = item.getAttribute('filter');
+  const activeItems = itemsContainer.querySelectorAll('.shop__dropdown-item.active');
+  const activeCount = activeItems.length;
+  categoryButton.textContent = activeCount > 0 ? `${categoryName} (${activeCount})` : categoryName;
+};
+
+// if filter container is open while resizing, close it
 const handleResize = () => {
   if (pageOverlay.classList.contains('show')) {
     toggleMobileFilters();
   }
 };
 
+// if click outside filter container, close it
 const handleOutsideClick = (event) => {
   if (!event.target.closest('.shop__toolbar')) {
     closeAllDropdowns();
@@ -175,8 +145,8 @@ const handleOutsideClick = (event) => {
 };
 
 const closeAllDropdowns = () => {
-  filterCategoryButtons.forEach((category) => {
-    if (category) category.classList.remove('active');
+  filterCategoryButtons.forEach((button) => {
+    if (button) button.classList.remove('active');
   });
 };
 
@@ -195,8 +165,7 @@ const resetCategoryButtonTexts = () => {
   filterCategoryButtons.forEach((btn) => {
     const categoryText = btn.querySelector('.shop__dropdown-button-text');
     const baseText = categoryText.dataset.baseText || categoryText.textContent;
-    categoryText.textContent = baseText;
-    categoryText.dataset.baseText = baseText;
+    categoryText.textContent = btn.getAttribute('filter') || baseText;
   });
 };
 
@@ -209,6 +178,17 @@ const toggleMobileFilters = () => {
   toggleClass(pageOverlay, 'show');
   toggleClass(filterContainer, 'show');
   toggleClass(body, 'no-scroll');
+};
+
+const toggleFilterDropdown = (filterButton) => {
+  toggleClass(filterButton, 'active');
+
+  if (window.innerWidth > 900) {
+    const isActive = filterButton.classList.contains('active');
+    filterCategoryButtons.forEach((btn) =>
+      btn.classList.toggle('active', btn === filterButton && isActive),
+    );
+  }
 };
 
 const toggleClass = (element, className) => {

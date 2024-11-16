@@ -22,22 +22,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = file_get_contents('php://input');
     $decodedData = json_decode($data, true);
 
-
-    if($decodedData !== null && is_array($decodedData)) {
-        $filterItems = json_decode($data, true);
-        if(!empty($filterItems)) {
-            $filteredProducts = getFilteredProducts($type, $filterItems);
-            http_response_code(200);
-            header('Content-Type: application/json');
-            echo json_encode($filteredProducts);
-        } else {
-            if(isset($_GET['type'])) {
-                echo json_encode(getProducts($_GET['type'])); 
-            }
+    // filter
+    if($decodedData !== null) {
+        if(empty($decodedData)) {
+            echo json_encode(getProducts($_GET['type']));
+            die();
         }
+
+        $filteredProducts = getFilteredProducts($type, $decodedData);
+        echo json_encode($filteredProducts);
         die();
     }
     
+    // sort
     if($decodedData === null) {
         http_response_code(200);
         header('Content-Type: application/json');
@@ -70,11 +67,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             </header>
             <?php require './includes/components/shop-toolbar.php'?>
             <main class="product-catalog">
-                <?php 
-                    foreach($products as $product) {
-                        createProductCard($product);
-                    }
-                ?>
+                <?php foreach($products as $product) createProductCard($product);?>
             </main>
         </section>
     </div>
