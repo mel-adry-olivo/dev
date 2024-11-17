@@ -15,6 +15,20 @@ if(isset($_GET['id'])) {
     $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
 }
 
+$testReviews = [
+    [
+        "name" => "John Doe",
+        "created_at" => "2024-11-12",
+        "rating" => 4.5,
+        "review_text" => "Great product, but a little bit pricey. Overall, I'm satisfied with the quality."
+    ],
+    [
+        "name" => "Jane Smith",
+        "created_at" => "2024-11-15",
+        "rating" => 3,
+        "review_text" => "The product is decent, but it's not as comfortable as I expected."
+    ]
+];
 
 ?>
 
@@ -57,7 +71,7 @@ if(isset($_GET['id'])) {
                 </div>
                 <div class="product__info-main">
                     <span class="product__info-price">₱<?php echo number_format($product['price'], '0', '.', ','); ?></span>
-                    <div class="product__info-reviews">
+                    <div class="product__info-ratings">
                         <div class="product__info-stars-wrapper">
                             <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
                             <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
@@ -83,46 +97,7 @@ if(isset($_GET['id'])) {
                             <button class="button-link product__info-other-button">Write a Review</button>
                         </header>
                         <div class="product__info-reviews">
-                            <div class="product__review-card">
-                                <div class="product__review-card-header">
-                                    <div class="product__review-card-text">
-                                        <span class="product__review-card-name">John Doe</span>
-                                        <span class="product__review-card-date">11/17/24</span></span>
-                                    </div>
-                                    <div class="product__review-card-stars">
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>  
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span> 
-                                    </div>
-                                </div>
-                                <div class="product__review-card-body">
-                                    <p class="product__review-card-text">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="product__review-card">
-                                <div class="product__review-card-header">
-                                    <div class="product__review-card-text">
-                                        <span class="product__review-card-name">John Doe</span>
-                                        <span class="product__review-card-date">11/17/24</span></span>
-                                    </div>
-                                    <div class="product__review-card-stars">
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>  
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span>
-                                        <span class="icon-container product__review-rating"><?php echo getIcon("star-empty"); ?></span> 
-                                    </div>
-                                </div>
-                                <div class="product__review-card-body">
-                                    <p class="product__review-card-text">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    </p>
-                                </div>
-                            </div>
+                            <?php foreach($testReviews as $review) createReviewCard($review); ?>
                         </div>
                     </div>
                 </div>
@@ -135,7 +110,7 @@ if(isset($_GET['id'])) {
             <main class="section__content">
             <div class="products__showcase">
                 <div class="products__carousel">
-                    <?php foreach(getLimitedProducts(4) as $product) createProductCard($product); ?>
+                    <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
                     
                 </div>
                 <div class="products__carousel-control-group">

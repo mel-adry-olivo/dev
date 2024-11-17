@@ -79,3 +79,70 @@ function createFilterCategory($category, $items) {
     </li>
     HTML;
 }
+
+function createReviewCard($review) {
+    $name = $review["name"];
+    $date = $review["created_at"];
+    $rating = $review["rating"];
+    $text = $review["review_text"];
+    $ratingHTML = createRatingStars($rating);
+
+    echo
+    <<<HTML
+        <div class="product__review-card">
+            <div class="product__review-card-header">
+                <div class="product__review-card-text">
+                    <span class="product__review-card-name">$name</span>
+                    <span class="product__review-card-date">$date</span></span>
+                </div>
+                <div class="product__review-card-stars">
+                    $ratingHTML
+                </div>
+            </div>
+            <div class="product__review-card-body">
+                <p class="product__review-card-text">
+                    $text
+                </p>
+            </div>
+        </div>
+    HTML;
+}
+
+function createRatingStars($rating) {
+    $ratingHTML = '';
+
+    $starEmpty = getIcon("star-empty");
+    $starHalf = getIcon("star-half");
+    $starFilled = getIcon("star-filled");
+
+    $emptyStarHTML = '<span class="icon-container product__review-rating">' . $starEmpty. '</span>';
+    $halfStarHTML = '<span class="icon-container product__review-rating">' . $starHalf . '</span>';
+    $fullStarHTML = '<span class="icon-container product__review-rating">' . $starFilled . '</span>';
+
+    $fullStars = floor($rating); 
+    $halfStars = ($rating != $fullStars) ? 1 : 0; 
+    $emptyStars = 5 - $fullStars - $halfStars; 
+
+
+    for ($i = 0; $i < $fullStars; $i++) {
+        $ratingHTML .= $fullStarHTML;
+
+    }
+
+    if ($halfStars == 1) {
+        $ratingHTML .= $halfStarHTML;
+
+    }
+
+    for ($i = 0; $i < $emptyStars; $i++) {
+        $ratingHTML .= $emptyStarHTML;
+    }
+
+
+    return $ratingHTML;
+}
+
+function logger($message) {
+    echo "<script>console.log('$message')</script>";
+
+}

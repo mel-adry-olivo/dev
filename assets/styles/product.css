@@ -87,7 +87,7 @@
   padding-block: 1rem;
 }
 
-.product__info-reviews {
+.product__info-ratings {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -178,6 +178,7 @@
   display: flex;
   gap: 1rem;
   padding-block: 0.75rem;
+  align-items: stretch;
 }
 
 .product__info-reviews > * {
@@ -192,10 +193,12 @@
 }
 
 .product__review-card {
+  display: grid;
   gap: 0.5rem;
   border-radius: 1rem;
   padding: 1.5rem 0.75rem;
   background-color: var(--clr-surface);
+  min-height: 150px;
 }
 
 .product__review-card-header {
