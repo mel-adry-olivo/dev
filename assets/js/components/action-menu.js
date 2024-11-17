@@ -1,4 +1,4 @@
-const pageOverlay = document.querySelector('.page-overlay');
+const pageOverlay = document.querySelector('.page-overlay-action-menu');
 const actionMenu = document.querySelector('.action-menu');
 const actionMenuCloseButton = document.querySelector('.action-menu__close-button');
 const headerActionButtons = document.querySelectorAll('.header__action-button');

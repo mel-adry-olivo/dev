@@ -8,7 +8,7 @@ const filterCloseButton = document.querySelector('.shop__filter-close-button');
 const filterResetButtonMobile = document.querySelector('.shop__filter-reset-mobile');
 const filterResetButton = document.querySelector('.shop__filter-reset-desktop');
 const sortItems = document.querySelectorAll('.shop__dropdown-item[sort-order]');
-const pageOverlay = document.querySelector('.page-overlay');
+const pageOverlay = document.querySelector('.page-overlay-filter');
 const body = document.body;
 const CURRENT_URL = window.location.href;
 

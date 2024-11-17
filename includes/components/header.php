@@ -1,10 +1,14 @@
 <header class="header__wrapper">
     <div class="header">
+        <div class="page-overlay page-overlay-nav"></div>
         <nav class="header__nav">
             <button class="header__nav-button">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="iconify iconify--iconoir" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5h18M3 12h18M3 19h18"></path></svg>
             </button>
             <ul class="header__nav-list">
+                <header class="header__nav-header">
+                    <button class="icon-container header__nav-close-button"><?php echo getIcon('close')?></button>
+                </header>
                 <li class="header__nav-item">
                     <a href="./shop.php?type=sunglasses" class="header__nav-link">Sunglasses</a>
                 </li>
@@ -47,4 +51,4 @@
         </div>
     </div>
 </header>
-<div class="page-overlay"></div>
+<div class="page-overlay page-overlay-action-menu"></div>
