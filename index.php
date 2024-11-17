@@ -45,7 +45,7 @@ session_start();
             </div>
         </div>
     </section>
-    <div class="wrapper">
+    <main class="wrapper">
         <section class="standard">
             <header class="standard__header">
                 <h4 class="standard__header-text"><?php echo $shapesHeaderText; ?></h4>
@@ -96,6 +96,7 @@ session_start();
                 </div>
             </main>
         </section>  
-    </div>
+    </main>
+    <?php require './includes/components/footer.php'?>
 </body>
 </html>

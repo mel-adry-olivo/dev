@@ -137,5 +137,6 @@ $testReviews = [
             </main>
         </section>  
     </div>
+    <?php require './includes/components/footer.php'?>
 </body>
 </html>

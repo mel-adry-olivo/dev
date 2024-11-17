@@ -72,5 +72,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             </main>
         </section>
     </div>
+    <?php require './includes/components/footer.php'?>
 </body>
 </html>
