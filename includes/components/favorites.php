@@ -15,8 +15,8 @@
                 <div class="favorites__content">
                 <?php foreach($favorites as $favorite) : ?>
                     <?php 
-                    $product = getProductById($favorite['product_id']); 
-                    createProductCard($product);
+                    $favoriteProduct = getProductById($favorite['product_id']); 
+                    createProductCard($favoriteProduct);
                     ?>
                 <?php endforeach; ?>
                 </div>
