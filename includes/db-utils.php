@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
 function getUserByEmail($email) {
     global $conn;
     $sql = "SELECT * FROM users WHERE email = '$email'";

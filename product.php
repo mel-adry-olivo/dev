@@ -1,7 +1,4 @@
 <?php
-
-session_start();
-
 $testReviews = [
     [
         "name" => "John Doe",
@@ -16,6 +13,8 @@ $testReviews = [
         "review_text" => "The product is decent, but it's not as comfortable as I expected."
     ]
 ];
+
+session_start();
 
 require './includes/templates.php';
 require './includes/icons.php';
