@@ -31,7 +31,7 @@
   opacity: 1;
 }
 
-/* TODO: REFACTOR */
+/* ilislan */
 .product__favorite-button::after {
   content: attr(data-tooltip);
   font-size: 0.85rem;
@@ -50,6 +50,14 @@
 
 .product__favorite-button:hover::after {
   opacity: 0.8;
+}
+
+.product__favorite-button.active .product__favorite-icon--checked {
+  display: inline-flex;
+}
+
+.product__favorite-button.active .product__favorite-icon--unchecked {
+  display: none;
 }
 
 .product__favorite-icon {

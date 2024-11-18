@@ -10,6 +10,8 @@ const searchForm = document.querySelector('.search__form');
 const searchIcon = document.querySelector('.search__icon');
 const searchSubmitButton = document.querySelector('.search__submit');
 const searchInput = document.getElementById('search__input');
+const favoriteContainer = document.querySelector('.favorite__content');
+const favoriteEmptyMessage = document.querySelector('.favorites__empty-content');
 const body = document.body;
 
 const initActionMenu = () => {
@@ -75,8 +77,7 @@ const initSearch = () => {
   searchInput.addEventListener('blur', () => toggleFocusedState(false));
   searchInput.addEventListener('input', toggleButtonState);
 
-  // Initial check to set button state on page load
   toggleButtonState();
 };
 
-export default initActionMenu;
+export { initActionMenu, toggleActionMenu, favoriteContainer, favoriteEmptyMessage };

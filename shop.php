@@ -1,11 +1,12 @@
 <?php 
 
+session_start();
+
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/db-connect.php';
+require './includes/config.php';
 require './includes/db-utils.php';
 
-session_start();
 
 $title = "INSPEC®"; 
 if(isset($_GET['type'])) {
@@ -17,32 +18,6 @@ if(isset($_GET['type'])) {
     $products = getSortedProducts($type, 'DESC'); // DESC by default
 }
 
-
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = file_get_contents('php://input');
-    $decodedData = json_decode($data, true);
-
-    // filter
-    if($decodedData !== null) {
-        if(empty($decodedData)) {
-            echo json_encode(getProductsbyType($_GET['type']));
-            die();
-        }
-
-        $filteredProducts = getFilteredProducts($type, $decodedData);
-        echo json_encode($filteredProducts);
-        die();
-    }
-    
-    // sort
-    if($decodedData === null) {
-        http_response_code(200);
-        header('Content-Type: application/json');
-        echo json_encode(getSortedProducts($type, $data));
-        die();
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +26,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $title; ?></title>
-    <script type="module" src="./assets/js/shop.js" defer></script>
+    <script type="module" src="./assets/js/pages/shop.js" defer></script>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <?php require './includes/style-loader.php'?>
 </head>
@@ -73,5 +48,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
     </div>
     <?php require './includes/components/footer.php'?>
+    <div id="snackbar"></div>
 </body>
 </html>

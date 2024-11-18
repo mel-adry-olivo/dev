@@ -1,5 +1,7 @@
 <?php 
 
+session_start();
+
 function getUserByEmail($email) {
     global $conn;
     $sql = "SELECT * FROM users WHERE email = '$email'";
@@ -86,6 +88,36 @@ function getProductById($id) {
     ";
     $result = $conn->query($sql);
     return $result->fetch_assoc();
+}
+
+function getFavoritedProducts() {
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "SELECT * FROM favorites WHERE user_id = $userId ORDER BY added_at DESC";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function isProductFavorite($productId) {
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "SELECT * FROM favorites WHERE user_id = $userId AND product_id = $productId";
+    $result = $conn->query($sql);
+    return $result->num_rows > 0;
+}
+
+function addProductFavorite($productId) {
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "INSERT INTO favorites (user_id, product_id) VALUES ($userId, $productId)";
+    $conn->query($sql);
+}
+
+function removeProductFavorite($productId) {
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "DELETE FROM favorites WHERE user_id = $userId AND product_id = $productId";
+    $conn->query($sql);
 }
 
 function getProductAttributesByID($id) {

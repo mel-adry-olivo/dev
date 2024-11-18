@@ -14,12 +14,13 @@ $footer = '<link href="./assets/styles/components/footer.css" rel="stylesheet"/>
 $productCard = '<link href="./assets/styles/components/product-card.css" rel="stylesheet"/>';
 $productCarousel = '<link href="./assets/styles/components/product-carousel.css" rel="stylesheet"/>';
 $actionOverlay = '<link href="./assets/styles/components/action-menu.css" rel="stylesheet"/>';
+$snackbar = '<link href="./assets/styles/components/snackbar.css" rel="stylesheet"/>';
 
 $home = '<link href="./assets/styles/home.css" rel="stylesheet"/>';
 $shop = '<link href="./assets/styles/shop.css" rel="stylesheet"/>';
 $productPage = '<link href="./assets/styles/product.css" rel="stylesheet"/>';
 
-echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay;
+echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay, $snackbar;
 
 if($currentPage == 'index') {
     echo $home;

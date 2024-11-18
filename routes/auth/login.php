@@ -1,11 +1,10 @@
 <?php
 
-require './includes/db-connect.php';
-require './includes/db-utils.php';
+require '../../includes/config.php';
+require '../../includes/db-utils.php';
 
 session_start();
 
-// to be validated
 $inputEmail = $_POST['login-email'];
 $inputPassword = md5($_POST['login-password']);
 
@@ -16,12 +15,13 @@ if($user) {
     $_SESSION['fname'] = $user['fname'];
     $_SESSION['lname'] = $user['lname'];
     $_SESSION['email'] = $user['email'];
-
-
+    $_SESSION['login_success'] = true;
 
     header("Location: " . ($_SERVER['HTTP_REFERER'] ?? './index.php'));
     exit();
 } else {
-    echo 'User not found'; 
+    
+    $_SESSION['login_success'] = false;
+    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? './index.php'));
+    exit();
 }
-?>

@@ -1,8 +1,10 @@
 <?php 
 
+session_start();
+
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/db-connect.php';
+require './includes/config.php';
 require './includes/db-utils.php';
 
 $title = "INSPEC®"; 
@@ -13,7 +15,6 @@ $heroCtaButtonText = "Shop now";
 $shapesHeaderText = "Discover eyewear by shape—find frames that perfectly complement your unique look.";
 $trendingHeaderText = "Explore our top-trending eyewear styles and make a statement with every look.";
 
-session_start();
 
 ?>
 
@@ -23,7 +24,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $title; ?></title>
-    <script type="module" src="./assets/js/home.js" defer></script>
+    <script type="module" src="./assets/js/pages/home.js" defer></script>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <?php require './includes/style-loader.php'?>
 </head>
@@ -84,10 +85,11 @@ session_start();
             <main class="standard__content">
                 <div class="products__showcase">
                     <div class="products__carousel">
-                        <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
-                        <!-- <div class="products__carousel-see-all">
-                            <a href="#">See all products</a>
-                        </div> -->
+                        <?php 
+                        foreach(getAllProducts() as $product) {
+                            createProductCard($product);
+                        } 
+                        ?>
                     </div>
                     <div class="products__carousel-control-group">
                         <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>
@@ -98,5 +100,6 @@ session_start();
         </section>  
     </main>
     <?php require './includes/components/footer.php'?>
+    <div id="snackbar"></div>
 </body>
 </html>

@@ -30,10 +30,10 @@ function createProductCard($product) {
 
     echo
     <<<HTML
-        <a href="./product.php?id=$productId" class="product__card">  
+        <a href="./product.php?id=$productId" class="product__card" data-id="$productId">  
             <div class="product__image-container">
                 <img src="$imagePath" alt="" class="product__image" width="316" height="">
-                <button class="product__favorite-button" data-tooltip="Add to favorites">
+                <button class="product__favorite-button" data-tooltip="Add to favorites" data-id="$productId">
                     <span class="product__favorite-icon product__favorite-icon--unchecked">$favoriteUnchecked</span>
                     <span class="product__favorite-icon product__favorite-icon--checked" data-tooltip="Remove from favorites">$favoriteChecked</span>
                 </button>

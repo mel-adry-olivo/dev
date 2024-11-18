@@ -1,19 +1,6 @@
 <?php
 
-require './includes/templates.php';
-require './includes/icons.php';
-require './includes/db-connect.php';
-require './includes/db-utils.php';
-
 session_start();
-
-
-if(isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $product = getProductById($id);
-    $productAttributes = getProductAttributesByID($id);
-    $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
-}
 
 $testReviews = [
     [
@@ -30,6 +17,20 @@ $testReviews = [
     ]
 ];
 
+require './includes/templates.php';
+require './includes/icons.php';
+require './includes/config.php';
+require './includes/db-utils.php';
+
+
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $product = getProductById($id);
+    $productAttributes = getProductAttributesByID($id);
+    $isFavorite = isProductFavorite($id) ? 'active' : '';
+    $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +39,7 @@ $testReviews = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
-    <script type="module" src="./assets/js/product.js" defer></script>
+    <script type="module" src="./assets/js/pages/product.js" defer></script>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <?php require './includes/style-loader.php'?>
 </head>
@@ -64,7 +65,7 @@ $testReviews = [
                             <?php echo $productAttributes['Color'] . " " . $productAttributes['Shape'] . " " .  $productAttributes['Gender'] . " " . $product['type']; ?>
                         </span>
                     </div>
-                    <button class="product__favorite-button product__info-favorite" data-tooltip="Add to favorites">
+                    <button class="product__favorite-button product__info-favorite <?php echo $isFavorite; ?>" data-tooltip="Add to favorites" data-action="favorites" data-id="<?php echo $product['product_id']; ?>">
                         <span class="product__favorite-icon product__favorite-icon--unchecked "> <?php echo getIcon("heart"); ?> </span>
                         <span class="product__favorite-icon product__favorite-icon--checked" data-tooltip="Remove from favorites"><?php echo getIcon("heart-filled"); ?></span>
                     </button>
@@ -137,6 +138,8 @@ $testReviews = [
             </main>
         </section>  
     </div>
+    <div id="snackbar"></div>
     <?php require './includes/components/footer.php'?>
+    <?php require './includes/components/snackbar.php'?>
 </body>
 </html>

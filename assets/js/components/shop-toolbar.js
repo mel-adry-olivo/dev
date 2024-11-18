@@ -1,4 +1,5 @@
-import productCard from './product-card.js';
+import { createProductCard } from './product.js';
+import { toggleClass, request } from '../utils.js';
 
 const filterCategoryButtons = document.querySelectorAll('.shop__dropdown-button');
 const filterButtonMobile = document.querySelector('.shop__filter-button-mobile');
@@ -10,7 +11,7 @@ const filterResetButton = document.querySelector('.shop__filter-reset-desktop');
 const sortItems = document.querySelectorAll('.shop__dropdown-item[sort-order]');
 const pageOverlay = document.querySelector('.page-overlay-filter');
 const body = document.body;
-const CURRENT_URL = window.location.href;
+const productType = new URLSearchParams(window.location.search).get('type');
 
 export default function initFilter() {
   filterCategoryButtons.forEach((category) => {
@@ -45,7 +46,7 @@ const handleFilterItemClick = (item) => {
   applyFilters();
 };
 
-const applyFilters = () => {
+const applyFilters = async () => {
   const activeFilterItems = document.querySelectorAll('.shop__dropdown-item.active[filter]');
   const filteredItems = {};
 
@@ -61,52 +62,31 @@ const applyFilters = () => {
     filteredItems[itemCategory].push(itemName);
   });
 
-  requestFilteredProducts(filteredItems).then(updateProductUI);
+  const url = './routes/products/filter.php?type=' + productType;
+  const filteredProducts = await request(url, 'POST', JSON.stringify(filteredItems));
+  updateProductUI(filteredProducts);
 };
 
-const handleSortItemClick = (item) => {
+const handleSortItemClick = async (item) => {
   if (!item.hasAttribute('sort-order')) return;
   if (item.classList.contains('active')) return;
 
   sortItems.forEach((it) => it.classList.toggle('active', it === item));
   const sortOrder = item.getAttribute('sort-order');
-  requestSortedProducts(sortOrder).then(updateProductUI);
+
+  const url = './routes/products/sort.php?type=' + productType + '&sortOrder=' + sortOrder;
+  const sortedProducts = await request(url, 'GET');
+  updateProductUI(sortedProducts);
 };
 
-const handleResetFilterClick = () => {
+const handleResetFilterClick = async () => {
   filterItems.forEach((item) => item.classList.remove('active'));
   resetCategoryButtonTexts();
   checkResetFilter();
-  closeAllDropdowns();
-  requestFilteredProducts({});
-};
 
-const requestFilteredProducts = async (items) => {
-  try {
-    const response = await fetch(CURRENT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(items),
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const requestSortedProducts = async (direction) => {
-  try {
-    const response = await fetch(CURRENT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: direction,
-    });
-
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-  }
+  const url = './routes/products/products.php?type=' + productType;
+  const products = await request(url, 'GET');
+  updateProductUI(products);
 };
 
 const updateProductUI = (data) => {
@@ -114,9 +94,8 @@ const updateProductUI = (data) => {
   const productContainer = document.querySelector('.product-catalog');
 
   let productHTML = '';
-  data.forEach((product) => (productHTML += productCard.createProductCard(product)));
+  data.forEach((product) => (productHTML += createProductCard(product)));
   productContainer.innerHTML = productHTML;
-
   productCount.textContent = data.length > 1 ? `${data.length} Products` : `${data.length} Product`;
 };
 
@@ -189,8 +168,4 @@ const toggleFilterDropdown = (filterButton) => {
       btn.classList.toggle('active', btn === filterButton && isActive),
     );
   }
-};
-
-const toggleClass = (element, className) => {
-  element.classList.toggle(className);
 };

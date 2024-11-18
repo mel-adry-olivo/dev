@@ -163,9 +163,11 @@
   }
 
   .header__nav-close-button {
+    display: inline-flex;
     color: var(--clr-gray-200);
     background-color: transparent;
   }
+
   .header__nav-close-button:hover {
     color: var(--clr-gray-400);
   }

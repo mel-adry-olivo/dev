@@ -249,6 +249,12 @@
   padding-block: 1rem;
 }
 
+.products__showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 @media (max-width: 1024px) {
   .product {
     flex-direction: column;
