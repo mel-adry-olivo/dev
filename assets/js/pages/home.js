@@ -8,4 +8,7 @@ window.onload = () => {
   initCarousel();
   initActionMenu();
   initFavorites();
+
+  const loaderContainer = document.querySelector('.loader-container');
+  loaderContainer.style.visibility = 'hidden';
 };

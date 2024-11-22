@@ -79,34 +79,112 @@
 }
 
 .product__text-wrapper {
-  /* display: grid;
-  grid-template-rows: repeat(3, 1fr); */
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding-inline: 0.5rem;
 }
 
 .product__text-wrapper > * {
   display: flex;
   align-items: center;
-  padding-inline: 0.5rem;
 }
 
-.product__brand {
-  font-size: 0.7rem;
+.product__brand,
+.product__favorite-brand {
   font-weight: 300;
   text-transform: uppercase;
   color: var(--clr-gray-200);
 }
 
-.product__name {
-  font-size: 0.92rem;
+.product__name,
+.product__favorite-name {
   font-weight: 500;
   color: var(--clr-gray-300);
 }
 
-.product__price {
-  font-size: 0.95rem;
+.product__price,
+.product__favorite-price {
   font-weight: 500;
   color: var(--clr-gray-400);
+}
+
+.product__brand {
+  font-size: 0.7rem;
+}
+
+.product__name {
+  font-size: 0.92rem;
+}
+
+.product__price {
+  font-size: 0.95rem;
+}
+
+.product__favorite-card {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--clr-gray-100);
+  border-radius: 0.45rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.product__favorite-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.product__favorite-close svg {
+  color: var(--clr-gray-200);
+  transition: color 0.3s ease;
+}
+
+.product__favorite-close:hover svg {
+  color: var(--clr-gray-300);
+}
+
+.product__favorite-card > .product__image-container {
+  width: 12rem;
+  aspect-ratio: auto;
+  background-color: transparent;
+}
+
+.product__favorite-text-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.product__favorite-brand {
+  font-size: 0.75rem;
+}
+
+.product__favorite-name {
+  font-size: 0.95rem;
+}
+
+.product__favorite-price {
+  font-size: 1rem;
+  width: fit-content;
+  height: fit-content;
+  align-self: flex-end;
+  margin-left: auto;
+  padding-block: 0.25rem;
+}
+
+.product__favorite-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  padding-block: 0.25rem;
+}
+
+.product__favorite-action {
+  font-size: 0.9rem;
+  color: var(--clr-gray-200);
+  width: fit-content;
 }

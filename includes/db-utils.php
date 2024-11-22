@@ -88,30 +88,45 @@ function getProductById($id) {
     return $result->fetch_assoc();
 }
 
-function getFavoritedProducts() {
+function getFavoritedProducts($userId) {
+
+    if(!$userId) return [];
+
     global $conn;
-    $userId = $_SESSION['user_id'];
-    $sql = "SELECT * FROM favorites WHERE user_id = $userId ORDER BY added_at DESC";
+    $sql = "
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN favorites ON products.product_id = favorites.product_id
+        JOIN brands ON products.brand_id = brands.brand_id
+        WHERE user_id = $userId 
+        ORDER BY added_at DESC
+        ";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
-function isProductFavorite($productId) {
+function isProductFavorite($productId, $userId) {
+
+    if(!$userId) return false;
+
     global $conn;
-    $userId = $_SESSION['user_id'];
     $sql = "SELECT * FROM favorites WHERE user_id = $userId AND product_id = $productId";
     $result = $conn->query($sql);
     return $result->num_rows > 0;
 }
 
-function addProductFavorite($productId) {
+function addProductFavorite($productId, $userId) {
+    if(!$userId) return [];
     global $conn;
     $userId = $_SESSION['user_id'];
     $sql = "INSERT INTO favorites (user_id, product_id) VALUES ($userId, $productId)";
     $conn->query($sql);
 }
 
-function removeProductFavorite($productId) {
+function removeProductFavorite($productId, $userId) {
+    if(!$userId) return [];
     global $conn;
     $userId = $_SESSION['user_id'];
     $sql = "DELETE FROM favorites WHERE user_id = $userId AND product_id = $productId";

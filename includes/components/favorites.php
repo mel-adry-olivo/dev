@@ -1,23 +1,27 @@
 <?php
 
-    $favorites = getFavoritedProducts();
+    if(isset($_SESSION['user_id'])) {
+        $favorites = getFavoritedProducts($_SESSION['user_id']);
+        $favoriteProducts = [];
+    }
+    
+
 ?>
 
 <div class="action-menu__content-item favorites">
     <div class="favorites__wrapper">
         <?php if(isset($_SESSION['user_id'])) : ?>
             <?php if(empty($favorites)) : ?>
-            <div class="favorites__empty-content">
-                <span class="favorites__empty-text">Your favorites is empty</span>
-                <a href="./shop.php" class="button-link favorites__explore">Explore</a>
+            <div class="favorites__content">
+                <div class="favorites__empty-content">
+                    <span class="favorites__empty-text">Your favorites is empty</span>
+                    <a href="./shop.php" class="button-link favorites__explore">Explore</a>
+                </div>
             </div>
             <?php else : ?>
                 <div class="favorites__content">
                 <?php foreach($favorites as $favorite) : ?>
-                    <?php 
-                    $favoriteProduct = getProductById($favorite['product_id']); 
-                    createProductCard($favoriteProduct);
-                    ?>
+                    <?php createFavoriteCard($favorite); ?>
                 <?php endforeach; ?>
                 </div>
             <?php endif; ?>

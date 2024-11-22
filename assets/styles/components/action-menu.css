@@ -254,11 +254,18 @@
 .favorites {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
 }
 .favorites__wrapper {
   display: flex;
   justify-content: center;
+}
+
+.favorites__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .favorites__empty-content {

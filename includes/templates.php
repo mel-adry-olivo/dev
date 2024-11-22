@@ -20,6 +20,9 @@ function createShapeItem($shape) {
 }
 
 function createProductCard($product) {
+
+    $userId = $_SESSION["user_id"] ?? null;
+
     $productId = $product["product_id"];
     $imagePath = $product["image_main"];
     $brand = $product["brand"];
@@ -27,13 +30,15 @@ function createProductCard($product) {
     $price = $product["price"];
     $favoriteUnchecked = getIcon("heart");
     $favoriteChecked = getIcon("heart-filled");
+    $isFavorite = isProductFavorite($productId, $userId) ? 'active' : '';
+    $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
 
     echo
     <<<HTML
         <a href="./product.php?id=$productId" class="product__card" data-id="$productId">  
             <div class="product__image-container">
                 <img src="$imagePath" alt="" class="product__image" width="316" height="">
-                <button class="product__favorite-button" data-tooltip="Add to favorites" data-id="$productId">
+                <button class="product__favorite-button $isFavorite" data-tooltip="$tooltip" data-id="$productId">
                     <span class="product__favorite-icon product__favorite-icon--unchecked">$favoriteUnchecked</span>
                     <span class="product__favorite-icon product__favorite-icon--checked" data-tooltip="Remove from favorites">$favoriteChecked</span>
                 </button>
@@ -41,9 +46,37 @@ function createProductCard($product) {
             <div class="product__text-wrapper">
                 <span class="product__brand">$brand</span>
                 <span class="product__name">$name</span>
-                <span class="product__price">$price</span>
+                <span class="product__price">₱$price</span>
             </div>
         </a>
+    HTML;
+}
+
+function createFavoriteCard($product) {
+    $productId = $product["product_id"];
+    $imagePath = $product["image_main"];
+    $brand = $product["brand"];
+    $name = $product["name"];
+    $price = $product["price"];
+    $close = getIcon("close");
+
+
+    echo
+    <<<HTML
+        <div class="product__favorite-card" data-id="$productId">  
+            <button class="icon-container product__favorite-close" data-id="$productId">$close</button>
+            <div class="product__image-container">
+                <img src="$imagePath" alt="" class="product__image" width="316" height="">
+            </div>
+            <div class="product__favorite-info">
+                <div class="product__favorite-text-wrapper">
+                    <span class="product__favorite-brand">$brand</span>
+                    <a  href="./product.php?id=$productId" class="product__favorite-name">$name</a>
+                </div>
+                <button class="button-link product__favorite-action">Add to bag</button>
+            </div>
+            <span class="product__favorite-price">₱$price</span>
+        </div>
     HTML;
 }
 
