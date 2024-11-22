@@ -1,13 +1,9 @@
 <?php
-
     if(isset($_SESSION['user_id'])) {
         $favorites = getFavoritedProducts($_SESSION['user_id']);
         $favoriteProducts = [];
     }
-    
-
 ?>
-
 <div class="action-menu__content-item favorites">
     <div class="favorites__wrapper">
         <?php if(isset($_SESSION['user_id'])) : ?>
@@ -15,7 +11,7 @@
             <div class="favorites__content">
                 <div class="favorites__empty-content">
                     <span class="favorites__empty-text">Your favorites is empty</span>
-                    <a href="./shop.php" class="button-link favorites__explore">Explore</a>
+                    <a href="./shop.php" class="button-link explore">Explore</a>
                 </div>
             </div>
             <?php else : ?>
@@ -26,9 +22,11 @@
                 </div>
             <?php endif; ?>
         <?php else : ?>
-            <div class="favorites__empty-content">
-                <span class="favorites__empty-text">Your favorites is empty</span>
-                <button class="button-link favorites__not-logged-button">Log in or create an account</button>
+            <div class="favorites__content">
+                <div class="favorites__empty-content">
+                    <span class="favorites__empty-text">Your favorites is empty</span>
+                    <button class="button-link favorites__not-logged-button">Log in or create an account</button>
+                </div>
             </div>
         <?php endif; ?>
     </div>
