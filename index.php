@@ -33,7 +33,7 @@ $trendingHeaderText = "Explore our top-trending eyewear styles and make a statem
     <?php require './includes/components/action-menu.php'?>
     <section class="hero">
         <div class="hero__media-container">
-            <video playsinline autoplay loop muted src="./assets/images/hero-video.webm" class="hero__media" poster="./assets/images/hero-image.png"></video>
+            <video preload="none" playsinline autoplay loop muted src="./assets/images/hero-video.webm" class="hero__media" poster="./assets/images/hero-image.png"></video>
             <div class="hero__media-content">
                 <div class="hero__headline-wrapper">
                     <h1 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h1>

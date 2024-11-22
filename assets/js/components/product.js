@@ -1,10 +1,11 @@
-import { checkUserLogin, request, toggleClass } from '../utils.js';
+import { checkUserLogin, request } from '../utils.js';
 import { toggleActionMenu } from './action-menu.js';
 import { showSnackbar } from './snackbar.js';
 
+const CLOSE_BUTTON = '.product__favorite-close';
+
 const productFavoriteButtons = document.querySelectorAll('.product__favorite-button');
 const favoriteContainer = document.querySelector('.favorites__content');
-const favoriteCardCloseButtons = document.querySelectorAll('.product__favorite-close');
 
 const initFavorites = () => {
   productFavoriteButtons.forEach((button) =>
@@ -14,12 +15,11 @@ const initFavorites = () => {
     }),
   );
 
-  favoriteCardCloseButtons.forEach((button) =>
-    button.addEventListener('click', async (e) => {
-      e.preventDefault();
-      handleRemoveFavorite(button);
-    }),
-  );
+  favoriteContainer.addEventListener('click', (e) => {
+    if (e.target.closest(CLOSE_BUTTON)) {
+      handleRemoveFavorite(e.target.closest('.product__favorite-close'));
+    }
+  });
 };
 
 const handleFavoriteClick = async (button) => {
@@ -66,13 +66,6 @@ const addFavoriteCardToUI = (product) => {
 
   const productCard = createFavoriteProductCard(product);
   favoriteContainer.innerHTML += productCard;
-
-  const closeButton = favoriteContainer.querySelector(
-    `.product__favorite-close[data-id="${product.product_id}"]`,
-  );
-
-  // add functionality to close button to the newly added card
-  closeButton.addEventListener('click', (e) => handleRemoveFavorite(closeButton));
 };
 
 const removeProductFromFavorite = async (productId) => {

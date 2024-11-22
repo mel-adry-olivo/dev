@@ -233,6 +233,13 @@ input {
   z-index: 9999;
   background-color: var(--clr-bg);
   visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.loader-container.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .loader {
