@@ -10,8 +10,6 @@ const searchForm = document.querySelector('.search__form');
 const searchIcon = document.querySelector('.search__icon');
 const searchSubmitButton = document.querySelector('.search__submit');
 const searchInput = document.getElementById('search__input');
-const favoriteContainer = document.querySelector('.favorite__content');
-const favoriteEmptyMessage = document.querySelector('.favorites__empty-content');
 const body = document.body;
 
 const initActionMenu = () => {
@@ -30,7 +28,13 @@ const initActionMenu = () => {
     }
   });
 
+  document.querySelectorAll('.favorites__content, .bag__content').forEach((container) => {
+    container.addEventListener('scroll', handleScrollMask);
+  });
+
   initSearch();
+
+  handleScrollMask();
 };
 
 const setActionEvent = (buttons, callback) => {
@@ -80,4 +84,22 @@ const initSearch = () => {
   toggleButtonState();
 };
 
-export { initActionMenu, toggleActionMenu, favoriteContainer, favoriteEmptyMessage };
+function handleScrollMask() {
+  const containers = document.querySelectorAll('.favorites__content, .bag__content');
+
+  containers.forEach((container) => {
+    const scrollHeight = container.scrollHeight;
+    const scrollTop = container.scrollTop;
+    const clientHeight = container.clientHeight;
+
+    if (scrollTop + clientHeight < scrollHeight) {
+      container.style.maskImage = 'linear-gradient(to top, transparent, black 25%)';
+      container.style.webkitMaskImage = 'linear-gradient(to top, transparent, black 25%)';
+    } else {
+      container.style.maskImage = 'none';
+      container.style.webkitMaskImage = 'none';
+    }
+  });
+}
+
+export { initActionMenu, toggleActionMenu };

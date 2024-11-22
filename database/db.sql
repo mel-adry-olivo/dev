@@ -58,8 +58,8 @@ CREATE TABLE favorites (
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE cart (
-    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE bag (
+    bag_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     product_id INT,
     added_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -2,10 +2,9 @@ import { checkUserLogin, request } from '../utils.js';
 import { toggleActionMenu } from './action-menu.js';
 import { showSnackbar } from './snackbar.js';
 
-const CLOSE_BUTTON = '.product__favorite-close';
-
 const productFavoriteButtons = document.querySelectorAll('.product__favorite-button');
 const favoriteContainer = document.querySelector('.favorites__content');
+const bagContainer = document.querySelector('.bag__content');
 
 const initFavorites = () => {
   productFavoriteButtons.forEach((button) =>
@@ -16,8 +15,20 @@ const initFavorites = () => {
   );
 
   favoriteContainer.addEventListener('click', (e) => {
-    if (e.target.closest(CLOSE_BUTTON)) {
-      handleRemoveFavorite(e.target.closest('.product__favorite-close'));
+    const button = e.target.closest('.product__card-close');
+    if (button) {
+      handleRemoveFavorite(button);
+    }
+  });
+
+  bagContainer.addEventListener('click', (e) => {
+    const subtractButton = e.target.closest('.product__quantity-button--subtract');
+    const addButton = e.target.closest('.product__quantity-button--add');
+
+    if (subtractButton) {
+      handleQuantityChange(subtractButton, -1);
+    } else if (addButton) {
+      handleQuantityChange(addButton, 1);
     }
   });
 };
@@ -94,10 +105,37 @@ const removeProductFromFavorite = async (productId) => {
 
 const updateFavoriteButton = (productId) => {
   const button = document.querySelector(`.product__favorite-button[data-id="${productId}"]`);
+  if (!button) return; // some favorite buttons may not exist on the current page
+
   const isFavorite = button.classList.contains('active');
 
   button.setAttribute('data-tooltip', isFavorite ? 'Add to favorites' : 'Remove from favorites');
   button.classList.toggle('active');
+};
+
+const handleQuantityChange = (button, change) => {
+  const productCard = button.closest('.product__bag-card');
+  const productId = productCard.dataset.id;
+
+  const priceElement = productCard.querySelector('.product__bag-price');
+  const quantityElement = productCard.querySelector('.product__quantity');
+
+  const currentPrice = parseInt(priceElement.textContent.replace('₱', ''));
+  const currentQuantity = parseInt(quantityElement.textContent);
+
+  const newQuantity = Math.max(1, currentQuantity + change);
+  const unitPrice = currentPrice / currentQuantity;
+
+  const totalPrice = unitPrice * newQuantity;
+
+  priceElement.textContent = `₱${totalPrice}`;
+  quantityElement.textContent = newQuantity;
+
+  // updateProductQuantity(productId, newQuantity);
+};
+
+const updateProductQuantity = async (productId, quantity) => {
+  // To implement later
 };
 
 const createProductCard = (product) => {
@@ -132,7 +170,7 @@ const createFavoriteProductCard = (product) => {
 
   return `
     <div class="product__favorite-card" data-id="${product_id}">  
-        <button class="icon-container product__favorite-close" data-id="${product_id}">${closeIcon}</button>
+        <button class="icon-container product__card-close" data-id="${product_id}">${closeIcon}</button>
         <div class="product__image-container">
             <img src="${image_main}" alt="" class="product__image" width="316" height="">
         </div>
