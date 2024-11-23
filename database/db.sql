@@ -107,7 +107,6 @@ VALUES
     (4, 'Frame Type'),
     (5, 'Gender');
 
-
 INSERT INTO attributes (attribute_id, category_id, name)
 VALUES
     (1, 1, 'Round'),

@@ -17,11 +17,11 @@ if($user) {
     $_SESSION['email'] = $user['email'];
     $_SESSION['login_success'] = true;
 
-    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? './index.php'));
+    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? '../../index.php'));
     exit();
 } else {
     
     $_SESSION['login_success'] = false;
-    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? './index.php'));
+    header("Location: " . ($_SERVER['HTTP_REFERER'] ?? '../../index.php'));
     exit();
 }

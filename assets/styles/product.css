@@ -113,13 +113,24 @@
   color: var(--clr-gray-200);
 }
 
+.product__info-form {
+  width: 100%;
+}
+
+.product__info-in-bag-text {
+  color: hsl(0, 86%, 60%);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .product__add-button {
   position: relative;
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   padding-block: 1rem;
   border-radius: 0.75rem;
+  width: 100%;
 }
 
 .product__add-content {
@@ -153,10 +164,11 @@
   transform: translateX(1.5rem);
 }
 
-.product__info-reservation-count {
+.product__info-reservation-count,
+.product__info-reminder {
   color: var(--clr-gray-200);
   font-size: 0.9rem;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .product__info-others {

@@ -8,12 +8,4 @@ window.onload = () => {
   initCarousel();
   initActionMenu();
   initFavorites();
-
-  const addToBagButton = document.querySelector('.product__add-button');
-  addToBagButton.addEventListener('click', () => {
-    addToBagButton.classList.toggle('active');
-    setTimeout(() => {
-      window.location.href = './summary.php';
-    }, 1000);
-  });
 };

@@ -312,7 +312,7 @@
   width: fit-content;
 }
 
-.bag {
+/* .bag {
   height: 100% !important;
   justify-content: space-between;
 }
@@ -324,7 +324,7 @@
 .bag__footer {
   display: flex;
   flex-direction: column;
-}
+} */
 
 @media (max-width: 1200px) {
   .action-menu {

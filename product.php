@@ -31,6 +31,10 @@ if(isset($_GET['id'])) {
     $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
 }
 
+if(isset($_SESSION['in_bag'])) {
+    $inBag = $_SESSION['in_bag'];
+    unset($_SESSION['in_bag']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,13 +87,20 @@ if(isset($_GET['id'])) {
                         <span class="product__info-reviews-count">0 Reviews</span>
                     </div>
                 </div>
-                <button class="button button--filled-dark product__add-button">
-                    <div class="product__add-content">
-                        <div class="loader product__add-button-loader"></div>
-                        <span class="product__add-button-text">Add to Bag</span>
-                    </div>
-                </button>
+                <form action="./routes/products/bag.php" method="POST" class="product__info-form">
+                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                    <button name="add" class="button button--filled-dark product__add-button">
+                        <div class="product__add-content">
+                            <div class="loader product__add-button-loader"></div>
+                            <span class="product__add-button-text">Add to Bag</span>
+                        </div>
+                    </button>
+                </form>
+                <?php if(isset($inBag)) : ?>
+                <span class="product__info-in-bag-text">Product is already in your bag</span>
+                <?php endif ?>
                 <span class="product__info-reservation-count"><?php echo $product['reserve_count']; ?> Reserved</span>
+                <span class="product__info-reminder">You can only reserve 1 unit at a time</span>
                 <div class="product__info-others">
                     <div class="product__info-others-item">
                         <span class="product__info-other-title">Size & Fit</span>

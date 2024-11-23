@@ -131,7 +131,8 @@
   width: 100%;
 }
 
-.product__card-close {
+.product__card-close,
+.product__bag-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -157,7 +158,7 @@
 }
 
 .product__bag-card > .product__image-container {
-  width: 15rem;
+  width: 14rem;
 }
 
 .product__favorite-text-wrapper {
@@ -186,6 +187,11 @@
   padding-block: 0.25rem;
 }
 
+.product__bag-price {
+  align-self: flex-start;
+  margin-left: 0;
+}
+
 .product__favorite-info {
   display: flex;
   flex-direction: column;
@@ -208,7 +214,7 @@
 .product__quantity-container > * {
   display: inline-flex;
   justify-content: center;
-  flex: 1;
+  flex: 0 0 1;
   padding: 0.35rem;
 }
 

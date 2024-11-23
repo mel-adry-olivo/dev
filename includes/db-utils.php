@@ -88,6 +88,48 @@ function getProductById($id) {
     return $result->fetch_assoc();
 }
 
+function getBagProducts($userId) {
+    if(!$userId) return [];
+    global $conn;
+    $sql = "
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN bag ON products.product_id = bag.product_id
+        JOIN brands ON products.brand_id = brands.brand_id
+        WHERE user_id = $userId
+        ORDER BY bag.added_on DESC
+        ";
+
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function isProductInBag($productId, $userId) {
+    if(!$userId) return false;
+    global $conn;
+    $sql = "SELECT * FROM bag WHERE user_id = $userId AND product_id = $productId";
+    $result = $conn->query($sql);
+    return $result->num_rows > 0;
+}
+
+function addProductToBag($productId, $userId) {
+    if(!$userId) return [];
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "INSERT INTO bag (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
+    $conn->query($sql);
+}
+
+function removeProductFromBag($productId, $userId) {
+    if(!$userId) return [];
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "DELETE FROM bag WHERE user_id = $userId AND product_id = $productId";
+    $conn->query($sql);
+}
+
 function getFavoritedProducts($userId) {
 
     if(!$userId) return [];
@@ -101,7 +143,7 @@ function getFavoritedProducts($userId) {
         JOIN favorites ON products.product_id = favorites.product_id
         JOIN brands ON products.brand_id = brands.brand_id
         WHERE user_id = $userId 
-        ORDER BY added_at DESC
+        ORDER BY favorites.added_at DESC
         ";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);

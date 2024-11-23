@@ -44,21 +44,16 @@ const initActionMenu = () => {
 
 const setActionEvent = (buttons, callback) => {
   buttons.forEach((btn) =>
-    btn.addEventListener('click', async () => {
+    btn.addEventListener('click', () => {
       const action = btn.getAttribute('data-action');
       callback(action);
     }),
   );
 };
 
-const toggleActionMenu = async (action = null) => {
-  if (action == 'bag') {
-    if (!(await checkUserLogin())) {
-      toggleActionMenu('user');
-      showSnackbar('You need to be logged in to view your bag');
-    } else {
-      window.location.href = './summary.php';
-    }
+const toggleActionMenu = (action = null) => {
+  if (action === 'bag') {
+    handleBagClick(toggleActionMenu);
     return;
   }
   updateActionMenuContent(action);
@@ -67,16 +62,12 @@ const toggleActionMenu = async (action = null) => {
   body.classList.toggle('no-scroll');
 };
 
-const updateActionMenuContent = async (action) => {
-  if (action == 'bag') {
-    if (!(await checkUserLogin())) {
-      updateActionMenuContent('user');
-      showSnackbar('You need to be logged in to view your bag');
-    } else {
-      window.location.href = './summary.php';
-    }
+const updateActionMenuContent = (action) => {
+  if (action === 'bag') {
+    handleBagClick(updateActionMenuContent);
     return;
   }
+
   const contentItems = actionMenuContent.querySelectorAll('.action-menu__content-item');
   contentItems.forEach((content) =>
     content.classList.toggle('active', content.classList.contains(action)),
@@ -85,6 +76,15 @@ const updateActionMenuContent = async (action) => {
   actionMenuButtons.forEach((btn) =>
     btn.classList.toggle('active', btn.getAttribute('data-action') === action),
   );
+};
+
+const handleBagClick = async (callback) => {
+  if (!(await checkUserLogin())) {
+    callback('user');
+    showSnackbar('You need to be logged in to view your bag');
+  } else {
+    window.location.href = './summary.php';
+  }
 };
 
 const initSearch = () => {
