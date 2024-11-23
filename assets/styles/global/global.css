@@ -121,7 +121,7 @@ input {
   opacity: 1;
 }
 
-.confirm-dialog {
+.confirm__dialog {
   visibility: hidden;
   opacity: 0;
   position: fixed;
@@ -132,16 +132,40 @@ input {
   border-radius: 1rem;
   padding: 2rem;
   z-index: 100;
+  width: 18rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   color: var(--clr-gray-300);
   transition: all 0.3s ease;
 }
 
-.confirm-dialog.show {
+.confirm__message {
+  font-size: 0.9rem;
+  color: var(--clr-gray-200);
+}
+
+.confirm__dialog.show {
   visibility: visible;
   opacity: 1;
+}
+
+.confirm__button-wrapper {
+  align-self: flex-end;
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.confirm__dialog .confirm__ok {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+}
+
+.confirm__dialog .confirm__cancel {
+  font-size: 0.85rem;
+  color: var(--clr-gray-200);
 }
 
 .icon-container {
@@ -253,11 +277,13 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
   z-index: 9999;
   background-color: var(--clr-bg);
   visibility: visible;
   opacity: 1;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .loader-container.hidden {
@@ -266,10 +292,6 @@ input {
 }
 
 .loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 48px;
   height: 48px;
   border: 3px solid var(--clr-gray-300);

@@ -1,11 +1,9 @@
 import { checkUserLogin, request } from '../utils.js';
 import { toggleActionMenu } from './action-menu.js';
 import { showSnackbar } from './snackbar.js';
-import { showConfirmDialog } from './confirm-dialog.js';
 
 const productFavoriteButtons = document.querySelectorAll('.product__favorite-button');
 const favoriteContainer = document.querySelector('.favorites__content');
-const bagContainer = document.querySelector('.bag__summary-products');
 
 const initFavorites = () => {
   productFavoriteButtons.forEach((button) =>
@@ -20,20 +18,6 @@ const initFavorites = () => {
     if (button) {
       handleRemoveFavorite(button);
     }
-  });
-};
-
-const initBag = () => {
-  const productBagCloseForm = document.querySelectorAll('.product__bag-close-form');
-  productBagCloseForm.forEach((form) => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      showConfirmDialog('Do you want to proceed?', (confirmed) => {
-        if (confirmed) {
-          form.submit();
-        }
-      });
-    });
   });
 };
 
@@ -199,4 +183,4 @@ const createEmptyContent = () => {
   `;
 };
 
-export { initFavorites, initBag, createProductCard };
+export { initFavorites, createProductCard };

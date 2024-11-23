@@ -144,6 +144,10 @@
   color: var(--clr-gray-300);
 }
 
+.bag__reserve-form {
+  width: 100%;
+}
+
 .bag__reserve {
   margin-top: 1.2rem;
   border-radius: 0.75rem;
@@ -154,6 +158,11 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
+}
+
+.bag__reserve[disabled] {
+  cursor: default;
+  opacity: 0.5;
 }
 
 @media (max-width: 1000px) {

@@ -55,7 +55,7 @@ foreach($bag as $bagproduct) {
             <main class="bag__summary-content">
                 <div class="bag__summary-products">
                     <div class="bag__summary-content-header">
-                        <h6 class="bag__summary-title">Bag Summary</h6>
+                        <h6 class="bag__summary-title">Your Bag</h6>
                         <span class="bag__summary-count">
                             <?php 
                             echo $count; 
@@ -79,17 +79,26 @@ foreach($bag as $bagproduct) {
                         <span class="bag__subtotal-text">Subtotal</span>
                         <span class="bag__subtotal">₱<?php echo number_format($totalPrice, '0', '.', ','); ?></span>
                     </div>
-                    <a class="button button--filled-dark bag__reserve">Reserve Now</a>
+                    <form action="./routes/products/bag.php" method="POST" class="bag__reserve-form">
+                        <input type="hidden" name="reserve" value="true">
+                        <button name="reserve" class="button button--filled-dark bag__reserve" <?php echo empty($bag) ? 'disabled' : ''; ?>>Reserve Now</button>
+                    </form>
                 </div>
             </footer>
         </div>
     </div>
     <div id="snackbar"></div>
-    <div class="page-overlay confirm-overlay"></div>
-    <div class="confirm-dialog">
-        <p class="confirm-message">Message</p>
-        <button class="confirm-ok">OK</button>
-        <button class="confirm-cancel">Cancel</button>
+    <div class="page-overlay confirm__overlay"></div>
+    <div class="confirm__dialog">
+        <p class="confirm__message">Message</p>
+        <div class="confirm__button-wrapper">
+            <button class="confirm__cancel">Cancel</button>
+            <button class="button button--filled-dark confirm__ok">Yes</button>
+        </div>
+    </div>
+    <div class="loader-container hidden">
+        <div class="loader"></div>
+        <span>Processing reservation</span>
     </div>
 </body>
 </html>

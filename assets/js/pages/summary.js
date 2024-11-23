@@ -1,10 +1,39 @@
-import initHeader from '../components/header.js';
-import { initActionMenu } from '../components/action-menu.js';
-import { initFavorites, initBag } from '../components/product.js';
+import { showConfirmDialog, hideConfirmDialog } from '../components/confirm-dialog.js';
 
 window.onload = () => {
-  // initHeader();
-  // initActionMenu();
-  // initFavorites();
-  initBag();
+  const productBagCloseForm = document.querySelectorAll('.product__bag-close-form');
+  const pageOverlay = document.querySelector('.confirm__overlay');
+  const reserveForm = document.querySelector('.bag__reserve-form');
+  const loader = document.querySelector('.loader-container');
+  const loaderText = document.querySelector('.loader-container span');
+
+  productBagCloseForm.forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showConfirmDialog('Do you want remove this from your bag?', (confirmed) => {
+        if (confirmed) {
+          form.submit();
+        }
+      });
+    });
+  });
+
+  reserveForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    loader.classList.remove('hidden');
+
+    setTimeout(() => {
+      loaderText.textContent = 'Successfully Reserved';
+    }, 2000);
+
+    setTimeout(() => {
+      reserveForm.submit();
+    }, 2800);
+  });
+
+  pageOverlay.addEventListener('click', (e) => {
+    if (e.target === pageOverlay) {
+      hideConfirmDialog();
+    }
+  });
 };
