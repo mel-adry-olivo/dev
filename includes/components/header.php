@@ -38,13 +38,13 @@
                     </button>
                 </li>
                 <li class="header__action-item">
-                    <button class="icon-container header__action-button" data-action="bag">
-                        <?php echo getIcon('bag')?>
+                    <button class="icon-container header__action-button <?php echo (isset($_SESSION['user_id'])) ? 'online' : '' ?>" data-action="user">
+                        <?php echo getIcon('user')?>
                     </button>
                 </li>
                 <li class="header__action-item">
-                    <button class="icon-container header__action-button <?php echo (isset($_SESSION['user_id'])) ? 'online' : '' ?>" data-action="user">
-                        <?php echo getIcon('user')?>
+                    <button href="./summary.php" class="icon-container header__action-button" data-action="bag">
+                        <?php echo getIcon('bag')?>
                     </button>
                 </li>
             </ul>

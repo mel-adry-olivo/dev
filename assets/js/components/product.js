@@ -4,7 +4,7 @@ import { showSnackbar } from './snackbar.js';
 
 const productFavoriteButtons = document.querySelectorAll('.product__favorite-button');
 const favoriteContainer = document.querySelector('.favorites__content');
-const bagContainer = document.querySelector('.bag__content');
+const bagContainer = document.querySelector('.bag__summary-products');
 
 const initFavorites = () => {
   productFavoriteButtons.forEach((button) =>
@@ -20,7 +20,9 @@ const initFavorites = () => {
       handleRemoveFavorite(button);
     }
   });
+};
 
+const initBag = () => {
   bagContainer.addEventListener('click', (e) => {
     const subtractButton = e.target.closest('.product__quantity-button--subtract');
     const addButton = e.target.closest('.product__quantity-button--add');
@@ -195,4 +197,4 @@ const createEmptyContent = () => {
   `;
 };
 
-export { initFavorites, createProductCard };
+export { initFavorites, initBag, createProductCard };

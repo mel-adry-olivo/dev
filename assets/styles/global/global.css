@@ -255,6 +255,31 @@ input {
   animation: rotation 1s linear infinite;
 }
 
+#snackbar {
+  position: fixed;
+  display: inline-flex;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  bottom: 2rem;
+  left: 2rem;
+  background-color: var(--clr-gray-300);
+  opacity: 0;
+  z-index: 9999;
+  font-size: 0.9rem;
+  transition: opacity 0.6s ease-in-out;
+}
+
+#snackbar.show {
+  opacity: 0.95;
+}
+
+@media (max-width: 900px) {
+  #snackbar {
+    left: 2rem;
+    right: 2rem;
+  }
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

@@ -1,4 +1,5 @@
 <?php
+
 $testReviews = [
     [
         "name" => "John Doe",
@@ -82,7 +83,12 @@ if(isset($_GET['id'])) {
                         <span class="product__info-reviews-count">0 Reviews</span>
                     </div>
                 </div>
-                <button class="button button--filled-dark product__add-button">Add to bag</button>
+                <button class="button button--filled-dark product__add-button">
+                    <div class="product__add-content">
+                        <div class="loader product__add-button-loader"></div>
+                        <span class="product__add-button-text">Add to Bag</span>
+                    </div>
+                </button>
                 <span class="product__info-reservation-count"><?php echo $product['reserve_count']; ?> Reserved</span>
                 <div class="product__info-others">
                     <div class="product__info-others-item">

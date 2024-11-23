@@ -114,13 +114,43 @@
 }
 
 .product__add-button {
+  position: relative;
   margin-top: 2rem;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   padding-block: 1rem;
+  border-radius: 0.75rem;
+}
+
+.product__add-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.product__add-button-text {
+  position: absolute;
+  color: var(--clr-bg);
   font-size: 0.92rem;
   font-weight: 500;
-  border-radius: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.product__add-button-loader {
+  position: static;
+  border-color: var(--clr-bg);
+  border-bottom-color: transparent;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+}
+
+.product__add-button.active .product__add-button-loader {
+  opacity: 1;
+}
+
+.product__add-button.active .product__add-button-text {
+  transform: translateX(1.5rem);
 }
 
 .product__info-reservation-count {
