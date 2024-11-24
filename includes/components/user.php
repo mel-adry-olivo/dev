@@ -20,9 +20,11 @@ if(isset($_SESSION['user_id'])) {
                     <form action="./reservations.php">
                         <button class="button-link profile-link profile__view-reservations">View Reservations</button>
                     </form>
-                    <form action="#"class="profile__actions">
-                        <button class="button-link profile-link profile__edit">Edit Profile</button>
-                    </form>
+                    <?php if($_SESSION['role'] == 'admin') : ?>
+                        <form action="./admin.php">
+                            <button class="button-link profile-link profile__admin">Admin</button>
+                        </form>
+                    <?php endif; ?>
                     <form action="./routes/auth/logout.php" method="POST">
                         <button class="button-link profile-link profile__logout">Log out</button>
                     </form>

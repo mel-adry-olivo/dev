@@ -8,21 +8,23 @@ require './includes/config.php';
 require './includes/db-utils.php';
 
 
-$title = "INSPEC®"; 
 $type = $_GET['type'];
 
 switch($_GET['type']) {
     case 'sunglasses':
         $shopHeader = 'Sunglasses';
         $shopSubtitle = 'Discover our collection of sunglasses, crafted with precision lenses for crystal-clear vision.';
+        $title = "Sunglasses | INSPEC®"; 
         break;
     case 'eyeglasses':
         $shopHeader = 'Eyeglasses';
         $shopSubtitle = 'Elevate your style while protecting your eyes with our premium eyeglasses.';
+        $title = "Eyeglasses | INSPEC®"; 
         break;
     case 'all':
         $shopHeader = 'Shop';
         $shopSubtitle = 'Discover our collection of sunglasses, eyeglasses, and more, crafted with precision lenses for crystal-clear vision.';
+        $title = "Shop | INSPEC®"; 
         break;
 }
 

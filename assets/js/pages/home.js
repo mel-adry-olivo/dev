@@ -5,8 +5,8 @@ import { initFavorites } from '../components/product.js';
 
 window.onload = () => {
   initHeader();
-  initCarousel();
   initActionMenu();
+  initCarousel();
   initFavorites();
 
   const loaderContainer = document.querySelector('.loader-container');

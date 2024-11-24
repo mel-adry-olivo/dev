@@ -20,6 +20,7 @@ $shop               = '<link href="./assets/styles/shop.css" rel="stylesheet"/>'
 $productPage        = '<link href="./assets/styles/product.css" rel="stylesheet"/>';
 $summary            = '<link href="./assets/styles/summary.css" rel="stylesheet"/>';
 $reservations       = '<link href="./assets/styles/reservations.css" rel="stylesheet"/>';
+$login              = '<link href="./assets/styles/login.css" rel="stylesheet"/>';
 
 echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay;
 
@@ -33,4 +34,6 @@ if($currentPage == 'index') {
     echo $summary;
 } else if ($currentPage == 'reservations') {
     echo $summary, $reservations;
+} else if ($currentPage == 'login') {
+    echo $login;
 }

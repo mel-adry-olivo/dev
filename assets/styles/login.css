@@ -1,0 +1,22 @@
+.login {
+  min-height: calc(100vh - 6rem);
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.login__message {
+  color: orangered;
+}
+
+.login > .form {
+  width: 100%;
+  max-width: 600px;
+}
+
+.login .auth-register {
+  display: none;
+}
