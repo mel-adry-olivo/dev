@@ -16,7 +16,7 @@
                     <a href="./shop.php?type=eyeglasses" class="header__nav-link">Eyeglasses</a>
                 </li>
                 <li class="header__nav-item">
-                    <a href="#" class="header__nav-link">About</a>
+                    <a href="./shop.php?type=all" class="header__nav-link">Shop</a>
                 </li>
             </ul>
         </nav>

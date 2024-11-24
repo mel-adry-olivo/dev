@@ -93,6 +93,21 @@
   color: var(--clr-gray-300);
 }
 
+.profile__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-link {
+  color: var(--clr-gray-200);
+  transition: color 0.2s ease;
+}
+
+.profile-link:hover {
+  color: var(--clr-gray-400);
+}
+
 .auth[data-state='login'] > .auth-register,
 .auth[data-state='register'] > .auth-login {
   visibility: hidden;

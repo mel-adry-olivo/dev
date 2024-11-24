@@ -88,6 +88,53 @@ function getProductById($id) {
     return $result->fetch_assoc();
 }
 
+function reserveBagProducts($userId) {
+    if(!$userId) return [];
+    global $conn;
+    $sql = "SELECT * FROM bag WHERE user_id = $userId";
+    $result = $conn->query($sql);
+
+    if($result->num_rows > 0) {
+
+        $bagProducts = $result->fetch_all(MYSQLI_ASSOC);
+
+        foreach($bagProducts as $product) {
+            $productId = $product['product_id'];
+            $sql = "INSERT INTO reserved (user_id, product_id) VALUES ($userId, $productId)";
+            $conn->query($sql);
+        }
+
+        $sql = "DELETE FROM bag WHERE user_id = $userId";
+        $conn->query($sql);
+    }
+}
+
+function getReservedProducts($userId) {
+    if(!$userId) return [];
+    global $conn;
+    $sql = "
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN reserved ON products.product_id = reserved.product_id
+        JOIN brands ON products.brand_id = brands.brand_id
+        WHERE user_id = $userId
+        ORDER BY reserved.reserved_on DESC
+        ";
+
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function removeProductFromReservations($productId, $userId) {
+    if(!$userId) return [];
+    global $conn;
+    $userId = $_SESSION['user_id'];
+    $sql = "DELETE FROM reserved WHERE user_id = $userId AND product_id = $productId";
+    $conn->query($sql);
+}
+
 function getBagProducts($userId) {
     if(!$userId) return [];
     global $conn;
@@ -118,7 +165,7 @@ function addProductToBag($productId, $userId) {
     if(!$userId) return [];
     global $conn;
     $userId = $_SESSION['user_id'];
-    $sql = "INSERT INTO bag (user_id, product_id, quantity) VALUES ($userId, $productId, 1)";
+    $sql = "INSERT INTO bag (user_id, product_id) VALUES ($userId, $productId)";
     $conn->query($sql);
 }
 
@@ -206,6 +253,7 @@ function getProductAttributesByID($id) {
 function getFilteredProducts($type, $filters) {
     global $conn;
     $formattedType = ucfirst($type);
+    $where = $formattedType == 'All' ? 'WHERE 1=1' : " WHERE p.type = '$formattedType'";
     $sql = "
         SELECT DISTINCT 
             p.*,
@@ -215,7 +263,7 @@ function getFilteredProducts($type, $filters) {
         LEFT JOIN product_attributes pa ON p.product_id = pa.product_id
         LEFT JOIN attributes a ON pa.attribute_id = a.attribute_id
         LEFT JOIN categories c ON a.category_id = c.category_id
-        WHERE p.type = '$formattedType'
+        $where
     ";
 
     $conditions = [];
@@ -232,22 +280,28 @@ function getFilteredProducts($type, $filters) {
         $sql .= " AND " . implode(" AND ", $conditions);
     }
 
+
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
 function getSortedProducts($type, $direction) {
     global $conn;
+
     $formattedType = ucfirst($type);
+    $where = $formattedType == 'All' ? '' : " WHERE products.type = '$formattedType'";
+
     $sql = "
         SELECT 
             products.*,
             brands.name AS brand 
         FROM products
         JOIN brands ON products.brand_id = brands.brand_id
-        WHERE products.type = '$formattedType'
+        $where
         ORDER BY products.price $direction
-    ";
+        ";
+
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+

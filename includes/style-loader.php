@@ -19,6 +19,7 @@ $home               = '<link href="./assets/styles/home.css" rel="stylesheet"/>'
 $shop               = '<link href="./assets/styles/shop.css" rel="stylesheet"/>';
 $productPage        = '<link href="./assets/styles/product.css" rel="stylesheet"/>';
 $summary            = '<link href="./assets/styles/summary.css" rel="stylesheet"/>';
+$reservations       = '<link href="./assets/styles/reservations.css" rel="stylesheet"/>';
 
 echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay;
 
@@ -30,4 +31,6 @@ if($currentPage == 'index') {
     echo $productPage;
 } else if ($currentPage == 'summary') {
     echo $summary;
+} else if ($currentPage == 'reservations') {
+    echo $summary, $reservations;
 }

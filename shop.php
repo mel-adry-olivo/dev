@@ -9,14 +9,25 @@ require './includes/db-utils.php';
 
 
 $title = "INSPEC®"; 
-if(isset($_GET['type'])) {
-    $type = $_GET['type'];
-    $shopHeader = ucfirst($type);
-    $sunglassesSubtitle = 'Discover our collection of sunglasses, crafted with precision lenses for crystal-clear vision.';
-    $eyeglassesSubtitle = 'Elevate your style while protecting your eyes with our premium eyeglasses.';
-    $shopSubtitle = $type === 'sunglasses' ? $sunglassesSubtitle : $eyeglassesSubtitle;
-    $products = getSortedProducts($type, 'DESC'); // DESC by default
+$type = $_GET['type'];
+
+switch($_GET['type']) {
+    case 'sunglasses':
+        $shopHeader = 'Sunglasses';
+        $shopSubtitle = 'Discover our collection of sunglasses, crafted with precision lenses for crystal-clear vision.';
+        break;
+    case 'eyeglasses':
+        $shopHeader = 'Eyeglasses';
+        $shopSubtitle = 'Elevate your style while protecting your eyes with our premium eyeglasses.';
+        break;
+    case 'all':
+        $shopHeader = 'Shop';
+        $shopSubtitle = 'Discover our collection of sunglasses, eyeglasses, and more, crafted with precision lenses for crystal-clear vision.';
+        break;
 }
+
+
+$products = getSortedProducts($type, 'DESC');
 
 ?>
 

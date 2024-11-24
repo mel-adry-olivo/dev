@@ -87,9 +87,6 @@ function createBagCard($product) {
     $name = $product["name"];
     $price = $product["price"];
     $close = getIcon("close");
-    $add = getIcon("add");
-    $subtract = getIcon("remove");
-
 
     echo
     <<<HTML
@@ -108,17 +105,40 @@ function createBagCard($product) {
                     <a  href="./product.php?id=$productId" class="product__favorite-name">$name</a>
                 </div>
                 <span class="product__bag-price">₱$price</span>
-
-                <!-- <div class="product__quantity-container">
-                    <button class="button button--filled-dark product__quantity-button product__quantity-button--subtract">$subtract</button>
-                    <span class="product__quantity">1</span>
-                    <button class="button button--filled-dark product__quantity-button product__quantity-button--add">$add</button>
-                </div> -->
             </div>
         </div>
     HTML;
 }
 
+function createReservationCard($product) {
+    $productId = $product["product_id"];
+    $imagePath = $product["image_main"];
+    $brand = $product["brand"];
+    $name = $product["name"];
+    $price = $product["price"];
+    $close = getIcon("close");
+
+    echo
+    <<<HTML
+        <div class="product__bag-card" data-id="$productId">  
+            <form action="./routes/products/reservation.php" method="POST" class="product__reserve-close-form">
+                <input type="hidden" name="remove">
+                <input type="hidden" name="product_id" value="$productId">
+                <button type="submit" name="remove" class="icon-container product__bag-close" data-id="$productId">$close</button>
+            </form>
+            <div class="product__image-container">
+                <img src="$imagePath" alt="" class="product__image" width="316" height="">
+            </div>
+            <div class="product__favorite-info">
+                <div class="product__favorite-text-wrapper">
+                    <span class="product__favorite-brand">$brand</span>
+                    <a  href="./product.php?id=$productId" class="product__favorite-name">$name</a>
+                </div>
+                <span class="product__bag-price">₱$price</span>
+            </div>
+        </div>
+    HTML;
+}
 
 function createFilterCategory($category, $items) {
 

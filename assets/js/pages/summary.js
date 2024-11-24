@@ -24,11 +24,12 @@ window.onload = () => {
 
     setTimeout(() => {
       loaderText.textContent = 'Successfully Reserved';
-    }, 2000);
+    }, 1500);
 
     setTimeout(() => {
+      loader.classList.add('hidden');
       reserveForm.submit();
-    }, 2800);
+    }, 2000);
   });
 
   pageOverlay.addEventListener('click', (e) => {

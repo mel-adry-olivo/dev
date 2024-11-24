@@ -5,7 +5,6 @@ session_start();
 require '../../includes/config.php';
 require '../../includes/db-utils.php';
 
-var_dump($_POST);
 
 if(isset($_POST['add'])) {
     $userId = $_SESSION['user_id'] ?? null;
@@ -25,6 +24,8 @@ if(isset($_POST['remove'])) {
 }
 
 if(isset($_POST['reserve']))  {
+    $userId = $_SESSION['user_id'] ?? null;
+    reserveBagProducts($userId);
     header('Location: ../../index.php');
     exit();
 }

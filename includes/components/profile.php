@@ -1,9 +1,3 @@
-<?php 
-
-$firstName = $_SESSION['fname'];
-$lastName = $_SESSION['lname'];
-
-?>
 
 <div class="profile">
     <div class="profile__header">

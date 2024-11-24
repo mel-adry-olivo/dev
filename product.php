@@ -22,13 +22,17 @@ require './includes/icons.php';
 require './includes/config.php';
 require './includes/db-utils.php';
 
+
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
     $product = getProductById($id);
     $productAttributes = getProductAttributesByID($id);
+    $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
+}
+
+if(isset($_SESSION['user_id'])) {
     $isFavorite = isProductFavorite($id, $_SESSION['user_id']) ? 'active' : '';
     $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
-    $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
 }
 
 if(isset($_SESSION['in_bag'])) {

@@ -11,7 +11,7 @@
             <div class="favorites__content">
                 <div class="favorites__empty-content">
                     <span class="favorites__empty-text">Your favorites is empty</span>
-                    <a href="./shop.php" class="button-link explore">Explore</a>
+                    <a href="./shop.php?type=sunglasses" class="button-link explore">Explore</a>
                 </div>
             </div>
             <?php else : ?>
