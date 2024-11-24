@@ -28,11 +28,6 @@
         <div class="header__actions">
             <ul class="header__actions-list">
                 <li class="header__action-item">
-                    <button class="icon-container header__action-button" data-action="search">
-                        <?php echo getIcon('search')?>
-                    </button>
-                </li>
-                <li class="header__action-item">
                     <button class="icon-container header__action-button" data-action="favorites">
                         <?php echo getIcon('heart')?>
                     </button>

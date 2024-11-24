@@ -9,10 +9,6 @@ const actionMenuButtons = document.querySelectorAll('.action-menu__button');
 const actionMenuContent = document.querySelector('.action-menu__content');
 const authForm = document.querySelector('.auth');
 const authCtaButtons = document.querySelectorAll('.auth__cta-button');
-const searchForm = document.querySelector('.search__form');
-const searchIcon = document.querySelector('.search__icon');
-const searchSubmitButton = document.querySelector('.search__submit');
-const searchInput = document.getElementById('search__input');
 const body = document.body;
 
 const initActionMenu = () => {
@@ -36,8 +32,6 @@ const initActionMenu = () => {
   document.querySelectorAll('.favorites__content, .bag__content').forEach((container) => {
     container.addEventListener('scroll', handleScrollMask);
   });
-
-  initSearch();
 
   handleScrollMask();
 };
@@ -85,26 +79,6 @@ const handleBagClick = async (callback) => {
   } else {
     window.location.href = './summary.php';
   }
-};
-
-const initSearch = () => {
-  const toggleFocusedState = (isFocused) => {
-    searchIcon.classList.toggle('focused', isFocused);
-    searchForm.classList.toggle('focused', isFocused);
-  };
-
-  const toggleButtonState = () => {
-    const hasText = searchInput.value.length > 0;
-    searchSubmitButton.disabled = !hasText;
-    searchSubmitButton.classList.toggle('focused', hasText);
-  };
-
-  searchForm.addEventListener('click', () => searchInput.focus());
-  searchInput.addEventListener('focus', () => toggleFocusedState(true));
-  searchInput.addEventListener('blur', () => toggleFocusedState(false));
-  searchInput.addEventListener('input', toggleButtonState);
-
-  toggleButtonState();
 };
 
 function handleScrollMask() {

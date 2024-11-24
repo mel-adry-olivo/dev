@@ -189,9 +189,4 @@
   .header__actions-list {
     gap: 0.75rem;
   }
-
-  /* Search button */
-  .header__action-item:first-child > .header__action-button {
-    display: none;
-  }
 }

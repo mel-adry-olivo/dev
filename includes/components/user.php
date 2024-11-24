@@ -21,8 +21,8 @@ if(isset($_SESSION['user_id'])) {
                         <button class="button-link profile-link profile__view-reservations">View Reservations</button>
                     </form>
                     <?php if($_SESSION['role'] == 'admin') : ?>
-                        <form action="./admin.php">
-                            <button class="button-link profile-link profile__admin">Admin</button>
+                        <form action="./manage-products.php">
+                            <button class="button-link profile-link profile__manage">Manage Products</button>
                         </form>
                     <?php endif; ?>
                     <form action="./routes/auth/logout.php" method="POST">
