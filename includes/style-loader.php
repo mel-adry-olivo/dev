@@ -14,6 +14,7 @@ $footer             = '<link href="./assets/styles/components/footer.css" rel="s
 $productCard        = '<link href="./assets/styles/components/product-card.css" rel="stylesheet"/>';
 $productCarousel    = '<link href="./assets/styles/components/product-carousel.css" rel="stylesheet"/>';
 $actionOverlay      = '<link href="./assets/styles/components/action-menu.css" rel="stylesheet"/>';
+$reviewForm         = '<link href="./assets/styles/components/review-form.css" rel="stylesheet"/>';
 
 $home               = '<link href="./assets/styles/home.css" rel="stylesheet"/>';
 $shop               = '<link href="./assets/styles/shop.css" rel="stylesheet"/>';
@@ -21,8 +22,10 @@ $productPage        = '<link href="./assets/styles/product.css" rel="stylesheet"
 $summary            = '<link href="./assets/styles/summary.css" rel="stylesheet"/>';
 $reservations       = '<link href="./assets/styles/reservations.css" rel="stylesheet"/>';
 $login              = '<link href="./assets/styles/login.css" rel="stylesheet"/>';
+$review             = '<link href="./assets/styles/review.css" rel="stylesheet"/>';
 
-echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay;
+
+echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay, $reviewForm;
 
 if($currentPage == 'index') {
     echo $home;
@@ -36,4 +39,6 @@ if($currentPage == 'index') {
     echo $summary, $reservations;
 } else if ($currentPage == 'login') {
     echo $login;
+} else if ($currentPage == 'review') {
+    echo $review;
 }

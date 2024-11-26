@@ -210,6 +210,7 @@
 
 .product__info-other-button {
   color: var(--clr-gray-200);
+  font-size: 0.8rem;
 }
 
 .product__info-other-button:hover {
@@ -225,6 +226,20 @@
 
 .product__info-reviews > * {
   flex: 1;
+}
+
+.review-forms {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.review-forms form {
+  display: inline-flex;
+}
+
+.product__add-review:hover {
+  color: var(--clr-gray-300);
 }
 
 .product__review-card,

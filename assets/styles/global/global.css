@@ -135,7 +135,7 @@ input {
   width: 18rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   color: var(--clr-gray-300);
   transition: all 0.3s ease;
 }

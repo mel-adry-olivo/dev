@@ -90,6 +90,7 @@ foreach($bag as $bagproduct) {
     <div id="snackbar"></div>
     <div class="page-overlay confirm__overlay"></div>
     <div class="confirm__dialog">
+        <h6>Confirm</h6>
         <p class="confirm__message">Message</p>
         <div class="confirm__button-wrapper">
             <button class="confirm__cancel">Cancel</button>

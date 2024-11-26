@@ -21,6 +21,20 @@ const initFavorites = () => {
   });
 };
 
+const initBag = () => {
+  const productInfoForm = document.querySelector('.product__info-form');
+  productInfoForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!(await checkUserLogin())) {
+      toggleActionMenu('user');
+      showSnackbar('You need to be logged in to add to bag');
+      return;
+    }
+
+    productInfoForm.submit();
+  });
+};
+
 const handleFavoriteClick = async (button) => {
   if (!(await checkUserLogin())) {
     toggleActionMenu('user');
@@ -101,31 +115,6 @@ const updateFavoriteButton = (productId) => {
   button.classList.toggle('active');
 };
 
-const handleQuantityChange = (button, change) => {
-  const productCard = button.closest('.product__bag-card');
-  const productId = productCard.dataset.id;
-
-  const priceElement = productCard.querySelector('.product__bag-price');
-  const quantityElement = productCard.querySelector('.product__quantity');
-
-  const currentPrice = parseInt(priceElement.textContent.replace('₱', ''));
-  const currentQuantity = parseInt(quantityElement.textContent);
-
-  const newQuantity = Math.max(1, currentQuantity + change);
-  const unitPrice = currentPrice / currentQuantity;
-
-  const totalPrice = unitPrice * newQuantity;
-
-  priceElement.textContent = `₱${totalPrice}`;
-  quantityElement.textContent = newQuantity;
-
-  // updateProductQuantity(productId, newQuantity);
-};
-
-const updateProductQuantity = async (productId, quantity) => {
-  // To implement later
-};
-
 const createProductCard = (product) => {
   const { product_id, image_main, brand, name, price } = product;
   const favoriteUnchecked =
@@ -183,4 +172,4 @@ const createEmptyContent = () => {
   `;
 };
 
-export { initFavorites, createProductCard };
+export { initFavorites, initBag, createProductCard };

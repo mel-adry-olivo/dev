@@ -23,6 +23,9 @@ require './includes/config.php';
 require './includes/db-utils.php';
 
 
+$isFavorite = '';
+
+
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
     $product = getProductById($id);
@@ -32,8 +35,10 @@ if(isset($_GET['id'])) {
 
 if(isset($_SESSION['user_id'])) {
     $isFavorite = isProductFavorite($id, $_SESSION['user_id']) ? 'active' : '';
-    $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
 }
+
+$tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
+
 
 if(isset($_SESSION['in_bag'])) {
     $inBag = $_SESSION['in_bag'];
@@ -115,7 +120,10 @@ if(isset($_SESSION['in_bag'])) {
                     <div class="product__info-others-item">
                         <header class="product__info-others-header">
                             <span class="product__info-other-title">User Reviews</span>
-                            <button class="button-link product__info-other-button">Write a Review</button>
+                            <div class="review-forms">
+                                <a href="./review.php?id=<?php echo $product['product_id']; ?>" class="button-link product__info-other-button">View All</a>
+                                <button class="button-link product__info-other-button product__write-review">Write Review</button>
+                            </div>
                         </header>
                         <div class="product__info-reviews">
                             <?php foreach($testReviews as $review) createReviewCard($review); ?>
@@ -160,5 +168,6 @@ if(isset($_SESSION['in_bag'])) {
     </div>
     <div id="snackbar"></div>
     <?php require './includes/components/footer.php'?>
+    <?php require './includes/components/review-form.php' ?>
 </body>
 </html>
