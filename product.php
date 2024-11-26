@@ -21,6 +21,7 @@ require './includes/templates.php';
 require './includes/icons.php';
 require './includes/config.php';
 require './includes/db-utils.php';
+require './includes/utils.php';
 
 
 $isFavorite = '';
@@ -37,13 +38,17 @@ if(isset($_SESSION['user_id'])) {
     $isFavorite = isProductFavorite($id, $_SESSION['user_id']) ? 'active' : '';
 }
 
-$tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
-
-
 if(isset($_SESSION['in_bag'])) {
     $inBag = $_SESSION['in_bag'];
     unset($_SESSION['in_bag']);
 }
+
+$tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
+$reviews = getLimitedProductReviews($id, 2);
+$averageRating = getAverageRating($id);
+$count = getProductReviewCount($id);
+
+echo $averageRating;
 ?>
 
 <!DOCTYPE html>
@@ -87,13 +92,9 @@ if(isset($_SESSION['in_bag'])) {
                     <span class="product__info-price">₱<?php echo number_format($product['price'], '0', '.', ','); ?></span>
                     <div class="product__info-ratings">
                         <div class="product__info-stars-wrapper">
-                            <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
-                            <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
-                            <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
-                            <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
-                            <span class="icon-container product__info-rating"><?php echo getIcon("star-empty"); ?></span>
+                            <?php echo createRatingStars(floor($averageRating), 'product__info-rating'); ?>
                         </div>
-                        <span class="product__info-reviews-count">0 Reviews</span>
+                        <span class="product__info-reviews-count"><?php echo $count; ?> Reviews</span>
                     </div>
                 </div>
                 <form action="./routes/products/bag.php" method="POST" class="product__info-form">
@@ -126,7 +127,7 @@ if(isset($_SESSION['in_bag'])) {
                             </div>
                         </header>
                         <div class="product__info-reviews">
-                            <?php foreach($testReviews as $review) createReviewCard($review); ?>
+                            <?php foreach($reviews as $review) createReviewCard($review); ?>
                         </div>
                     </div>
                 </div>

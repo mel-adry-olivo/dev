@@ -173,19 +173,21 @@ function createFilterCategory($category, $items) {
 }
 
 function createReviewCard($review) {
-    $name = $review["name"];
+    $name = $review["fname"] . " " . $review["lname"];
+    $userId = $review["user_id"];
     $date = $review["created_at"];
+    $formattedDate = date("F j, Y", strtotime($date));
     $rating = $review["rating"];
     $text = $review["review_text"];
     $ratingHTML = createRatingStars($rating);
 
     echo
     <<<HTML
-        <div class="product__review-card">
+        <div class="product__review-card" data-user-id="$userId">
             <div class="product__review-card-header">
                 <div class="product__review-card-text">
                     <span class="product__review-card-name">$name</span>
-                    <span class="product__review-card-date">$date</span></span>
+                    <span class="product__review-card-date">$formattedDate</span>
                 </div>
                 <div class="product__review-card-stars">
                     $ratingHTML
@@ -200,29 +202,23 @@ function createReviewCard($review) {
     HTML;
 }
 
-function createRatingStars($rating) {
+function createRatingStars($rating, $class = null) {
     $ratingHTML = '';
 
+    $class = $class === null ? 'product__review-rating' : $class;
+
     $starEmpty = getIcon("star-empty");
-    $starHalf = getIcon("star-half");
     $starFilled = getIcon("star-filled");
 
-    $emptyStarHTML = '<span class="icon-container product__review-rating">' . $starEmpty. '</span>';
-    $halfStarHTML = '<span class="icon-container product__review-rating">' . $starHalf . '</span>';
-    $fullStarHTML = '<span class="icon-container product__review-rating">' . $starFilled . '</span>';
+    $emptyStarHTML = '<span class="icon-container '. $class .'">' . $starEmpty. '</span>';
+    $fullStarHTML = '<span class="icon-container '. $class .'">' . $starFilled . '</span>';
 
-    $fullStars = floor($rating); 
-    $halfStars = ($rating != $fullStars) ? 1 : 0; 
-    $emptyStars = 5 - $fullStars - $halfStars; 
+    $fullStars = $rating; 
+    $emptyStars = 5 - $fullStars;
 
 
     for ($i = 0; $i < $fullStars; $i++) {
         $ratingHTML .= $fullStarHTML;
-
-    }
-
-    if ($halfStars == 1) {
-        $ratingHTML .= $halfStarHTML;
 
     }
 

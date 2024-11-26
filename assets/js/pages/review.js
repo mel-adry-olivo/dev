@@ -9,6 +9,7 @@ const pageOverlay = document.querySelector('.review-overlay');
 window.onload = () => {
   initHeader();
   initActionMenu();
+  initReview();
 };
 
 export function initReview() {

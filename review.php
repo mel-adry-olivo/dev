@@ -13,8 +13,11 @@ if(isset($_GET['id'])) {
     $product = getProductById($id);
     $productAttributes = getProductAttributesByID($id);
 }
-$title = 'Review | INSPEC®';
 
+$title = 'Review | INSPEC®';
+$reviews = getProductReviewsByDate($id);
+$averageRating = getAverageRating($id);
+$count = getProductReviewCount($id);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +36,10 @@ $title = 'Review | INSPEC®';
         <?php require './includes/components/action-menu.php'?>
         <section class="review">
             <header class="review__header">
-                <span class="review__header-title">Ratings & Reviews of <?php echo $product['name']; ?></span>
+                <div class="top-bar">
+                    <span class="review__header-title">Ratings & Reviews of <?php echo $product['name']; ?></span>
+                    <button class="button-link product__review__button product__write-review">Write Review</button>
+                </div>
                 <div class="review__statistics-ratings">
                     <div class="product-data">
                         <img class="image" src="<?php echo $product['image_main']?>" alt="">
@@ -43,26 +49,23 @@ $title = 'Review | INSPEC®';
                     <div class="review__statistics-average">
                         <span class="review__average-label">Average Rating</span>
                         <div class="rating-wrapper">
-                            <span class="rating-total">0.0</span>
+                            <span class="rating-total"><?php echo $averageRating; ?></span>
                             <div class="rating-stars">
-                                <span class="icon-container rating-star">&#9733</span>
-                                <span class="icon-container rating-star">&#9733</span>
-                                <span class="icon-container rating-star">&#9733</span>
-                                <span class="icon-container rating-star">&#9733</span>
-                                <span class="icon-container rating-star">&#9733</span>
+                                <?php echo createRatingStars(floor($averageRating))?>
                             </div>
-                            <span class="rating-subtitle">1213 Reviews</span>
+                            <span class="rating-subtitle"><?php echo $count; ?> Reviews</span>
                         </div>
                     </div>
                 </div>
             </header>
             <main class="review__content">
-                
+                <?php foreach($reviews as $review) createReviewCard($review); ?>
             </main>
         </section>
     </div>
     <div id="snackbar"></div>
     <?php require './includes/components/footer.php'?>
+    <?php require './includes/components/review-form.php' ?>
 
 </body>
 </html>

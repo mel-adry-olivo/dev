@@ -1,4 +1,4 @@
-<form action="./routes/products/reviews.php" method="POST" class="review__form">
+<form action="./routes/products/reviews.php?action=create" method="POST" class="review__form">
     <h6 class="review__form-title">Write a review</h6>
     <div class="field-group">
         <label for="review-rating">Rating</label>
@@ -18,5 +18,6 @@
         <button class="button review__cancel" type="button">Cancel</button>
         <button class="button button--filled-dark review__submit" type="submit">Submit Review</button>
     </div>
+    <input type="hidden" name="product_id" value="<?php echo $id; ?>">
 </form>
 <div class="page-overlay review-overlay"></div>

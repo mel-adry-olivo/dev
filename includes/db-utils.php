@@ -305,3 +305,86 @@ function getSortedProducts($type, $direction) {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
+function getProductReviews($id) {
+    global $conn;
+    $sql = "
+        SELECT 
+            reviews.*,
+            users.user_id,
+            users.fname,
+            users.lname
+        FROM reviews 
+        JOIN users ON reviews.user_id = users.user_id
+        WHERE product_id = $id
+        ORDER BY RAND()
+        ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function createProductReview($review) {
+    global $conn;
+    $sql = "
+        INSERT INTO reviews (product_id, user_id, rating, review_text) 
+        VALUES ({$review['product_id']}, {$review['user_id']}, {$review['rating']}, '{$review['review_text']}')
+    ";
+    $conn->query($sql);
+}
+
+function getProductReviewsByDate($id) {
+    global $conn;
+    $sql = "
+        SELECT 
+            reviews.*,
+            users.user_id,
+            users.fname,
+            users.lname
+        FROM reviews 
+        JOIN users ON reviews.user_id = users.user_id
+        WHERE product_id = $id
+        ORDER BY reviews.created_at DESC
+        ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getLimitedProductReviews($id, $limit) {
+    global $conn;
+    $sql = "
+        SELECT 
+            reviews.*,
+            users.user_id,
+            users.fname,
+            users.lname
+        FROM reviews 
+        JOIN users ON reviews.user_id = users.user_id
+        WHERE product_id = $id
+        ORDER BY RAND()
+        LIMIT $limit
+        ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}   
+
+function getAverageRating($id) {
+    $reviews = getProductReviews($id);
+    $total = 0;
+    
+    if (count($reviews) === 0) {
+        return 0; 
+    }
+
+    foreach ($reviews as $review) {
+        $total += $review['rating'];
+    }
+
+    $avg = (float)($total / count($reviews));
+    $formattedAvg = number_format($avg, 1);
+
+    return $formattedAvg;
+}
+
+function getProductReviewCount($id) {
+    $reviews = getProductReviews($id);
+    return count($reviews);
+}
