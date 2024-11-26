@@ -173,6 +173,7 @@ function createFilterCategory($category, $items) {
 }
 
 function createReviewCard($review) {
+    $reviewId = $review['review_id'];
     $name = $review["fname"] . " " . $review["lname"];
     $userId = $review["user_id"];
     $date = $review["created_at"];
@@ -180,6 +181,21 @@ function createReviewCard($review) {
     $rating = $review["rating"];
     $text = $review["review_text"];
     $ratingHTML = createRatingStars($rating);
+    $closeIcon = getIcon('close');
+    $currentUser = $_SESSION['user_id'] ?? '';
+
+    if(isset($currentUser)) {
+        $isCurrentUser = $userId == $currentUser ? '<button  class="product__review-close">'. $closeIcon .'</button>' : '';
+        $editForm = <<<HTML
+            <form class="product__review-close-form" method="post" action="./routes/products/reviews.php">
+                <input type="hidden" name="action" value="remove"/>
+                <input type="hidden" name="review_id" value="$reviewId"/>
+                $isCurrentUser
+            </form>
+        HTML;
+    }
+
+    
 
     echo
     <<<HTML
@@ -188,11 +204,13 @@ function createReviewCard($review) {
                 <div class="product__review-card-text">
                     <span class="product__review-card-name">$name</span>
                     <span class="product__review-card-date">$formattedDate</span>
+
                 </div>
-                <div class="product__review-card-stars">
+                $editForm 
+            </div>
+            <div class="product__review-card-stars">
                     $ratingHTML
                 </div>
-            </div>
             <div class="product__review-card-body">
                 <p class="product__review-card-text">
                     $text
@@ -212,6 +230,7 @@ function createRatingStars($rating, $class = null) {
 
     $emptyStarHTML = '<span class="icon-container '. $class .'">' . $starEmpty. '</span>';
     $fullStarHTML = '<span class="icon-container '. $class .'">' . $starFilled . '</span>';
+
 
     $fullStars = $rating; 
     $emptyStars = 5 - $fullStars;

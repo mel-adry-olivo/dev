@@ -1,18 +1,25 @@
-<?php
+<?php 
 
 require '../../includes/config.php';
 require '../../includes/db-utils.php';
 
 session_start();
 
-$inputEmail = $_POST['login-email'];
-$inputPassword = md5($_POST['login-password']);
+$inputFname = $_POST['register-fname'];
+$inputLname = $_POST['register-lname'];
+$inputEmail = $_POST['register-email'];
+$inputPassword = md5($_POST['register-password']);
 
-$user = getUserByEmail($inputEmail);
+$user = [
+    'fname' => $inputFname,
+    'lname' => $inputLname,
+    'email' => $inputEmail,
+    'password' => $inputPassword,
+];
 
-if($user) {
+if(createUser($user)) {
     $_SESSION['role'] = $user['user_id'] == 1 ? 'admin' : 'customer';
-    $_SESSION['user_id'] = $user['user_id'];
+    $_SESSION['user_id'] = getUserByEmail($inputEmail)['user_id'];
     $_SESSION['fname'] = $user['fname'];
     $_SESSION['lname'] = $user['lname'];
     $_SESSION['email'] = $user['email'];
@@ -26,9 +33,5 @@ if($user) {
     
     header("Location: ../../index.php?login=true");
     exit();
-} else {
-    
-    $_SESSION['login_success'] = false;
-    header("Location: ./../../login.php");
-    exit();
 }
+

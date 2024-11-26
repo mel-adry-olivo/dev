@@ -6,6 +6,7 @@ require '../../includes/config.php';
 require '../../includes/db-utils.php';
 
 
+
 if(isset($_POST['add'])) {
     $userId = $_SESSION['user_id'] ?? null;
     $productID = $_POST['product_id'];

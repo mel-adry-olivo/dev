@@ -1,5 +1,11 @@
 <?php 
 
+function createUser($user) {
+    global $conn;
+    $sql = "INSERT INTO users (fname, lname, email, password) VALUES ('{$user['fname']}', '{$user['lname']}', '{$user['email']}', '{$user['password']}')";
+    return $conn->query($sql);
+}
+
 function getUserByEmail($email) {
     global $conn;
     $sql = "SELECT * FROM users WHERE email = '$email'";
@@ -328,6 +334,12 @@ function createProductReview($review) {
         INSERT INTO reviews (product_id, user_id, rating, review_text) 
         VALUES ({$review['product_id']}, {$review['user_id']}, {$review['rating']}, '{$review['review_text']}')
     ";
+    $conn->query($sql);
+}
+
+function removeProductReview($id) {
+    global $conn;
+    $sql = "DELETE FROM reviews WHERE review_id = $id";
     $conn->query($sql);
 }
 

@@ -144,24 +144,6 @@
   color: var(--clr-bg);
   font-size: 0.92rem;
   font-weight: 500;
-  transition: transform 0.2s ease;
-}
-
-.product__add-button-loader {
-  position: static;
-  border-color: var(--clr-bg);
-  border-bottom-color: transparent;
-  width: 16px;
-  height: 16px;
-  opacity: 0;
-}
-
-.product__add-button.active .product__add-button-loader {
-  opacity: 1;
-}
-
-.product__add-button.active .product__add-button-text {
-  transform: translateX(1.5rem);
 }
 
 .product__info-reservation-count,
@@ -240,57 +222,6 @@
 
 .product__add-review:hover {
   color: var(--clr-gray-300);
-}
-
-.product__review-card,
-.product__review-card-header,
-.product__review-card-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.product__review-card {
-  display: grid;
-  gap: 0.5rem;
-  border-radius: 1rem;
-  padding: 1.5rem 0.75rem;
-  background-color: var(--clr-surface);
-  min-height: 150px;
-}
-
-.product__review-card-header {
-  gap: 0.5rem;
-}
-
-.product__review-card-text {
-  display: flex;
-  justify-content: space-between;
-}
-
-.product__review-card-name {
-  font-weight: 500;
-  font-size: 0.92rem;
-}
-
-.product__review-card-date {
-  font-size: 0.75rem;
-  color: var(--clr-gray-200);
-}
-
-.product__review-card-stars {
-  display: inline-flex;
-}
-
-.product__review-rating {
-  width: 18px;
-  height: 18px;
-  color: var(--clr-gray-200);
-  background-color: transparent;
-}
-
-.product__review-card-text {
-  color: var(--clr-gray-200);
-  font-size: 0.9rem;
 }
 
 .section {

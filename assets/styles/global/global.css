@@ -300,7 +300,7 @@ input {
   animation: rotation 1s linear infinite;
 }
 
-#snackbar {
+.snackbar {
   position: fixed;
   display: inline-flex;
   padding: 0.75rem 2rem;
@@ -311,11 +311,13 @@ input {
   opacity: 0;
   z-index: 9999;
   font-size: 0.9rem;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.6s ease-in-out, transform 0.4s ease;
+  transform: translateX(calc(-100% - 2rem));
 }
 
-#snackbar.show {
+.snackbar.show {
   opacity: 0.95;
+  transform: translateX(0);
 }
 
 @media (max-width: 900px) {

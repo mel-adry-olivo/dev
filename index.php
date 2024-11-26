@@ -102,7 +102,7 @@ $trendingHeaderText = "Explore our top-trending eyewear styles and make a statem
         </section>  
     </main>
     <?php require './includes/components/footer.php'?>
-    <div id="snackbar"></div>
+    <div class="snackbar"></div>
     <div class="loader-container">
         <div class="loader"></div>
     </div>

@@ -7,6 +7,10 @@ require './includes/icons.php';
 require './includes/config.php';
 require './includes/db-utils.php';
 
+$sessionUserId = -1;
+if(isset($_SESSION['user_id'])) {
+    $sessionUserId = $_SESSION['user_id'];
+}
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -59,12 +63,13 @@ $count = getProductReviewCount($id);
                 </div>
             </header>
             <main class="review__content">
-                <?php foreach($reviews as $review) createReviewCard($review); ?>
+            <?php foreach($reviews as $review) createReviewCard($review)?>
             </main>
         </section>
     </div>
-    <div id="snackbar"></div>
+    <div class="snackbar"></div>
     <?php require './includes/components/footer.php'?>
+    <?php include './includes/components/confirm-dialog.php';?>
     <?php require './includes/components/review-form.php' ?>
 
 </body>

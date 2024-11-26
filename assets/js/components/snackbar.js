@@ -1,6 +1,6 @@
-const snackbar = document.getElementById('snackbar');
-
 export const showSnackbar = (message) => {
+  const snackbar = document.querySelector('.snackbar');
+
   snackbar.textContent = message;
   snackbar.classList.add('show');
 

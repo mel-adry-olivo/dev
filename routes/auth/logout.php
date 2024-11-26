@@ -5,5 +5,5 @@ session_unset();
 session_destroy();
 session_regenerate_id(true);
 
-header("Location: " . ($_SERVER['HTTP_REFERER'] ?? './index.php'));
+header("Location: ./../../index.php");
 exit();

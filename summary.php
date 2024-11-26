@@ -87,7 +87,7 @@ foreach($bag as $bagproduct) {
             </footer>
         </div>
     </div>
-    <div id="snackbar"></div>
+    <div class="snackbar"></div>
     <div class="page-overlay confirm__overlay"></div>
     <div class="confirm__dialog">
         <h6>Confirm</h6>

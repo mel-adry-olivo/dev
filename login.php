@@ -44,11 +44,11 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
                     </header>
                     <form action="./routes/auth/login.php" method="POST" class="auth__form">
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" placeholder="Name" name="login-email" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="login-email" autocomplete="off"/>
                             <label for="login-email" class="auth__label">Email</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="password" class="auth__field" placeholder="Password" name="login-password" autocomplete="off"/>
+                            <input type="password" class="auth__field" name="login-password" autocomplete="off"/>
                             <label for="login-password" class="auth__label">Password</label>
                         </div>
                         <button type="submit" class="button button--filled-dark auth__submit">Login</button>
@@ -65,19 +65,19 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
                     </header>
                     <form action="./routes/auth/register.php" method="POST" class="auth__form">
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" placeholder="Name" name="register-fname" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="register-fname" autocomplete="off"/>
                             <label for="register-fname" class="auth__label">First Name</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" placeholder="Name" name="register-lname" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="register-lname" autocomplete="off"/>
                             <label for="register-lname" class="auth__label">Last Name</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" placeholder="Name" name="register-email" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="register-email" autocomplete="off"/>
                             <label for="register-email" class="auth__label">Email</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="password" class="auth__field" placeholder="Password" name="register-password"autocomplete="off"/>
+                            <input type="password" class="auth__field" name="register-password"autocomplete="off"/>
                             <label for="register-password" class="auth__label">Password</label>
                         </div>
                         <button type="submit" class="button button--filled-dark auth__submit">Create Account</button>
@@ -91,6 +91,6 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
         </section>
     </div>
     <?php require './includes/components/footer.php'?>
-    <div id="snackbar"></div>
+    <div class="snackbar"></div>
 </body>
 </html>

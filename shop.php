@@ -61,6 +61,6 @@ $products = getSortedProducts($type, 'DESC');
         </section>
     </div>
     <?php require './includes/components/footer.php'?>
-    <div id="snackbar"></div>
+    <div class="snackbar"></div>
 </body>
 </html>

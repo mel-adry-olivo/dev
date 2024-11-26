@@ -1,5 +1,6 @@
 import initHeader from '../components/header.js';
 import { initActionMenu, toggleActionMenu } from '../components/action-menu.js';
+import { showConfirmDialog, hideConfirmDialog } from '../components/confirm-dialog.js';
 import { checkUserLogin } from '../utils.js';
 import { showSnackbar } from '../components/snackbar.js';
 
@@ -15,6 +16,18 @@ window.onload = () => {
 export function initReview() {
   const writeReviewButton = document.querySelector('.product__write-review');
   const cancelButton = document.querySelector('.review__cancel');
+  const closeForm = document.querySelectorAll('.product__review-close-form');
+
+  closeForm.forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showConfirmDialog('Do you want to remove this review?', (confirmed) => {
+        if (confirmed) {
+          form.submit();
+        }
+      });
+    });
+  });
 
   writeReviewButton.addEventListener('click', async () => {
     if (!(await checkUserLogin())) {

@@ -99,12 +99,8 @@ echo $averageRating;
                 </div>
                 <form action="./routes/products/bag.php" method="POST" class="product__info-form">
                     <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
-                    <button name="add" class="button button--filled-dark product__add-button">
-                        <div class="product__add-content">
-                            <div class="loader product__add-button-loader"></div>
-                            <span class="product__add-button-text">Add to Bag</span>
-                        </div>
-                    </button>
+                    <input type="hidden" name="add" value="add">
+                    <button type='submit' class="button button--filled-dark product__add-button">Add to Bag</button>
                 </form>
                 <?php if(isset($inBag)) : ?>
                 <span class="product__info-in-bag-text">Product is already in your bag</span>
@@ -167,8 +163,9 @@ echo $averageRating;
             </main>
         </section>  
     </div>
-    <div id="snackbar"></div>
+    <div class="snackbar"></div>
     <?php require './includes/components/footer.php'?>
     <?php require './includes/components/review-form.php' ?>
+    <?php include './includes/components/confirm-dialog.php';?>
 </body>
 </html>
