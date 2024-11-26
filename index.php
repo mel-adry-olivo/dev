@@ -15,6 +15,7 @@ $heroCtaButtonText = "Shop now";
 $shapesHeaderText = "Discover eyewear by shape—find frames that perfectly complement your unique look.";
 $trendingHeaderText = "Explore our top-trending eyewear styles and make a statement with every look.";
 
+$popularProducts = getPopularProducts();
 
 ?>
 
@@ -88,7 +89,7 @@ $trendingHeaderText = "Explore our top-trending eyewear styles and make a statem
                 <div class="products__showcase">
                     <div class="products__carousel">
                         <?php 
-                        foreach(getAllProducts() as $product) {
+                        foreach($popularProducts as $product) {
                             createProductCard($product);
                         } 
                         ?>

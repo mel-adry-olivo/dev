@@ -47,8 +47,18 @@ $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
 $reviews = getLimitedProductReviews($id, 2);
 $averageRating = getAverageRating($id);
 $count = getProductReviewCount($id);
+$productsByBrand = getProductsByBrand($product['brand']);
+$productsByBrand = array_filter($productsByBrand, function ($product) use ($id) {
+    return $product['product_id'] !== $id;
+});
 
-echo $averageRating;
+$productsByShape = getProductsByShape($productAttributes['Shape']);
+$productsByShape = array_filter($productsByShape, function ($product) use ($id) {
+    return $product['product_id'] !== $id;
+});
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +146,7 @@ echo $averageRating;
             <main class="section__content">
             <div class="products__showcase">
                 <div class="products__carousel">
-                    <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
+                    <?php foreach($productsByBrand as $product) createProductCard($product); ?>
                     
                 </div>
                 <div class="products__carousel-control-group">
@@ -153,7 +163,7 @@ echo $averageRating;
             <main class="section__content">
             <div class="products__showcase">
                 <div class="products__carousel">
-                    <?php foreach(getAllProducts() as $product) createProductCard($product); ?>
+                    <?php foreach($productsByShape as $product) createProductCard($product); ?>
                 </div>
                 <div class="products__carousel-control-group">
                     <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>

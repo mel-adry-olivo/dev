@@ -26,9 +26,10 @@ if($user) {
     
     header("Location: ../../index.php?login=true");
     exit();
+
 } else {
     
     $_SESSION['login_success'] = false;
-    header("Location: ./../../login.php");
+    header("Location: ../../login.php");
     exit();
 }

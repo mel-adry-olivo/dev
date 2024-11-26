@@ -51,7 +51,33 @@ function getAllProducts() {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
-function getLimitedProducts($limit) {
+function getPopularProducts() {
+    global $conn;
+    $sql = "     
+        SELECT 
+            p.*,
+            b.name AS brand,
+            AVG(r.rating) AS average_rating,
+            COUNT(r.review_id) AS review_count
+        FROM 
+            products p
+        JOIN brands b ON p.brand_id = b.brand_id
+        LEFT JOIN 
+            reviews r ON p.product_id = r.product_id
+        GROUP BY 
+            p.product_id
+        HAVING 
+            review_count > 0 
+        ORDER BY 
+            average_rating DESC, 
+            review_count DESC
+        LIMIT 8
+        ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getProductsByBrand($brand) {
     global $conn;
     $sql = "     
         SELECT 
@@ -59,11 +85,30 @@ function getLimitedProducts($limit) {
             brands.name AS brand 
         FROM products
         JOIN brands ON products.brand_id = brands.brand_id
-        LIMIT $limit
+        WHERE brands.name = '$brand'
     ";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+function getProductsByShape($shape) {
+    global $conn;
+    $sql = "     
+        SELECT 
+            products.*,
+            brands.name AS brand 
+        FROM products
+        JOIN brands ON products.brand_id = brands.brand_id
+        JOIN product_attributes pa ON products.product_id = pa.product_id
+        JOIN attributes a ON pa.attribute_id = a.attribute_id
+        JOIN categories c ON a.category_id = c.category_id
+        WHERE c.name = 'Shape' AND a.name = '$shape'
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+
 
 function getProductsbyType($type) {
     global $conn;
@@ -232,6 +277,7 @@ function getProductAttributesByID($id) {
     global $conn;
     $sql = "
         SELECT  
+            p.product_id,
             c.name AS category_name, 
             a.name AS attribute_name
         FROM 
