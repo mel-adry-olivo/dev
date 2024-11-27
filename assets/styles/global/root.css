@@ -12,4 +12,9 @@
   --wrapper-padding: clamp(1rem, 0.6479rem + 1.5023vw, 2rem);
   --icon-container-height: 32px;
   --icon-container-width: 32px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

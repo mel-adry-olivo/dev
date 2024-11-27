@@ -42,7 +42,7 @@ foreach($bag as $bagproduct) {
     <div class="wrapper">
         <div class="bag__summary">
             <header class="bag__summary-header">
-                <a href="<?php echo $_SESSION['referer'] ?? './index.php'; ?>" class="bag__summary-back">
+                <a href="<?php echo $_SESSION['referer'] ?? './'; ?>" class="bag__summary-back">
                     <span class="icon-container bag__summary-back-icon"><?php echo getIcon("arrow-left"); ?></span>
                     <span class="bag__summary-back-text">Back</span>
                 </a>

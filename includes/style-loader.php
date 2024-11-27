@@ -23,7 +23,7 @@ $summary            = '<link href="./assets/styles/summary.css" rel="stylesheet"
 $reservations       = '<link href="./assets/styles/reservations.css" rel="stylesheet"/>';
 $login              = '<link href="./assets/styles/login.css" rel="stylesheet"/>';
 $review             = '<link href="./assets/styles/review.css" rel="stylesheet"/>';
-
+$manage             = '<link href="./assets/styles/manage.css" rel="stylesheet"/>';
 
 echo $satoshi, $source_serif, $root, $global, $header, $footer, $productCard, $productCarousel, $actionOverlay, $reviewForm;
 
@@ -41,4 +41,6 @@ if($currentPage == 'index') {
     echo $login;
 } else if ($currentPage == 'review') {
     echo $review;
+} else if ($currentPage == 'manage') {
+    echo $manage;
 }

@@ -21,7 +21,7 @@
             </ul>
         </nav>
         <div class="header__logo">
-            <a href="./index.php">
+            <a href="./">
                 <img src="./assets/images/icons/logo-xsmall.png" alt="Inspec Logo" width="66" height="16">
             </a>
         </div>  

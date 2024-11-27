@@ -7,11 +7,6 @@ require './includes/icons.php';
 require './includes/config.php';
 require './includes/db-utils.php';
 
-$sessionUserId = -1;
-if(isset($_SESSION['user_id'])) {
-    $sessionUserId = $_SESSION['user_id'];
-}
-
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
     $product = getProductById($id);
