@@ -169,16 +169,15 @@
   position: absolute;
   top: 0;
   display: block;
-  transition: 0.2s;
   font-size: 0.9rem;
   color: var(--clr-gray-300);
+  transition: all 0.2s ease;
   user-select: none;
 }
 .auth__field:focus ~ .auth__label {
   position: absolute;
   top: 0;
   display: block;
-  transition: 0.2s;
   font-size: 0.75rem;
   color: var(--clr-gray-200);
 }

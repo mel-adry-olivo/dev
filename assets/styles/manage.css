@@ -6,6 +6,8 @@
   display: flex;
   padding-bottom: 2rem;
   flex-direction: column;
+  max-width: 1200px;
+  margin-inline: auto;
 }
 
 .manage__header {
@@ -18,7 +20,6 @@
 
 .manage__content {
   flex: 1;
-  /* background-color: var(--clr-surface); */
   border-radius: 1rem;
 }
 
@@ -26,7 +27,6 @@
   display: flex;
   justify-content: space-between;
   padding-block: 1.5rem;
-  padding-inline: 2rem;
 }
 
 .content__searchbar {
@@ -74,7 +74,7 @@
   display: inline-flex;
   align-items: center;
   padding-inline: 0.65rem;
-  padding-block: 0.25rem;
+  padding-block: 0.15rem;
 }
 
 .content__add-button > .icon-container {
@@ -89,23 +89,30 @@
 }
 
 .content__add-button > span {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   padding-right: 0.35rem;
   color: var(--clr-surface);
 }
 
 .content__products {
   display: flex;
+  scrollbar-width: thin;
+}
+
+.content__products::-webkit-scrollbar {
+  width: 3px;
 }
 
 .product__table {
+  min-width: 600px;
   flex: 1;
-  margin-inline: 2rem;
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 0.9rem;
-  text-align: left;
-  table-layout: fixed;
+  font-size: 0.87rem;
+}
+
+.product__table img {
+  object-fit: contain;
 }
 
 .product__table thead tr {
@@ -114,9 +121,15 @@
 
 .product__table th,
 .product__table td {
-  padding-block: 1rem;
+  padding-block: 0.5rem;
   padding-inline: 1.25rem;
   width: calc(100% / 6);
+}
+
+.product__table td {
+  padding-block: 0.8rem;
+  padding-inline: 1.25rem;
+  text-align: center;
 }
 
 .product__table th {
@@ -128,14 +141,16 @@
 .product__table th:first-of-type,
 .product__table td:first-of-type {
   width: 30%;
+  min-width: 16rem;
+  text-align: left;
 }
 
 .product__table th:first-of-type {
-  border-radius: 1rem 0 0 1rem;
+  border-radius: 0.75rem 0 0 0.75rem;
 }
 
 .product__table th:last-of-type {
-  border-radius: 0 1rem 1rem 0;
+  border-radius: 0 0.75rem 0.75rem 0;
 }
 
 .product__table td {
@@ -162,13 +177,17 @@
   color: inherit;
 }
 
-@media (max-width: 1000px) {
-  .product__table th {
-    display: none;
+@media (max-width: 724px) {
+  .product__table {
+    font-size: 0.8rem;
   }
 
-  .product__table td {
-    display: block;
-    width: 100%;
+  .product__table img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .content__products {
+    overflow-x: scroll;
   }
 }

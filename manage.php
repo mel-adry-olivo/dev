@@ -9,6 +9,8 @@ require './includes/db-utils.php';
 
 $title = 'Manage Products| INSPEC®';
 
+$products = getAllProducts();
+
 ?>
 
 <!DOCTYPE html>
@@ -53,17 +55,18 @@ $title = 'Manage Products| INSPEC®';
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($products as $product) : ?>
                             <tr>
                                 <td>
                                     <div class="product-container">
-                                        <img src="https://placehold.co/60" width="60" height="60" alt="product">
-                                        <span>Sample Product 1</span>
+                                        <img src="<?php echo $product['image_main']; ?>" width="60" height="60" alt="product">
+                                        <span><?php echo $product['brand'] . " " . $product['name']; ?></span>
                                     </div>
                                 </td>
-                                <td>Sunglasses</td>
-                                <td>Men</td>
-                                <td>P1,500</td>
-                                <td>45</td>
+                                <td><?php echo $product['type']; ?></td>
+                                <td><?php echo $product['gender']; ?></td>
+                                <td>₱<?php echo number_format($product['price'], '0', '.', ','); ?></td>
+                                <td><?php echo $product['stock_quantity']; ?></td>
                                 <td>
                                     <div class="actions-container">
                                         <button class="button-link">Edit</button>
@@ -71,42 +74,7 @@ $title = 'Manage Products| INSPEC®';
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="product-container">
-                                        <img src="https://placehold.co/60" width="60" height="60" alt="product">
-                                        <span>Sample Product 2</span>
-                                    </div>
-                                </td>
-                                <td>Sunglasses</td>
-                                <td>Men</td>
-                                <td>P1,500</td>
-                                <td>45</td>
-                                <td>
-                                    <div class="actions-container">
-                                        <button class="button-link">Edit</button>
-                                        <button class="button-link">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="product-container">
-                                        <img src="https://placehold.co/60" width="60" height="60" alt="product">
-                                        <span>Sample Product 3</span>
-                                    </div>
-                                </td>
-                                <td>Sunglasses</td>
-                                <td>Men</td>
-                                <td>P1,500</td>
-                                <td>45</td>
-                                <td>
-                                    <div class="actions-container">
-                                        <button class="button-link">Edit</button>
-                                        <button class="button-link">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -116,6 +84,6 @@ $title = 'Manage Products| INSPEC®';
     <div class="snackbar"></div>
     <?php require './includes/components/footer.php'?>
     <?php include './includes/components/confirm-dialog.php';?>
-    <?php require './includes/components/review-form.php' ?>
+    <?php require './includes/components/product-add-form.php' ?>
 </body>
 </html>

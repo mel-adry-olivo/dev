@@ -6,6 +6,9 @@ import { showSnackbar } from '../components/snackbar.js';
 
 const reviewForm = document.querySelector('.review__form');
 const pageOverlay = document.querySelector('.review-overlay');
+const writeReviewButton = document.querySelector('.product__write-review');
+const cancelButton = document.querySelector('.review__cancel');
+const closeForm = document.querySelectorAll('.product__review-close-form');
 
 window.onload = () => {
   initHeader();
@@ -14,10 +17,6 @@ window.onload = () => {
 };
 
 export function initReview() {
-  const writeReviewButton = document.querySelector('.product__write-review');
-  const cancelButton = document.querySelector('.review__cancel');
-  const closeForm = document.querySelectorAll('.product__review-close-form');
-
   closeForm.forEach((form) => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
