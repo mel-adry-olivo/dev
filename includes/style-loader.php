@@ -14,8 +14,7 @@ $footer             = '<link href="./assets/styles/components/footer.css" rel="s
 $productCard        = '<link href="./assets/styles/components/product-card.css" rel="stylesheet"/>';
 $productCarousel    = '<link href="./assets/styles/components/product-carousel.css" rel="stylesheet"/>';
 $actionOverlay      = '<link href="./assets/styles/components/action-menu.css" rel="stylesheet"/>';
-$reviewForm         = '<link href="./assets/styles/components/review-form.css" rel="stylesheet"/>';
-$productAddForm     = '<link href="./assets/styles/components/product-add-form.css" rel="stylesheet"/>';
+$forms              = '<link href="./assets/styles/components/forms.css" rel="stylesheet"/>';
 
 $home               = '<link href="./assets/styles/home.css" rel="stylesheet"/>';
 $shop               = '<link href="./assets/styles/shop.css" rel="stylesheet"/>';
@@ -28,8 +27,7 @@ $manage             = '<link href="./assets/styles/manage.css" rel="stylesheet"/
 
 echo 
 $satoshi, $source_serif, $root, $global, $header, $footer, 
-$productCard, $productCarousel, $actionOverlay, $reviewForm,
-$productAddForm;
+$productCard, $productCarousel, $actionOverlay, $forms;
 
 if($currentPage == 'index') {
     echo $home;

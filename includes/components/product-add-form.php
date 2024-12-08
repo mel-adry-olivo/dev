@@ -48,7 +48,7 @@ $shapes = getProductShapes($conn);
                 <label for="product-name">Product Name</label>
                 <input type="text" name="product-name" placeholder="Enter product name">
             </div>
-            <div class="row-group flex-1">
+            <div class="row-group">
                 <div class="field-group">
                     <label for="product-price">Price</label>
                     <input 
