@@ -37,6 +37,8 @@ export default function initFilter() {
 
   document.addEventListener('click', handleOutsideClick);
   window.addEventListener('resize', () => handleResize());
+
+  sortProducts('DESC');
 }
 
 const handleFilterItemClick = (item) => {
@@ -74,10 +76,28 @@ const handleSortItemClick = async (item) => {
   sortItems.forEach((it) => it.classList.toggle('active', it === item));
   const sortOrder = item.getAttribute('sort-order');
 
-  const url = './handlers/products/sort.php?type=' + productType + '&sortOrder=' + sortOrder;
-  const sortedProducts = await request(url, 'GET');
-  updateProductUI(sortedProducts);
+  sortProducts(sortOrder);
 };
+
+function sortProducts(sortOrder) {
+  const currentProducts = document.querySelectorAll('.product__card');
+  const sortedProducts = [...currentProducts].sort((a, b) => {
+    const priceA = parseFloat(a.querySelector('.product__price').textContent.replace('₱', '').trim());
+    const priceB = parseFloat(b.querySelector('.product__price').textContent.replace('₱', '').trim());
+
+    if (sortOrder === 'DESC') {
+      return priceB - priceA;
+    } else {
+      return priceA - priceB;
+    }
+  });
+
+  const productContainer = document.querySelector('.product-catalog');
+  productContainer.innerHTML = '';
+  sortedProducts.forEach((product) => {
+    productContainer.appendChild(product);
+  });
+}
 
 const handleResetFilterClick = async () => {
   filterItems.forEach((item) => item.classList.remove('active'));
@@ -99,7 +119,7 @@ const updateProductUI = (data) => {
   productCount.textContent = data.length > 1 ? `${data.length} Products` : `${data.length} Product`;
 };
 
-// adding '(a number)' to the category text if there are active items
+// adding '(n)' to the category text if there are active items
 const updateCategoryText = (item) => {
   const itemsContainer = item.closest('.shop__dropdown-container');
   const categoryButton = itemsContainer.parentElement.querySelector('.shop__dropdown-button-text');

@@ -35,6 +35,7 @@ function getAllCategories($conn) {
     return $categories;
 }
 
+
 function addProduct($conn, $product) {
     $sql = "
     INSERT INTO 
@@ -68,15 +69,108 @@ function addProduct($conn, $product) {
     return mysqli_insert_id($conn);
 }
 
+function deleteProduct($conn, $id) {
+    $sql = "DELETE FROM products WHERE product_id = $id";
+    return mysqli_query($conn, $sql);
+}
+
+function deleteFromReservations($conn, $id) {
+    $sql = "DELETE FROM reserved WHERE product_id = $id";
+    return mysqli_query($conn, $sql);
+}
+
+function deleteFromBag($conn, $id) {
+    $sql = "DELETE FROM bag WHERE product_id = $id";
+    return mysqli_query($conn, $sql);
+}
+
+function deleteFromFavorites($conn, $id) {
+    $sql = "DELETE FROM favorites WHERE product_id = $id";
+    return mysqli_query($conn, $sql);
+}
+
+function deleteFromReviews($conn, $id) {
+    $sql = "DELETE FROM reviews WHERE product_id = $id";
+    return mysqli_query($conn, $sql);
+}
+
+function updateProduct($conn, $productId, $product) {
+    $sql = "
+    UPDATE 
+        products 
+    SET 
+        brand_id = {$product['brand_id']}, 
+        name = '{$product['name']}', 
+        type = '{$product['type']}', 
+        price = {$product['price']}, 
+        stock_quantity = {$product['stock_quantity']}, 
+        lens_width = {$product['lens_width']}, 
+        bridge_width = {$product['bridge_width']}, 
+        temple_length = {$product['temple_length']}, 
+        image_main = '{$product['image_main']}', 
+        image_alternate = '{$product['image_alternate']}'
+    WHERE 
+        product_id = $productId";
+    return mysqli_query($conn, $sql);
+}
+
+function getProductAttributesByID($conn, $id) {
+    $sql = "
+        SELECT  
+            p.product_id,
+            pa.product_attribute_id,
+            c.name AS category_name, 
+            a.name AS attribute_name
+        FROM categories c
+        JOIN attributes a ON c.category_id = a.category_id
+        JOIN product_attributes pa ON a.attribute_id = pa.attribute_id
+        JOIN products p ON pa.product_id = p.product_id
+        WHERE p.product_id = $id
+    ";
+
+    $result = mysqli_query($conn, $sql);
+    $categories = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+
+        $categoryName = $row['category_name'];
+        $attributeName = $row['attribute_name'];
+        $productAttributeId = $row['product_attribute_id'];
+
+        $categories[$categoryName] = [
+            'name' => $attributeName,
+            'pa_id' => $productAttributeId
+        ];
+    }
+    return $categories;
+}
+
+function getProductAttribute ($conn, $id) {
+    $sql = "SELECT * FROM product_attributes WHERE product_attribute_id = $id";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function updateProductAttribute($conn, $product_attribute_id, $attributeId) {
+    $sql = "UPDATE product_attributes SET attribute_id = $attributeId WHERE product_attribute_id = $product_attribute_id";
+    return mysqli_query($conn, $sql);
+}
+
 function addProductAttriute($conn, $productId, $attributeId) {
     $sql = "INSERT INTO product_attributes (product_id, attribute_id) VALUES ($productId, $attributeId)";
     mysqli_query($conn, $sql);
+}
+
+function deleteProductAttributes($conn, $productId) {
+    $sql = "DELETE FROM product_attributes WHERE product_id = $productId";
+    return mysqli_query($conn, $sql);
 }
 
 function getAllProducts($conn) {
     $sql = "     
         SELECT 
             products.*,
+            brands.brand_id,
             brands.name AS brand 
         FROM products
         JOIN brands ON products.brand_id = brands.brand_id
@@ -362,32 +456,6 @@ function removeProductFavorite($conn, $productId, $userId) {
 
     $sql = "DELETE FROM favorites WHERE user_id = $userId AND product_id = $productId";
     mysqli_query($conn, $sql);
-}
-
-function getProductAttributesByID($conn, $id) {
-
-    $sql = "
-        SELECT  
-            p.product_id,
-            c.name AS category_name, 
-            a.name AS attribute_name
-        FROM categories c
-        JOIN attributes a ON c.category_id = a.category_id
-        JOIN product_attributes pa ON a.attribute_id = pa.attribute_id
-        JOIN products p ON pa.product_id = p.product_id
-        WHERE p.product_id = $id
-    ";
-
-    $result = mysqli_query($conn, $sql);
-    $categories = [];
-
-    while ($row = mysqli_fetch_assoc($result)) {
-
-        $categoryName = $row['category_name'];
-        $attributeName = $row['attribute_name'];
-        $categories[$categoryName] = $attributeName;
-    }
-    return $categories;
 }
 
 

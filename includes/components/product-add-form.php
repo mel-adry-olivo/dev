@@ -9,16 +9,14 @@ $shapes = getProductShapes($conn);
 
 ?>
 
-<form action="./handlers/products/add.php" method="POST" class="product__add-form" enctype="multipart/form-data">
+<form action="" method="POST" class="product__add-form" enctype="multipart/form-data">
     <div class="main-form">
         <div class="main-details">
             <h6 class="add__form-title">Add a product</h6>
             <div class="image-container">
                 <div class="image-main-container">
-
                 </div>
                 <div class="image-secondary-container">
-                    
                 </div>
             </div>
             <div class="file-chooser">
@@ -74,11 +72,18 @@ $shapes = getProductShapes($conn);
                 </div>
                 <div class="field-group">
                     <label for="product-gender">Gender</label>
+                    <input type="hidden" name="product-gender-pa" value="">
                     <select name="product-gender">
                         <option value="14">Men</option>
                         <option value="15">Women</option>
                         <option value="16">Unisex</option>
                     </select>
+                </div>
+                <div class="field-group">
+                <div class="field-group">
+                    <label for="product-stock-quantity">Stock Quantity</label>
+                    <input type="number" name="product-stock-quantity" placeholder="Ex: 15"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                </div>
                 </div>
             </div>
             <div class="row-group">
@@ -98,6 +103,7 @@ $shapes = getProductShapes($conn);
             <div class="row-group">
                 <div class="field-group">
                     <label for="product-color">Choose from existing colors</label>
+                    <input type="hidden" name="product-color-pa" value="">
                     <select name="product-color" class="product-select product-color-select" data-input="new-color"> 
                         <?php foreach ($colors as $color) : ?>
                         <option value="<?php echo $color['attribute_id']; ?>"><?php echo $color['color_name']; ?></option>
@@ -113,6 +119,7 @@ $shapes = getProductShapes($conn);
             <div class="row-group">
                 <div class="field-group">
                     <label for="product-material">Choose from existing materials</label>
+                    <input type="hidden" name="product-material-pa" value="">
                     <select name="product-material" class="product-select product-material-select" data-input="new-material"> 
                         <?php foreach ($materials as $material) : ?>
                         <option value="<?php echo $material['attribute_id']; ?>"><?php echo $material['material_name']; ?></option>
@@ -128,6 +135,7 @@ $shapes = getProductShapes($conn);
             <div class="row-group">
                 <div class="field-group">    
                     <label for="product-shape">Choose from existing shapes</label>
+                    <input type="hidden" name="product-shape-pa" value="">
                     <select name="product-shape" class="product-select product-shape-select" data-input="new-shape"> 
                         <?php foreach ($shapes as $shape) : ?>
                         <option value="<?php echo $shape['attribute_id']; ?>"><?php echo $shape['shape_name']; ?></option>
@@ -142,10 +150,11 @@ $shapes = getProductShapes($conn);
             </div>
             <div class="field-group">
                 <label for="product-frame-type">Frame Type</label>
+                <input type="hidden" name="product-frame-type-pa" value="">
                 <select name="product-frame-type" class="product-frame-type-select">
                     <option value="13">Rimless</option>
-                    <option value="12">Semi Rim</option>
-                    <option value="11">Full Rim</option>
+                    <option value="12">Semi-Rim</option>
+                    <option value="11">Full-Rim</option>
                 </select>
             </div>
         </div>
@@ -154,6 +163,5 @@ $shapes = getProductShapes($conn);
         <button class="button add__cancel" type="button">Cancel</button>
         <button class="button button--filled-dark add__submit" type="submit" name="add">Add Product</button>
     </div>
-    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
 </form>
 <div class="page-overlay add-product-overlay"></div>

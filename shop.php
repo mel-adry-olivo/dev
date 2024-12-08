@@ -29,7 +29,7 @@ switch($_GET['type']) {
 }
 
 
-$products = getSortedProducts($conn, $type, 'DESC');
+$products = getProductsbyType($conn, $type);
 
 ?>
 

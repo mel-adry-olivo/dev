@@ -75,9 +75,9 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                         <h6 class="product__info-name"><?php echo $product['name']; ?></h6>
                         <span class="product__info-subtext">
                             <?php 
-                                echo $productAttributes['Color'] . " " . 
-                                     $productAttributes['Shape'] . " " .  
-                                     $productAttributes['Gender'] . " " . 
+                                echo $productAttributes['Color']['name'] . " " . 
+                                     $productAttributes['Shape']['name'] . " " .  
+                                     $productAttributes['Gender']['name'] . " " . 
                                      $product['type']; ?>
                         </span>
                     </div>

@@ -59,7 +59,7 @@ $products = getAllProducts($conn);
                                 <td>
                                     <div class="product-container">
                                         <img src="<?php echo $product['image_main']; ?>" width="60" height="60" alt="product">
-                                        <span><?php echo $product['brand'] . " " . $product['name']; ?></span>
+                                        <a class="button-link" href="./product.php?id=<?php echo $product['product_id']; ?>"><?php echo $product['brand'] . " " . $product['name']; ?></a>
                                     </div>
                                 </td>
                                 <td><?php echo $product['type']; ?></td>
@@ -67,8 +67,8 @@ $products = getAllProducts($conn);
                                 <td><?php echo $product['stock_quantity']; ?></td>
                                 <td>
                                     <div class="actions-container">
-                                        <button class="button-link">Edit</button>
-                                        <button class="button-link">Delete</button>
+                                        <button class="button-link product__edit" data-id="<?php echo $product['product_id']; ?>">Edit</button>
+                                        <button class="button-link product__delete" data-id="<?php echo $product['product_id']; ?>">Delete</button>
                                     </div>
                                 </td>
                             </tr>
