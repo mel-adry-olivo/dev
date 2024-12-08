@@ -4,10 +4,10 @@ session_start();
 
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/config.php';
 require './includes/db-utils.php';
 require './includes/utils.php';
 
+$conn = require './includes/db-conn.php';
 $isFavorite = '';
 
 if(isset($_SESSION['in_bag'])) {
@@ -17,26 +17,27 @@ if(isset($_SESSION['in_bag'])) {
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
-    $product = getProductById($id);
-    $productAttributes = getProductAttributesByID($id);
+    $product = getProductById($conn, $id);
+    $productAttributes = getProductAttributesByID($conn, $id);
     $title = $product['brand'] . ' ' . $product['name'] . ' | INSPEC®';
 }
 
 if(isset($_SESSION['user_id'])) {
-    $isFavorite = isProductFavorite($id, $_SESSION['user_id']) ? 'active' : '';
+    $userId = $_SESSION['user_id'];
+    $isFavorite = isProductFavorite($conn, $id, $userId) ? 'active' : '';
 }
 
 
 $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
-$reviews = getLimitedProductReviews($id, 2);
-$averageRating = getAverageRating($id);
-$count = getProductReviewCount($id);
-$productsByBrand = getProductsByBrand($product['brand']);
+$reviews = getLimitedProductReviews($conn, $id, 2);
+$averageRating = getAverageRating($conn, $id);
+$count = getProductReviewCount($conn, $id);
+$productsByBrand = getProductsByBrand($conn, $product['brand']);
 $productsByBrand = array_filter($productsByBrand, function ($product) use ($id) {
     return $product['product_id'] !== $id;
 });
     
-$productsByShape = getProductsByShape($productAttributes['Shape']);
+$productsByShape = getProductsByShape($conn, $productAttributes['Shape']);
 $productsByShape = array_filter($productsByShape, function ($product) use ($id) {
     return $product['product_id'] !== $id;
 });

@@ -3,12 +3,14 @@
 require '../../includes/config.php';
 require '../../includes/db-utils.php';
 
+
 session_start();
 
+$conn = require '../../includes/db-conn.php';
 $inputEmail = $_POST['login-email'];
 $inputPassword = md5($_POST['login-password']);
 
-$user = getUserByEmail($inputEmail);
+$user = getUserByEmail($conn, $inputEmail);
 
 if($user) {
     $_SESSION['role'] = $user['user_id'] == 1 ? 'admin' : 'customer';

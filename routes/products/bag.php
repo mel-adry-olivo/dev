@@ -2,31 +2,28 @@
 
 session_start();
 
-require '../../includes/config.php';
 require '../../includes/db-utils.php';
 
+$conn = require '../../includes/db-conn.php';
+$userId = $_SESSION['user_id'] ?? null;
+$productID = $_POST['product_id'];
 
 
 if(isset($_POST['add'])) {
-    $userId = $_SESSION['user_id'] ?? null;
-    $productID = $_POST['product_id'];
-    if(isProductInBag($productID, $userId)) {
+    if(isProductInBag($conn, $productID, $userId)) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         $_SESSION['in_bag'] = true;
         exit();
     }
-    addProductToBag($productID, $userId);
+    addProductToBag($conn, $productID, $userId);
 }
 
 if(isset($_POST['remove'])) {
-    $userId = $_SESSION['user_id'] ?? null;
-    $productID = $_POST['product_id'];
-    removeProductFromBag($productID, $userId);
+    removeProductFromBag($conn, $productID, $userId);
 }
 
 if(isset($_POST['reserve']))  {
-    $userId = $_SESSION['user_id'] ?? null;
-    reserveBagProducts($userId);
+    reserveBagProducts($conn, $userId);
     header('Location: ../../index.php');
     exit();
 }

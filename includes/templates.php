@@ -1,8 +1,9 @@
 <?php 
+
 function createProductCard($product) {
 
+    $conn = require './includes/db-conn.php';
     $userId = $_SESSION["user_id"] ?? null;
-
     $productId = $product["product_id"];
     $imagePath = $product["image_main"];
     $brand = $product["brand"];
@@ -10,7 +11,7 @@ function createProductCard($product) {
     $price = $product["price"];
     $favoriteUnchecked = getIcon("heart");
     $favoriteChecked = getIcon("heart-filled");
-    $isFavorite = isProductFavorite($productId, $userId) ? 'active' : '';
+    $isFavorite = isProductFavorite($conn, $productId, $userId) ? 'active' : '';
     $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
 
     echo

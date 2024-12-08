@@ -164,8 +164,6 @@ const toggleFilterDropdown = (filterButton) => {
 
   if (window.innerWidth > 900) {
     const isActive = filterButton.classList.contains('active');
-    filterCategoryButtons.forEach((btn) =>
-      btn.classList.toggle('active', btn === filterButton && isActive),
-    );
+    filterCategoryButtons.forEach((btn) => btn.classList.toggle('active', btn === filterButton && isActive));
   }
 };

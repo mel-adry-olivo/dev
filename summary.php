@@ -7,6 +7,7 @@ require './includes/icons.php';
 require './includes/config.php';
 require './includes/db-utils.php';
 
+$conn = require './includes/db-conn.php';
 
 if(!isset($_SESSION['user_id'])) {
     header("Location: ./index.php");
@@ -17,8 +18,8 @@ if (!isset($_SESSION['referer']) ) {
     $_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
 }
 
-
-$bag = getBagProducts($_SESSION['user_id']);
+$userId = $_SESSION['user_id'] ?? null;
+$bag = getBagProducts($conn, $userId);
 $count = count($bag);   
 $title = 'Bag | INSPEC®';
 

@@ -17,48 +17,36 @@ if (isset($_POST['add'])) {
     $frameType = $_POST['product-frame-type'] ?? '';
 
     $colorId = $_POST['product-color'] ?? '';
+    $colorInput = $_POST['product-color-input'] ?? '';
 
     $materialId = $_POST['product-material'] ?? '';
+    $materialInput = $_POST['product-material-input'] ?? '';
 
     $shapeId = $_POST['product-shape'] ?? '';
+    $shapeInput = $_POST['product-shape-input'] ?? '';
 
     $brandId = $_POST['product-brand'] ?? '';
+    $brandInput = $_POST['product-brand-input'] ?? '';
     
 
-    if ($color === 'new') {
-        $color = $_POST['product-color-input'] ?? '';
-        // add to database
-    }
-    if ($material === 'new') {
-        $material = $_POST['product-material-input'] ?? '';
-        // add to database
-    }
-    if ($shape === 'new') {
-        $shape = $_POST['product-shape-input'] ?? '';
-        // add to database
-    }
-    if ($brandId === 'new') {
-        $brandId = $_POST['product-brand-input'] ?? '';
-        // add to database
-    }
 
     // handle image upload then save product details and attributes to database
 
-    $uploadDir = "../../assets/images/products/";
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0755, true);
-    }
+    // $uploadDir = "../../assets/images/products/";
+    // if (!is_dir($uploadDir)) {
+    //     mkdir($uploadDir, 0755, true);
+    // }
 
-    $image1Path = null;
-    $image2Path = null;
+    // $image1Path = null;
+    // $image2Path = null;
 
-    if (isset($_FILES['product-image']) && $_FILES['product-image']['error'] === UPLOAD_ERR_OK) {
-        $image1Path = uploadImage($_FILES['product-image'], $uploadDir, $name, $brandId);
-    }
+    // if (isset($_FILES['product-image']) && $_FILES['product-image']['error'] === UPLOAD_ERR_OK) {
+    //     $image1Path = uploadImage($_FILES['product-image'], $uploadDir, $name, $brandId);
+    // }
 
-    if (isset($_FILES['product-image2']) && $_FILES['product-image2']['error'] === UPLOAD_ERR_OK) {
-        $image2Path = uploadImage($_FILES['product-image2'], $uploadDir, $name, $brandId);
-    }
+    // if (isset($_FILES['product-image2']) && $_FILES['product-image2']['error'] === UPLOAD_ERR_OK) {
+    //     $image2Path = uploadImage($_FILES['product-image2'], $uploadDir, $name, $brandId);
+    // }
 }
 
 function uploadImage($file, $uploadDir, $name, $brand) {

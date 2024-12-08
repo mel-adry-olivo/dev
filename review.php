@@ -4,20 +4,22 @@ session_start();
 
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/config.php';
 require './includes/db-utils.php';
+
+$conn = require './includes/db-conn.php';
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
-    $product = getProductById($id);
-    $productAttributes = getProductAttributesByID($id);
+    $product = getProductById($conn, $id);
+    $productAttributes = getProductAttributesByID($conn, $id);
 }
 
 
 $title = 'Review | INSPEC®';
 $reviews = getProductReviewsByDate($id);
-$averageRating = getAverageRating($id);
-$count = getProductReviewCount($id);
+$averageRating = getAverageRating($conn, $id);
+$count = getProductReviewCount($conn, $id);
+
 ?>
 
 <!DOCTYPE html>

@@ -1,10 +1,10 @@
 <?php
 
 
-$brands = getProductBrands();
-$materials = getProductMaterials();
-$colors = getProductColors();
-$shapes = getProductShapes();
+$brands = getProductBrands($conn);
+$materials = getProductMaterials($conn);
+$colors = getProductColors($conn);
+$shapes = getProductShapes($conn);
 
 
 ?>

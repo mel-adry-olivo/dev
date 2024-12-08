@@ -1,10 +1,10 @@
 <?php 
 
 require '../../includes/config.php';
-require '../../includes/db-utils.php';
 
 session_start();
 
+$conn = require '../../includes/db-conn.php';
 $inputFname = $_POST['register-fname'];
 $inputLname = $_POST['register-lname'];
 $inputEmail = $_POST['register-email'];
@@ -17,9 +17,9 @@ $user = [
     'password' => $inputPassword,
 ];
 
-if(createUser($user)) {
+if(createUser($conn, $user)) {
     $_SESSION['role'] = $user['user_id'] == 1 ? 'admin' : 'customer';
-    $_SESSION['user_id'] = getUserByEmail($inputEmail)['user_id'];
+    $_SESSION['user_id'] = getUserByEmail($conn, $inputEmail)['user_id'];
     $_SESSION['fname'] = $user['fname'];
     $_SESSION['lname'] = $user['lname'];
     $_SESSION['email'] = $user['email'];

@@ -4,8 +4,9 @@ session_start();
 
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/config.php';
 require './includes/db-utils.php';
+
+$conn = require './includes/db-conn.php';
 
 $title = "INSPEC®"; 
 $heroHeadlinePrimary = "Redefining";
@@ -15,8 +16,8 @@ $heroCtaButtonText = "Shop now";
 $shapesHeaderText = "Discover eyewear by shape—find frames that perfectly complement your unique look.";
 $trendingHeaderText = "Explore our top-trending eyewear styles and make a statement with every look.";
 
-$popularProducts = getPopularProducts();
 
+$popularProducts = getPopularProducts($conn);
 ?>
 
 <!DOCTYPE html>

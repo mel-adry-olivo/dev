@@ -4,14 +4,16 @@ session_start();
 
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/config.php';
 require './includes/db-utils.php';
+
+$conn = require './includes/db-conn.php';
 
 if (!isset($_SESSION['referer']) ) {
     $_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
 }
 
-$reserved = getReservedProducts($_SESSION['user_id']);
+$userId = $_SESSION['user_id'] ?? null;
+$reserved = getReservedProducts($conn, $userId);
 $count = count($reserved);
 $title = 'Reservations | INSPEC®';
 

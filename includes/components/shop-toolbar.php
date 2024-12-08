@@ -1,3 +1,9 @@
+<?php
+
+$categories = getAllCategories($conn);
+
+?>
+
 <div class="shop__toolbar">
     <div class="shop__toolbar-filter">
         <button class="shop__dropdown-button shop__filter-button-mobile">
@@ -12,7 +18,6 @@
             <div class="shop__filter-content">
                 <ul class="shop__filter-items">
                     <?php 
-                        $categories = getAllCategories();
                         foreach($categories as $category => $categoryItems) {
                             createFilterCategory($category, $categoryItems);
                         }

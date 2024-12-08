@@ -1,25 +1,21 @@
 <?php 
 
-function createUser($user) {
-    global $conn;
+function createUser($conn, $user) {
     $sql = "INSERT INTO users (fname, lname, email, password) VALUES ('{$user['fname']}', '{$user['lname']}', '{$user['email']}', '{$user['password']}')";
-    return $conn->query($sql);
+    return mysqli_query($conn, $sql);
 }
 
-function getUserByEmail($email) {
-    global $conn;
+function getUserByEmail($conn, $email) {
     $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = $conn->query($sql);
-    return $result->fetch_assoc();
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
 }
 
-function getAllCategories() {
-    global $conn;
+function getAllCategories($conn) {
     $sql = "
         SELECT
             'Brand' as category_name,
             name as attribute_name
-            
         FROM brands
         UNION ALL
         SELECT  
@@ -28,9 +24,10 @@ function getAllCategories() {
         FROM categories
         JOIN attributes ON categories.category_id = attributes.category_id
     ";
-    $result = $conn->query($sql);
+    $result = mysqli_query($conn, $sql);
     $categories = [];
-    while ($row = $result->fetch_assoc()) {
+
+    while ($row = mysqli_fetch_assoc($result)) {
         $categoryName = $row['category_name'];
         $attributeName = $row['attribute_name'];
         $categories[$categoryName][] = $attributeName;
@@ -38,8 +35,8 @@ function getAllCategories() {
     return $categories;
 }
 
-function getAllProducts() {
-    global $conn;
+
+function getAllProducts($conn) {
     $sql = "     
         SELECT 
             products.*,
@@ -47,12 +44,12 @@ function getAllProducts() {
         FROM products
         JOIN brands ON products.brand_id = brands.brand_id
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getPopularProducts() {
-    global $conn;
+
+function getPopularProducts($conn) {
     $sql = "     
         SELECT 
             p.*,
@@ -73,12 +70,11 @@ function getPopularProducts() {
             review_count DESC
         LIMIT 8
         ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductsByBrand($brand) {
-    global $conn;
+function getProductsByBrand($conn, $brand) {
     $sql = "     
         SELECT 
             products.*,
@@ -87,12 +83,11 @@ function getProductsByBrand($brand) {
         JOIN brands ON products.brand_id = brands.brand_id
         WHERE brands.name = '$brand'
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductsByShape($shape) {
-    global $conn;
+function getProductsByShape($conn, $shape) {
     $sql = "     
         SELECT 
             products.*,
@@ -104,19 +99,17 @@ function getProductsByShape($shape) {
         JOIN categories c ON a.category_id = c.category_id
         WHERE c.name = 'Shape' AND a.name = '$shape'
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductBrands() {
-    global $conn;
+function getProductBrands($conn) {
     $sql = "SELECT * FROM brands";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductShapes() {
-    global $conn;
+function getProductShapes($conn) {
     $sql = "
         SELECT 
             attributes.attribute_id, 
@@ -125,12 +118,11 @@ function getProductShapes() {
         JOIN categories ON attributes.category_id = categories.category_id
         WHERE categories.name = 'Shape'
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductMaterials() {
-    global $conn;
+function getProductMaterials($conn) {
     $sql = "
         SELECT 
             attributes.attribute_id, 
@@ -139,12 +131,11 @@ function getProductMaterials() {
         JOIN categories ON attributes.category_id = categories.category_id
         WHERE categories.name = 'Material'
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductColors() {
-    global $conn;
+function getProductColors($conn) {
     $sql = "
         SELECT 
             attributes.attribute_id, 
@@ -153,19 +144,12 @@ function getProductColors() {
         JOIN categories ON attributes.category_id = categories.category_id
         WHERE categories.name = 'Color'
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getBrandById($id) {
-    global $conn;
-    $sql = "SELECT * FROM brands WHERE brand_id = $id";
-    $result = $conn->query($sql);
-    return $result->fetch_assoc();
-}
 
-function getProductsbyType($type) {
-    global $conn;
+function getProductsbyType($conn, $type) {
     $formattedType = ucfirst($type);
     $sql = "
         SELECT 
@@ -175,12 +159,12 @@ function getProductsbyType($type) {
         JOIN brands ON products.brand_id = brands.brand_id
         WHERE products.type = '$formattedType'
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductById($id) {
-    global $conn;
+
+function getProductById($conn, $id) {
     $sql = "     
         SELECT 
             products.*,
@@ -189,34 +173,35 @@ function getProductById($id) {
         JOIN brands ON products.brand_id = brands.brand_id
         WHERE products.product_id = $id
     ";
-    $result = $conn->query($sql);
-    return $result->fetch_assoc();
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
 }
 
-function reserveBagProducts($userId) {
+
+function reserveBagProducts($conn, $userId) {
     if(!$userId) return [];
-    global $conn;
+
     $sql = "SELECT * FROM bag WHERE user_id = $userId";
-    $result = $conn->query($sql);
+    $result = mysqli_query($conn, $sql);
 
-    if($result->num_rows > 0) {
+    if(mysqli_num_rows($result) > 0) {
 
-        $bagProducts = $result->fetch_all(MYSQLI_ASSOC);
+        $bagProducts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         foreach($bagProducts as $product) {
             $productId = $product['product_id'];
             $sql = "INSERT INTO reserved (user_id, product_id) VALUES ($userId, $productId)";
-            $conn->query($sql);
+            mysqli_query($conn, $sql);
         }
 
         $sql = "DELETE FROM bag WHERE user_id = $userId";
-        $conn->query($sql);
+        mysqli_query($conn, $sql);
     }
 }
 
-function getReservedProducts($userId) {
+function getReservedProducts($conn, $userId) {
     if(!$userId) return [];
-    global $conn;
+    
     $sql = "
         SELECT 
             products.*,
@@ -228,21 +213,20 @@ function getReservedProducts($userId) {
         ORDER BY reserved.reserved_on DESC
         ";
 
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function removeProductFromReservations($productId, $userId) {
+function removeProductFromReservations($conn, $productId, $userId) {
     if(!$userId) return [];
-    global $conn;
-    $userId = $_SESSION['user_id'];
+
     $sql = "DELETE FROM reserved WHERE user_id = $userId AND product_id = $productId";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
-function getBagProducts($userId) {
+function getBagProducts($conn, $userId) {
     if(!$userId) return [];
-    global $conn;
+
     $sql = "
         SELECT 
             products.*,
@@ -254,39 +238,36 @@ function getBagProducts($userId) {
         ORDER BY bag.added_on DESC
         ";
 
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function isProductInBag($productId, $userId) {
+function isProductInBag($conn, $productId, $userId) {
     if(!$userId) return false;
-    global $conn;
+
     $sql = "SELECT * FROM bag WHERE user_id = $userId AND product_id = $productId";
-    $result = $conn->query($sql);
-    return $result->num_rows > 0;
+    $result = mysqli_query($conn, $sql);
+    return mysqli_num_rows($result) > 0;
 }
 
-function addProductToBag($productId, $userId) {
+function addProductToBag($conn, $productId, $userId) {
     if(!$userId) return [];
-    global $conn;
-    $userId = $_SESSION['user_id'];
+
     $sql = "INSERT INTO bag (user_id, product_id) VALUES ($userId, $productId)";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
-function removeProductFromBag($productId, $userId) {
+
+function removeProductFromBag($conn, $productId, $userId) {
     if(!$userId) return [];
-    global $conn;
-    $userId = $_SESSION['user_id'];
+
     $sql = "DELETE FROM bag WHERE user_id = $userId AND product_id = $productId";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
-function getFavoritedProducts($userId) {
-
+function getFavoritedProducts($conn, $userId) {
     if(!$userId) return [];
 
-    global $conn;
     $sql = "
         SELECT 
             products.*,
@@ -297,57 +278,53 @@ function getFavoritedProducts($userId) {
         WHERE user_id = $userId 
         ORDER BY favorites.added_at DESC
         ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function isProductFavorite($productId, $userId) {
-
+function isProductFavorite($conn, $productId, $userId) {
     if(!$userId) return false;
 
-    global $conn;
     $sql = "SELECT * FROM favorites WHERE user_id = $userId AND product_id = $productId";
-    $result = $conn->query($sql);
-    return $result->num_rows > 0;
+    $result = mysqli_query($conn, $sql);
+
+    return mysqli_num_rows($result) > 0;
 }
 
-function addProductFavorite($productId, $userId) {
+function addProductFavorite($conn, $productId, $userId) {
     if(!$userId) return [];
-    global $conn;
-    $userId = $_SESSION['user_id'];
+
     $sql = "INSERT INTO favorites (user_id, product_id) VALUES ($userId, $productId)";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
-function removeProductFavorite($productId, $userId) {
+function removeProductFavorite($conn, $productId, $userId) {
     if(!$userId) return [];
-    global $conn;
-    $userId = $_SESSION['user_id'];
+
     $sql = "DELETE FROM favorites WHERE user_id = $userId AND product_id = $productId";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
-function getProductAttributesByID($id) {
-    global $conn;
+function getProductAttributesByID($conn, $id) {
+
     $sql = "
         SELECT  
             p.product_id,
             c.name AS category_name, 
             a.name AS attribute_name
-        FROM 
-            categories c
-        JOIN 
-            attributes a ON c.category_id = a.category_id
-        JOIN 
-            product_attributes pa ON a.attribute_id = pa.attribute_id
-        JOIN 
-            products p ON pa.product_id = p.product_id
-        WHERE 
-            p.product_id = $id
+        FROM categories c
+        JOIN attributes a ON c.category_id = a.category_id
+        JOIN product_attributes pa ON a.attribute_id = pa.attribute_id
+        JOIN products p ON pa.product_id = p.product_id
+        WHERE p.product_id = $id
     ";
-    $result = $conn->query($sql);
+
+    $result = mysqli_query($conn, $sql);
     $categories = [];
-    while ($row = $result->fetch_assoc()) {
+
+    while ($row = mysqli_fetch_assoc($result)) {
+
         $categoryName = $row['category_name'];
         $attributeName = $row['attribute_name'];
         $categories[$categoryName] = $attributeName;
@@ -356,44 +333,51 @@ function getProductAttributesByID($id) {
 }
 
 
-function getFilteredProducts($type, $filters) {
-    global $conn;
+function getFilteredProducts($conn, $type, $filters) {
+
     $formattedType = ucfirst($type);
-    $where = $formattedType == 'All' ? 'WHERE 1=1' : " WHERE p.type = '$formattedType'";
+
+    // if the type is 'All', fetch all products. 
+    // if not, filter by the specified product type
+    $where = $formattedType == 'All' ? 'WHERE 1 = 1' : " WHERE p.type = '$formattedType'";
+
     $sql = "
         SELECT DISTINCT 
-            p.*,
-            b.name AS brand 
+            p.*,                
+            b.name AS brand      
         FROM products p
-        INNER JOIN brands b ON p.brand_id = b.brand_id
-        LEFT JOIN product_attributes pa ON p.product_id = pa.product_id
-        LEFT JOIN attributes a ON pa.attribute_id = a.attribute_id
-        LEFT JOIN categories c ON a.category_id = c.category_id
-        $where
+        INNER JOIN brands b ON p.brand_id = b.brand_id       
+        LEFT JOIN product_attributes pa ON p.product_id = pa.product_id 
+        LEFT JOIN attributes a ON pa.attribute_id = a.attribute_id  
+        LEFT JOIN categories c ON a.category_id = c.category_id   
+        $where                                                 
     ";
 
     $conditions = [];
 
     foreach ($filters as $key => $value) {
         if($key == 'Brand') {
+            // separate clause because brand is another table
             $conditions[] = " b.name IN('" . implode("', '", $value) . "')";
         } else {
+            // c is categories, a is attributes
             $conditions[] = " c.name = '$key' AND a.name IN('" . implode("', '", $value) . "')";
         }
     }
 
+    
+    // example: AND c.name = 'Shape' AND a.name IN('Square', 'Rectangle')
     if (!empty($conditions)) {
         $sql .= " AND " . implode(" AND ", $conditions);
     }
 
 
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getSortedProducts($type, $direction) {
-    global $conn;
 
+function getSortedProducts($conn, $type, $direction) {
     $formattedType = ucfirst($type);
     $where = $formattedType == 'All' ? '' : " WHERE products.type = '$formattedType'";
 
@@ -407,12 +391,11 @@ function getSortedProducts($type, $direction) {
         ORDER BY products.price $direction
         ";
 
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getProductReviews($id) {
-    global $conn;
+function getProductReviews($conn, $id) {
     $sql = "
         SELECT 
             reviews.*,
@@ -424,8 +407,9 @@ function getProductReviews($id) {
         WHERE product_id = $id
         ORDER BY RAND()
         ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
 function createProductReview($review) {
@@ -434,13 +418,13 @@ function createProductReview($review) {
         INSERT INTO reviews (product_id, user_id, rating, review_text) 
         VALUES ({$review['product_id']}, {$review['user_id']}, {$review['rating']}, '{$review['review_text']}')
     ";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
 function removeProductReview($id) {
     global $conn;
     $sql = "DELETE FROM reviews WHERE review_id = $id";
-    $conn->query($sql);
+    mysqli_query($conn, $sql);
 }
 
 function getProductReviewsByDate($id) {
@@ -456,12 +440,11 @@ function getProductReviewsByDate($id) {
         WHERE product_id = $id
         ORDER BY reviews.created_at DESC
         ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function getLimitedProductReviews($id, $limit) {
-    global $conn;
+function getLimitedProductReviews($conn, $id, $limit) {
     $sql = "
         SELECT 
             reviews.*,
@@ -474,15 +457,16 @@ function getLimitedProductReviews($id, $limit) {
         ORDER BY RAND()
         LIMIT $limit
         ";
-    $result = $conn->query($sql);
-    return $result->fetch_all(MYSQLI_ASSOC);
+
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }   
 
-function getAverageRating($id) {
-    $reviews = getProductReviews($id);
+function getAverageRating($conn, $id) {
+    $reviews = getProductReviews($conn, $id);
     $total = 0;
     
-    if (count($reviews) === 0) {
+    if (count($reviews) === 0) {    
         return 0; 
     }
 
@@ -492,11 +476,11 @@ function getAverageRating($id) {
 
     $avg = (float)($total / count($reviews));
     $formattedAvg = number_format($avg, 1);
-
     return $formattedAvg;
 }
 
-function getProductReviewCount($id) {
-    $reviews = getProductReviews($id);
+
+function getProductReviewCount($conn, $id) {
+    $reviews = getProductReviews($conn, $id);
     return count($reviews);
 }
