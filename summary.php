@@ -4,7 +4,6 @@ session_start();
 
 require './includes/templates.php';
 require './includes/icons.php';
-require './includes/config.php';
 require './includes/db-utils.php';
 
 $conn = require './includes/db-conn.php';

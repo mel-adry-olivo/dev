@@ -2,7 +2,6 @@
 
 session_start();
 
-require '../../includes/config.php';
 require '../../includes/db-utils.php';
 
 $productId = $_POST['product_id'] ?? ''; 
