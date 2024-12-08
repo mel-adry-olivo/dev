@@ -1,6 +1,6 @@
 export const checkUserLogin = async () => {
   try {
-    const response = await fetch('./routes/auth/check-login.php', {
+    const response = await fetch('./handlers/auth/check-login.php', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });

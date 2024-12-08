@@ -9,7 +9,7 @@ $shapes = getProductShapes($conn);
 
 ?>
 
-<form action="./routes/products/add.php" method="POST" class="product__add-form" enctype="multipart/form-data">
+<form action="./handlers/products/add.php" method="POST" class="product__add-form" enctype="multipart/form-data">
     <div class="main-form">
         <div class="main-details">
             <h6 class="add__form-title">Add a product</h6>

@@ -62,7 +62,7 @@ const applyFilters = async () => {
     filteredItems[itemCategory].push(itemName);
   });
 
-  const url = './routes/products/filter.php?type=' + productType;
+  const url = './handlers/products/filter.php?type=' + productType;
   const filteredProducts = await request(url, 'POST', JSON.stringify(filteredItems));
   updateProductUI(filteredProducts);
 };
@@ -74,7 +74,7 @@ const handleSortItemClick = async (item) => {
   sortItems.forEach((it) => it.classList.toggle('active', it === item));
   const sortOrder = item.getAttribute('sort-order');
 
-  const url = './routes/products/sort.php?type=' + productType + '&sortOrder=' + sortOrder;
+  const url = './handlers/products/sort.php?type=' + productType + '&sortOrder=' + sortOrder;
   const sortedProducts = await request(url, 'GET');
   updateProductUI(sortedProducts);
 };
@@ -84,7 +84,7 @@ const handleResetFilterClick = async () => {
   resetCategoryButtonTexts();
   checkResetFilter();
 
-  const url = './routes/products/products.php?type=' + productType;
+  const url = './handlers/products/products.php?type=' + productType;
   const products = await request(url, 'GET');
   updateProductUI(products);
 };

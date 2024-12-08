@@ -40,7 +40,7 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
                         <span class="auth__title">Login</span>
                         <span class="auth__subtitle">To access your account</span>
                     </header>
-                    <form action="./routes/auth/login.php" method="POST" class="auth__form">
+                    <form action="./handlers/auth/login.php" method="POST" class="auth__form">
                         <div class="auth__field-group">
                             <input type="text" class="auth__field" name="login-email" autocomplete="off"/>
                             <label for="login-email" class="auth__label">Email</label>
@@ -61,7 +61,7 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
                         <span class="auth__title">Register</span>
                         <span class="auth__subtitle">Create an account</span>
                     </header>
-                    <form action="./routes/auth/register.php" method="POST" class="auth__form">
+                    <form action="./handlers/auth/register.php" method="POST" class="auth__form">
                         <div class="auth__field-group">
                             <input type="text" class="auth__field" name="register-fname" autocomplete="off"/>
                             <label for="register-fname" class="auth__label">First Name</label>

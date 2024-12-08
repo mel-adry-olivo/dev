@@ -25,7 +25,7 @@ if(isset($_SESSION['user_id'])) {
                             <button class="button-link profile-link profile__manage">Manage Products</button>
                         </form>
                     <?php endif; ?>
-                    <form action="./routes/auth/logout.php" method="POST">
+                    <form action="./handlers/auth/logout.php" method="POST">
                         <button class="button-link profile-link profile__logout">Log out</button>
                     </form>
                     

@@ -56,15 +56,11 @@ const handleRemoveFavorite = (button) => {
 
 const addToFavorite = async (productId) => {
   // insert product into favorites table
-  const response = await request(
-    './routes/products/favorite.php',
-    'POST',
-    JSON.stringify({ productId, action: 'add' }),
-  );
+  const response = await request('./handlers/products/favorite.php', 'POST', JSON.stringify({ productId, action: 'add' }));
 
   // add product card element to UI
   if (response.success) {
-    const product = await request(`./routes/products/product.php?id=${productId}`, 'GET');
+    const product = await request(`./handlers/products/product.php?id=${productId}`, 'GET');
     addFavoriteCardToUI(product);
     toggleActionMenu('favorites');
   }
@@ -83,17 +79,11 @@ const addFavoriteCardToUI = (product) => {
 
 const removeProductFromFavorite = async (productId) => {
   // delete product from database
-  const response = await request(
-    './routes/products/favorite.php',
-    'POST',
-    JSON.stringify({ productId, action: 'remove' }),
-  );
+  const response = await request('./handlers/products/favorite.php', 'POST', JSON.stringify({ productId, action: 'remove' }));
 
   // remove product card element from UI
   if (response.success) {
-    const productCard = favoriteContainer.querySelector(
-      `.product__favorite-card[data-id="${productId}"]`,
-    );
+    const productCard = favoriteContainer.querySelector(`.product__favorite-card[data-id="${productId}"]`);
     if (productCard) productCard.remove();
 
     // if favorite container is empty, show empty message

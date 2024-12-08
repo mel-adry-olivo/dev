@@ -79,7 +79,7 @@ foreach($bag as $bagproduct) {
                         <span class="bag__subtotal-text">Subtotal</span>
                         <span class="bag__subtotal">₱<?php echo number_format($totalPrice, '0', '.', ','); ?></span>
                     </div>
-                    <form action="./routes/products/bag.php" method="POST" class="bag__reserve-form">
+                    <form action="./handlers/products/bag.php" method="POST" class="bag__reserve-form">
                         <input type="hidden" name="reserve" value="true">
                         <button name="reserve" class="button button--filled-dark bag__reserve" <?php echo empty($bag) ? 'disabled' : ''; ?>>Reserve Now</button>
                     </form>

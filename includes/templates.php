@@ -72,7 +72,7 @@ function createBagCard($product) {
     echo
     <<<HTML
         <div class="product__bag-card" data-id="$productId">  
-            <form action="./routes/products/bag.php" method="POST" class="product__bag-close-form">
+            <form action="./handlers/products/bag.php" method="POST" class="product__bag-close-form">
                 <input type="hidden" name="remove">
                 <input type="hidden" name="product_id" value="$productId">
                 <button type="submit" name="remove" class="icon-container product__bag-close" data-id="$productId">$close</button>
@@ -102,7 +102,7 @@ function createReservationCard($product) {
     echo
     <<<HTML
         <div class="product__bag-card" data-id="$productId">  
-            <form action="./routes/products/reservation.php" method="POST" class="product__reserve-close-form">
+            <form action="./handlers/products/reservation.php" method="POST" class="product__reserve-close-form">
                 <input type="hidden" name="remove">
                 <input type="hidden" name="product_id" value="$productId">
                 <button type="submit" name="remove" class="icon-container product__bag-close" data-id="$productId">$close</button>
@@ -136,7 +136,7 @@ function createReviewCard($review) {
     if(isset($currentUser)) {
         $isCurrentUser = $userId == $currentUser ? '<button  class="product__review-close">'. $closeIcon .'</button>' : '';
         $editForm = <<<HTML
-            <form class="product__review-close-form" method="post" action="./routes/products/reviews.php">
+            <form class="product__review-close-form" method="post" action="./handlers/products/reviews.php">
                 <input type="hidden" name="action" value="remove"/>
                 <input type="hidden" name="review_id" value="$reviewId"/>
                 $isCurrentUser
