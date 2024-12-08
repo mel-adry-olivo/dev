@@ -57,6 +57,36 @@
   font-size: 1.5rem;
   border-radius: 2rem;
 }
+.standard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--default-gap);
+  padding-bottom: var(--wrapper-padding);
+}
+
+.standard__header {
+  display: flex;
+  justify-content: center;
+  padding-block: min(8rem, 16%);
+}
+
+.standard__header-text {
+  color: var(--clr-gray-300);
+  width: 66%;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.05rem;
+  text-wrap: pretty;
+}
+
+.standard__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.standard__footer {
+  padding-block: 1rem;
+}
 .shapes__grid {
   display: grid;
   gap: var(--default-gap);

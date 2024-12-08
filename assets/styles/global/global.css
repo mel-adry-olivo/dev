@@ -1,3 +1,7 @@
+/* /////////////////////////////// */
+/* VARIABLES */
+/* /////////////////////////////// */
+
 :root {
   --clr-gray-400: hsl(0, 0%, 16%);
   --clr-gray-300: hsl(0, 0%, 24%);
@@ -17,6 +21,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+/* /////////////////////////////// */
+/* RESET  */
+/* /////////////////////////////// */
 
 *,
 *::before,
@@ -123,6 +131,28 @@ input {
   background: transparent;
 }
 
+.wrapper {
+  padding: 0 var(--wrapper-padding);
+  margin-inline: auto;
+  max-width: 1440px;
+  overflow: hidden;
+  position: relative;
+}
+
+.icon-container {
+  width: var(--icon-container-width);
+  height: var(--icon-container-height);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--clr-bg);
+}
+
+/* /////////////////////////////// */
+/* PAGE OVERLAY STYLES  */
+/* /////////////////////////////// */
+
 .page-overlay {
   position: fixed;
   inset: 0;
@@ -140,6 +170,10 @@ input {
   visibility: visible;
   opacity: 1;
 }
+
+/* /////////////////////////////// */
+/* CONFIRM DIALOG STYLES  */
+/* /////////////////////////////// */
 
 .confirm__dialog {
   visibility: hidden;
@@ -188,54 +222,9 @@ input {
   color: var(--clr-gray-200);
 }
 
-.icon-container {
-  width: var(--icon-container-width);
-  height: var(--icon-container-height);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: var(--clr-bg);
-}
-
-.wrapper {
-  padding: 0 var(--wrapper-padding);
-  margin-inline: auto;
-  max-width: 1440px;
-  overflow: hidden;
-  position: relative;
-}
-
-.standard {
-  display: flex;
-  flex-direction: column;
-  gap: var(--default-gap);
-  padding-bottom: var(--wrapper-padding);
-}
-
-.standard__header {
-  display: flex;
-  justify-content: center;
-  padding-block: min(8rem, 16%);
-}
-
-.standard__header-text {
-  color: var(--clr-gray-300);
-  width: 66%;
-  font-weight: 500;
-  text-align: center;
-  letter-spacing: 0.05rem;
-  text-wrap: pretty;
-}
-
-.standard__content {
-  display: flex;
-  flex-direction: column;
-}
-
-.standard__footer {
-  padding-block: 1rem;
-}
+/* /////////////////////////////// */
+/* BUTTON STYLES  */
+/* /////////////////////////////// */
 
 .button {
   font: inherit;
@@ -291,6 +280,10 @@ input {
   transform: translateX(100%);
 }
 
+/* /////////////////////////////// */
+/* LOADER STYLES  */
+/* /////////////////////////////// */
+
 .loader-container {
   position: fixed;
   inset: 0;
@@ -319,6 +312,10 @@ input {
   border-radius: 50%;
   animation: rotation 1s linear infinite;
 }
+
+/* /////////////////////////////// */
+/* SNACKBAR STYLES  */
+/* /////////////////////////////// */
 
 .snackbar {
   position: fixed;

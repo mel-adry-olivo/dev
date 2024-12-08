@@ -36,7 +36,11 @@ foreach($bag as $bagproduct) {
     <title><?php echo $title; ?></title>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <script type="module" src="./assets/js/pages/summary.js" defer></script>
-    <?php require './includes/style-loader.php'?>
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
+    <link href="https://fonts.cdnfonts.com/css/source-serif-pro" rel="stylesheet"/>
+    <link href="./assets/styles/global/global.css" rel="stylesheet"/>
+    <link href="./assets/styles/global/components.css" rel="stylesheet"/>
+    <link href="./assets/styles/pages/summary.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="wrapper">

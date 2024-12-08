@@ -1,4 +1,4 @@
-<form action="./handlers/products/reviews.php" method="POST" class="review__form">
+<form action="./routes/products/reviews.php" method="POST" class="review__form">
     <h6 class="review__form-title">Write a review</h6>
     <div class="field-group">
         <label for="review-rating">Rating</label>
