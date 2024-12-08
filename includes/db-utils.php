@@ -35,6 +35,43 @@ function getAllCategories($conn) {
     return $categories;
 }
 
+function addProduct($conn, $product) {
+    $sql = "
+    INSERT INTO 
+        products (
+            brand_id, 
+            name, 
+            type, 
+            price, 
+            reserve_count, 
+            stock_quantity, 
+            lens_width, 
+            bridge_width, 
+            temple_length, 
+            image_main, 
+            image_alternate
+            )
+    VALUES (
+        {$product['brand_id']}, 
+        '{$product['name']}', 
+        '{$product['type']}', 
+        {$product['price']}, 
+        {$product['reserve_count']}, 
+        {$product['stock_quantity']}, 
+        {$product['lens_width']}, 
+        {$product['bridge_width']}, 
+        {$product['temple_length']}, 
+        '{$product['image_main']}', 
+        '{$product['image_alternate']}'
+        )";
+    mysqli_query($conn, $sql); 
+    return mysqli_insert_id($conn);
+}
+
+function addProductAttriute($conn, $productId, $attributeId) {
+    $sql = "INSERT INTO product_attributes (product_id, attribute_id) VALUES ($productId, $attributeId)";
+    mysqli_query($conn, $sql);
+}
 
 function getAllProducts($conn) {
     $sql = "     
@@ -108,6 +145,27 @@ function getProductBrands($conn) {
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
+function addProductBrand($conn, $brand) {
+    $sql = "INSERT INTO brands (name) VALUES ('$brand')";
+    mysqli_query($conn, $sql);
+    return getProductBrandById($conn, $conn->insert_id);
+}
+
+
+function getProductBrandById($conn, $id) {
+    $sql = "SELECT * FROM brands WHERE brand_id = $id";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+
+function addProductAttribute($conn, $productId, $attributeId) {
+    $sql = "INSERT INTO product_attributes (product_id, attribute_id) VALUES ($productId, $attributeId)";
+    mysqli_query($conn, $sql);
+    return mysqli_insert_id($conn);
+}
+
 
 function getProductShapes($conn) {
     $sql = "

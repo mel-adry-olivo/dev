@@ -121,7 +121,11 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                             </div>
                         </header>
                         <div class="product__info-reviews">
-                            <?php foreach($reviews as $review) createReviewCard($review); ?>
+                            <?php if(!empty($reviews)) : ?>
+                                <?php foreach($reviews as $review) createReviewCard($review); ?>
+                            <?php else : ?>
+                                <p>No reviews found</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

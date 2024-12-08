@@ -131,7 +131,7 @@ input {
   background-color: var(--clr-bg);
   border-radius: 1rem;
   padding: 2rem;
-  z-index: 100;
+  z-index: 1500;
   width: 18rem;
   display: flex;
   flex-direction: column;

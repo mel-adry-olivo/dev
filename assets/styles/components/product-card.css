@@ -17,6 +17,10 @@
   padding: 1rem;
 }
 
+.product__image {
+  mix-blend-mode: multiply;
+}
+
 .product__favorite-button {
   display: inline-flex;
   position: absolute;
@@ -72,10 +76,6 @@
 .product__favorite-icon > svg {
   width: 26px;
   height: 26px;
-}
-
-.product__image {
-  mix-blend-mode: multiply;
 }
 
 .product__text-wrapper {

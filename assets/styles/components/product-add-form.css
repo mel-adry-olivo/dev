@@ -53,12 +53,15 @@
   border: 1px solid var(--clr-gray-100);
   border-radius: 1rem;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-container > * > img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+  /* height: 100%;
+  width: 100%; */
+  mix-blend-mode: multiply;
 }
 
 .row-group {
@@ -82,7 +85,7 @@
 
 .file-chooser {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .file-chooser-item {
@@ -134,7 +137,8 @@
   /* height: 200px; */
 }
 
-.field-group input[type='text']::placeholder {
+.field-group input[type='text']::placeholder,
+.field-group input[type='number']::placeholder {
   font-size: 0.8rem;
   opacity: 0.6;
 }

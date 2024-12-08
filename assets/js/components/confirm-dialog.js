@@ -23,4 +23,6 @@ export const showConfirmDialog = (message, callback) => {
 export const hideConfirmDialog = () => {
   pageOverlay.classList.remove('show');
   confirmDialog.classList.remove('show');
+  confirmDialogButtonCancel.removeEventListener('click', () => {});
+  confirmDialogButtonOk.removeEventListener('click', () => {});
 };

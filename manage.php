@@ -48,7 +48,6 @@ $products = getAllProducts($conn);
                             <tr>
                                 <th>Product</th>
                                 <th>Type</th>
-                                <th>Gender</th>
                                 <th>Price</th>
                                 <th>Stocks</th>
                                 <th>Actions</th>
@@ -64,7 +63,6 @@ $products = getAllProducts($conn);
                                     </div>
                                 </td>
                                 <td><?php echo $product['type']; ?></td>
-                                <td><?php echo $product['gender']; ?></td>
                                 <td>₱<?php echo number_format($product['price'], '0', '.', ','); ?></td>
                                 <td><?php echo $product['stock_quantity']; ?></td>
                                 <td>

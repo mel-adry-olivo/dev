@@ -23,11 +23,11 @@ $shapes = getProductShapes($conn);
             </div>
             <div class="file-chooser">
                 <div class="file-chooser-item">
-                    <label for="product-image">Choose Image 1</label>
+                    <label for="product-image">Choose Main Image</label>
                     <input type="file" name="product-image" id="product-image" accept="image/*">
                 </div>
                 <div class="file-chooser-item">
-                    <label for="product-image2">Choose Image 2</label>
+                    <label for="product-image2">Choose Alternate Image</label>
                     <input type="file" name="product-image2" id="product-image2" accept="image/*" >
                 </div>
             </div>
@@ -68,31 +68,31 @@ $shapes = getProductShapes($conn);
                 <div class="field-group">
                     <label for="product-type">Type</label>
                     <select name="product-type">
-                        <option value="eyeglasses">Eyeglasses</option>
-                        <option value="sunglasses">Sunglasses</option>
+                        <option value="Eyeglasses">Eyeglasses</option>
+                        <option value="Sunglasses">Sunglasses</option>
                     </select>
                 </div>
                 <div class="field-group">
                     <label for="product-gender">Gender</label>
                     <select name="product-gender">
-                        <option value="men">Men</option>
-                        <option value="women">Women</option>
-                        <option value="unisex">Unisex</option>
+                        <option value="14">Men</option>
+                        <option value="15">Women</option>
+                        <option value="16">Unisex</option>
                     </select>
                 </div>
             </div>
             <div class="row-group">
                 <div class="field-group">
                     <label for="product-lens-width">Lens Width</label>
-                    <input type="number" name="product-lens-width" value="0" onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-lens-width" placeholder="Ex: 50 (50mm)"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
                 </div>
                 <div class="field-group">
                     <label for="product-bridge-width">Bridge Width</label>
-                    <input type="number" name="product-bridge-width" value="0" onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-bridge-width" placeholder="Ex: 23 (23mm)"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
                 </div>
                 <div class="field-group">
                     <label for="product-temple-length">Temple Length</label>
-                    <input type="number" name="product-temple-length" value="0" onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-temple-length" placeholder="Ex: 145 (145mm)"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
                 </div>
             </div>
             <div class="row-group">
@@ -143,9 +143,9 @@ $shapes = getProductShapes($conn);
             <div class="field-group">
                 <label for="product-frame-type">Frame Type</label>
                 <select name="product-frame-type" class="product-frame-type-select">
-                    <option value="rimless">Rimless</option>
-                    <option value="semi-rim">Semi Rim</option>
-                    <option value="full-rim">Full Rim</option>
+                    <option value="13">Rimless</option>
+                    <option value="12">Semi Rim</option>
+                    <option value="11">Full Rim</option>
                 </select>
             </div>
         </div>
