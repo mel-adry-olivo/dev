@@ -24,7 +24,7 @@ if($user) {
         exit();
     }
     
-    header("Location: ../../index.php?login=true");
+    header("Location: ./../../");
     exit();
 
 } else {

@@ -9,7 +9,6 @@ require './includes/db-utils.php';
 
 
 $title = "Login | INSPEC®"; 
-
 $message = "";
 
 if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {

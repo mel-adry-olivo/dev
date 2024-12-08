@@ -1,33 +1,3 @@
-// PRODUCTS with ATTRIBUTES
-SELECT 
-    p.name AS product_name,
-    p.price,
-    p.type,
-	MAX(CASE WHEN c.name = 'Color' THEN a.name END) AS color,
-    MAX(CASE WHEN c.name = 'Frame Type' THEN a.name END) AS frame_type,
-    MAX(CASE WHEN c.name = 'Shape' THEN a.name END) AS shape,
-    MAX(CASE WHEN c.name = 'Material' THEN a.name END) AS material,
-    MAX(CASE WHEN c.name = 'Gender' THEN a.name END) AS gender,
-    p.lens_width,
-    p.bridge_width,
-    p.temple_length,
-    p.image_main,
-    p.image_alternate
-FROM 
-    products p
-JOIN 
-    product_attributes pa ON p.product_id = pa.product_id
-JOIN 
-    attributes a ON pa.attribute_id = a.attribute_id
-JOIN 
-    categories c ON a.category_id = c.category_id
-GROUP BY 
-    p.product_id, p.name, p.price, p.type, p.lens_width, p.bridge_width, p.temple_length, p.image_main, p.image_alternate
-ORDER BY 
-    p.name;
-
-
-
 // PRODUCT INSERT TEMPLATE
 INSERT INTO products (
     brand_id, 

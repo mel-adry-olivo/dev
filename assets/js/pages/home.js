@@ -12,12 +12,4 @@ window.onload = () => {
 
   const loaderContainer = document.querySelector('.loader-container');
   loaderContainer.classList.add('hidden');
-
-  const queryParams = new URLSearchParams(window.location.search);
-
-  if (queryParams.get('login') === 'true') {
-    console.log(document.referrer);
-    showSnackbar('Successfully logged in');
-    console.log(queryParams.get('login'));
-  }
 };

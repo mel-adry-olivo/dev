@@ -1,20 +1,5 @@
 <?php
 
-$testReviews = [
-    [
-        "name" => "John Doe",
-        "created_at" => "2024-11-12",
-        "rating" => 4.5,
-        "review_text" => "Great product, but a little bit pricey. Overall, I'm satisfied with the quality."
-    ],
-    [
-        "name" => "Jane Smith",
-        "created_at" => "2024-11-15",
-        "rating" => 3,
-        "review_text" => "The product is decent, but it's not as comfortable as I expected."
-    ]
-];
-
 session_start();
 
 require './includes/templates.php';
@@ -23,9 +8,12 @@ require './includes/config.php';
 require './includes/db-utils.php';
 require './includes/utils.php';
 
-
 $isFavorite = '';
 
+if(isset($_SESSION['in_bag'])) {
+    $inBag = $_SESSION['in_bag'];
+    unset($_SESSION['in_bag']);
+}
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -38,10 +26,6 @@ if(isset($_SESSION['user_id'])) {
     $isFavorite = isProductFavorite($id, $_SESSION['user_id']) ? 'active' : '';
 }
 
-if(isset($_SESSION['in_bag'])) {
-    $inBag = $_SESSION['in_bag'];
-    unset($_SESSION['in_bag']);
-}
 
 $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
 $reviews = getLimitedProductReviews($id, 2);
@@ -51,12 +35,11 @@ $productsByBrand = getProductsByBrand($product['brand']);
 $productsByBrand = array_filter($productsByBrand, function ($product) use ($id) {
     return $product['product_id'] !== $id;
 });
-
+    
 $productsByShape = getProductsByShape($productAttributes['Shape']);
 $productsByShape = array_filter($productsByShape, function ($product) use ($id) {
     return $product['product_id'] !== $id;
 });
-
 
 
 ?>
@@ -78,10 +61,10 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
         <section class="product">
             <div class="product__images">
                 <div class="product__image-container--main">
-                    <img src="<?php echo $product['image_main']; ?>" alt="">
+                    <img src="<?php echo $product['image_main']; ?>" alt="" />
                 </div>
                 <div class="product__image-container--alternate">
-                    <img src="<?php echo $product['image_alternate']; ?>" alt="">
+                    <img src="<?php echo $product['image_alternate']; ?>" alt="" />
                 </div>
             </div>  
             <div class="product__info">
@@ -90,7 +73,11 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                         <h6 class="product__info-brand"><?php echo $product['brand']; ?></h6>
                         <h6 class="product__info-name"><?php echo $product['name']; ?></h6>
                         <span class="product__info-subtext">
-                            <?php echo $productAttributes['Color'] . " " . $productAttributes['Shape'] . " " .  $productAttributes['Gender'] . " " . $product['type']; ?>
+                            <?php 
+                                echo $productAttributes['Color'] . " " . 
+                                     $productAttributes['Shape'] . " " .  
+                                     $productAttributes['Gender'] . " " . 
+                                     $product['type']; ?>
                         </span>
                     </div>
                     <button class="product__favorite-button product__info-favorite <?php echo $isFavorite; ?>" data-tooltip="<?php echo $tooltip; ?>" data-action="favorites" data-id="<?php echo $product['product_id']; ?>">
@@ -144,16 +131,25 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                 <h5 class="section__header-text">More from the same brand</h5>
             </header>
             <main class="section__content">
-            <div class="products__showcase">
-                <div class="products__carousel">
-                    <?php foreach($productsByBrand as $product) createProductCard($product); ?>
-                    
+                <div class="products__showcase">
+                    <?php if(!empty($productsByBrand)) : ?>
+                        <div class="products__carousel">
+                            <?php foreach($productsByBrand as $product) createProductCard($product); ?>
+                        </div>
+                        <?php if(count($productsByBrand) > 4) : ?>
+                            <div class="products__carousel-control-group">
+                                <button class="icon-container products__carousel-control products__carousel-control--prev">
+                                    <?php echo getIcon('arrow-left'); ?>
+                                </button>
+                                <button class="icon-container products__carousel-control products__carousel-control--next">
+                                    <?php echo getIcon('arrow-right'); ?>
+                                </button>
+                            </div>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <p>No products found</p>
+                    <?php endif; ?>
                 </div>
-                <div class="products__carousel-control-group">
-                    <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>
-                    <button class="icon-container products__carousel-control products__carousel-control--next"><?php echo getIcon('arrow-right'); ?></button>
-                </div>
-            </div>
             </main>
         </section>  
         <section class="section section--recommended">
@@ -161,15 +157,25 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                 <h5 class="section__header-text">You may also like</h5>
             </header>
             <main class="section__content">
-            <div class="products__showcase">
-                <div class="products__carousel">
-                    <?php foreach($productsByShape as $product) createProductCard($product); ?>
+                <div class="products__showcase">
+                    <?php if(!empty($productsByShape)) : ?>
+                        <div class="products__carousel">
+                            <?php foreach($productsByShape as $product) createProductCard($product); ?>
+                        </div>
+                        <?php if(count($productsByShape) > 4) : ?>
+                            <div class="products__carousel-control-group">
+                                <button class="icon-container products__carousel-control products__carousel-control--prev">
+                                    <?php echo getIcon('arrow-left'); ?>
+                                </button>
+                                <button class="icon-container products__carousel-control products__carousel-control--next">
+                                    <?php echo getIcon('arrow-right'); ?>
+                                </button>
+                            </div>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <p>No products found</p>
+                    <?php endif; ?>
                 </div>
-                <div class="products__carousel-control-group">
-                    <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>
-                    <button class="icon-container products__carousel-control products__carousel-control--next"><?php echo getIcon('arrow-right'); ?></button>
-                </div>
-            </div>
             </main>
         </section>  
     </div>

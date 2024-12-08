@@ -13,6 +13,7 @@ if(isset($_GET['id'])) {
     $productAttributes = getProductAttributesByID($id);
 }
 
+
 $title = 'Review | INSPEC®';
 $reviews = getProductReviewsByDate($id);
 $averageRating = getAverageRating($id);

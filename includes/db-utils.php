@@ -108,7 +108,61 @@ function getProductsByShape($shape) {
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
+function getProductBrands() {
+    global $conn;
+    $sql = "SELECT * FROM brands";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
+function getProductShapes() {
+    global $conn;
+    $sql = "
+        SELECT 
+            attributes.attribute_id, 
+            attributes.name AS shape_name
+        FROM attributes 
+        JOIN categories ON attributes.category_id = categories.category_id
+        WHERE categories.name = 'Shape'
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getProductMaterials() {
+    global $conn;
+    $sql = "
+        SELECT 
+            attributes.attribute_id, 
+            attributes.name AS material_name
+        FROM attributes 
+        JOIN categories ON attributes.category_id = categories.category_id
+        WHERE categories.name = 'Material'
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getProductColors() {
+    global $conn;
+    $sql = "
+        SELECT 
+            attributes.attribute_id, 
+            attributes.name AS color_name
+        FROM attributes 
+        JOIN categories ON attributes.category_id = categories.category_id
+        WHERE categories.name = 'Color'
+    ";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function getBrandById($id) {
+    global $conn;
+    $sql = "SELECT * FROM brands WHERE brand_id = $id";
+    $result = $conn->query($sql);
+    return $result->fetch_assoc();
+}
 
 function getProductsbyType($type) {
     global $conn;
