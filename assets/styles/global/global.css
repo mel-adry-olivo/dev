@@ -55,41 +55,32 @@ body {
   background-color: var(--clr-bg);
   overflow-x: hidden;
 }
-
 body.no-scroll {
   overflow: hidden;
 }
-
 h1 {
   font-size: clamp(4rem, 3.3333rem + 2.963vw, 6rem);
   line-height: 1;
 }
-
 h2 {
   font-size: clamp(3rem, 2.6667rem + 1.4815vw, 4rem);
 }
-
 h3 {
   font-size: clamp(2.25rem, 1.9167rem + 1.4815vw, 3.25rem);
 }
-
 h4 {
   font-size: clamp(2rem, 1.6667rem + 1.4815vw, 3rem);
 }
-
 h5 {
   font-size: clamp(1.5rem, 1.1479rem + 1.5023vw, 2.5rem);
 }
-
 h6 {
   font-size: clamp(1rem, 0.8239rem + 0.7512vw, 1.5rem);
 }
-
 ul,
 li {
   list-style: none;
 }
-
 p,
 span,
 a {
@@ -97,7 +88,6 @@ a {
   color: var(--clr-gray-300);
   font-weight: 400;
 }
-
 button {
   font-family: inherit;
   background: none;
@@ -105,24 +95,20 @@ button {
   border: none;
   cursor: pointer;
 }
-
 video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 img {
   display: block;
   max-height: 100%;
   max-width: 100%;
   object-fit: cover;
 }
-
 svg {
   fill: currentColor;
 }
-
 input {
   font: inherit;
   width: 100%;
@@ -130,7 +116,6 @@ input {
   outline: 0;
   background: transparent;
 }
-
 .wrapper {
   padding: 0 var(--wrapper-padding);
   margin-inline: auto;
@@ -138,7 +123,6 @@ input {
   overflow: hidden;
   position: relative;
 }
-
 .icon-container {
   width: var(--icon-container-width);
   height: var(--icon-container-height);
@@ -163,7 +147,8 @@ input {
   backdrop-filter: blur(4px);
   visibility: hidden;
   opacity: 0;
-  transition: all 0.3s ease;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: auto;
 }
 .page-overlay.show {
   visibility: visible;
@@ -192,30 +177,25 @@ input {
   color: var(--clr-gray-300);
   transition: all 0.3s ease;
 }
-
 .confirm__message {
   font-size: 0.9rem;
   color: var(--clr-gray-200);
 }
-
 .confirm__dialog.show {
   visibility: visible;
   opacity: 1;
 }
-
 .confirm__button-wrapper {
   align-self: flex-end;
   align-items: center;
   display: flex;
   gap: 0.75rem;
 }
-
 .confirm__dialog .confirm__ok {
   font-size: 0.85rem;
   padding: 0.5rem 0.75rem;
   border-radius: 1rem;
 }
-
 .confirm__dialog .confirm__cancel {
   font-size: 0.85rem;
   color: var(--clr-gray-200);
@@ -232,35 +212,28 @@ input {
   border-radius: 1rem;
   transition: opacity 0.2s ease;
 }
-
 .button--filled {
   background-color: var(--clr-bg);
   color: var(--clr-gray-300);
 }
-
 .button--filled:hover {
   background-color: var(--clr-bg-hover);
 }
-
 .button--filled-dark {
   background-color: var(--clr-gray-300);
   color: var(--clr-bg);
 }
-
 .button--filled-dark:hover {
   opacity: 0.9;
 }
-
 .button--outline {
   border: 1px solid var(--clr-gray-100);
 }
-
 .button-link {
   position: relative;
   overflow-x: hidden;
   padding-bottom: 2px;
 }
-
 .button-link::before {
   position: absolute;
   content: '';
@@ -297,12 +270,10 @@ input {
   opacity: 1;
   transition: all 0.2s ease;
 }
-
 .loader-container.hidden {
   visibility: hidden;
   opacity: 0;
 }
-
 .loader {
   width: 48px;
   height: 48px;
@@ -330,7 +301,6 @@ input {
   transition: opacity 0.6s ease-in-out, transform 0.4s ease;
   transform: translateX(calc(-100% - 2rem));
 }
-
 .snackbar.show {
   opacity: 0.95;
   transform: translateX(0);
@@ -350,7 +320,7 @@ input {
   padding-inline: 5vw;
   z-index: 10;
   background-color: var(--clr-bg);
-  transition: transform 0.25s ease, opacity 0.2s ease, background-color 0.6s ease;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .header__wrapper.hidden {
   transform: translateY(-100%);
