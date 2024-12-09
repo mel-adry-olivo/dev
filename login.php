@@ -93,6 +93,7 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
         </section>
     </div>
     <?php require './includes/components/footer.php'?>
+    <?php include './includes/components/confirm-dialog.php';?>
     <div class="snackbar"></div>
 </body>
 </html>

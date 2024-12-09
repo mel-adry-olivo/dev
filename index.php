@@ -104,6 +104,7 @@ $popularProducts = getPopularProducts($conn);
         </section>  
     </main>
     <?php require './includes/components/footer.php'?>
+    <?php include './includes/components/confirm-dialog.php';?>
     <div class="snackbar"></div>
     <div class="loader-container">
         <div class="loader"></div>

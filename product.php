@@ -36,7 +36,7 @@ $productsByBrand = array_filter($productsByBrand, function ($product) use ($id) 
     return $product['product_id'] !== $id;
 });
     
-$productsByShape = getProductsByShape($conn, $productAttributes['Shape']);
+$productsByShape = getProductsByShape($conn, $productAttributes['Shape']['name']);
 $productsByShape = array_filter($productsByShape, function ($product) use ($id) {
     return $product['product_id'] !== $id;
 });
@@ -104,7 +104,7 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                     <button type='submit' class="button button--filled-dark product__add-button">Add to Bag</button>
                 </form>
                 <?php if(isset($inBag)) : ?>
-                <span class="product__info-in-bag-text">Product is already in your bag</span>
+                    <span class="product__info-in-bag-text">Product is already in your bag</span>
                 <?php endif ?>
                 <span class="product__info-reservation-count"><?php echo $product['reserve_count']; ?> Reserved</span>
                 <span class="product__info-reminder">You can only reserve 1 unit at a time</span>

@@ -1,5 +1,6 @@
 import { checkUserLogin } from '../utils.js';
 import { showSnackbar } from './snackbar.js';
+import { handleAddToBagFromFavorite } from './product.js';
 
 const pageOverlay = document.querySelector('.page-overlay-action-menu');
 const actionMenu = document.querySelector('.action-menu');
@@ -29,11 +30,11 @@ const initActionMenu = () => {
     }
   });
 
-  document.querySelectorAll('.favorites__content, .bag__content').forEach((container) => {
-    container.addEventListener('scroll', handleScrollMask);
+  document.addEventListener('submit', (e) => {
+    if (e.target.matches('.product__favorite-form')) {
+      handleAddToBagFromFavorite(e);
+    }
   });
-
-  handleScrollMask();
 };
 
 const setActionEvent = (buttons, callback) => {
@@ -63,13 +64,9 @@ const updateActionMenuContent = (action) => {
   }
 
   const contentItems = actionMenuContent.querySelectorAll('.action-menu__content-item');
-  contentItems.forEach((content) =>
-    content.classList.toggle('active', content.classList.contains(action)),
-  );
+  contentItems.forEach((content) => content.classList.toggle('active', content.classList.contains(action)));
 
-  actionMenuButtons.forEach((btn) =>
-    btn.classList.toggle('active', btn.getAttribute('data-action') === action),
-  );
+  actionMenuButtons.forEach((btn) => btn.classList.toggle('active', btn.getAttribute('data-action') === action));
 };
 
 const handleBagClick = async (callback) => {
@@ -80,23 +77,5 @@ const handleBagClick = async (callback) => {
     window.location.href = './summary.php';
   }
 };
-
-function handleScrollMask() {
-  const containers = document.querySelectorAll('.favorites__content, .bag__content');
-
-  containers.forEach((container) => {
-    const scrollHeight = container.scrollHeight;
-    const scrollTop = container.scrollTop;
-    const clientHeight = container.clientHeight;
-
-    if (scrollTop + clientHeight < scrollHeight) {
-      container.style.maskImage = 'linear-gradient(to top, transparent, black 25%)';
-      container.style.webkitMaskImage = 'linear-gradient(to top, transparent, black 25%)';
-    } else {
-      container.style.maskImage = 'none';
-      container.style.webkitMaskImage = 'none';
-    }
-  });
-}
 
 export { initActionMenu, toggleActionMenu };

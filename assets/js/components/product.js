@@ -1,6 +1,7 @@
-import { checkUserLogin, request } from '../utils.js';
+import { checkProductInBag, checkUserLogin, request, requestHtml } from '../utils.js';
 import { toggleActionMenu } from './action-menu.js';
 import { showSnackbar } from './snackbar.js';
+import { showConfirmDialog, hideConfirmDialog } from './confirm-dialog.js';
 
 const productFavoriteButtons = document.querySelectorAll('.product__favorite-button');
 const favoriteContainer = document.querySelector('.favorites__content');
@@ -31,7 +32,26 @@ const initBag = () => {
       return;
     }
 
-    productInfoForm.submit();
+    showConfirmDialog('Do you want to add this product to your bag?', (confirmed) => {
+      if (confirmed) {
+        productInfoForm.submit();
+      }
+    });
+  });
+};
+
+export const handleAddToBagFromFavorite = (e) => {
+  e.preventDefault();
+  toggleActionMenu();
+  showConfirmDialog('Do you want to add this product to your bag?', (confirmed) => {
+    if (confirmed) {
+      const productCard = e.target.closest('.product__favorite-card');
+      removeProductFromFavorite(productCard.dataset.id);
+      updateFavoriteButton(productCard.dataset.id);
+      e.target.submit();
+    } else {
+      toggleActionMenu('favorites');
+    }
   });
 };
 
@@ -39,6 +59,11 @@ const handleFavoriteClick = async (button) => {
   if (!(await checkUserLogin())) {
     toggleActionMenu('user');
     showSnackbar('You need to be logged in to add favorites');
+    return;
+  }
+
+  if (await checkProductInBag(button.dataset.id)) {
+    showSnackbar('Product already in bag');
     return;
   }
 
@@ -52,6 +77,7 @@ const handleRemoveFavorite = (button) => {
   const productId = button.dataset.id;
   updateFavoriteButton(productId);
   removeProductFromFavorite(productId);
+  showSnackbar('Product removed from favorites');
 };
 
 const addToFavorite = async (productId) => {
@@ -60,7 +86,7 @@ const addToFavorite = async (productId) => {
 
   // add product card element to UI
   if (response.success) {
-    const product = await request(`./handlers/products/product.php?id=${productId}`, 'GET');
+    const product = await requestHtml(`./handlers/products/product.php?id=${productId}&type=favorite`, 'GET');
     addFavoriteCardToUI(product);
     toggleActionMenu('favorites');
   }
@@ -72,32 +98,30 @@ const addFavoriteCardToUI = (product) => {
   if (emptyContent) {
     emptyContent.remove();
   }
-
-  const productCard = createFavoriteProductCard(product);
-  favoriteContainer.innerHTML += productCard;
+  favoriteContainer.innerHTML += product;
 };
 
-const removeProductFromFavorite = async (productId) => {
+export const removeProductFromFavorite = async (productId) => {
   // delete product from database
   const response = await request('./handlers/products/favorite.php', 'POST', JSON.stringify({ productId, action: 'remove' }));
-
-  // remove product card element from UI
   if (response.success) {
-    const productCard = favoriteContainer.querySelector(`.product__favorite-card[data-id="${productId}"]`);
-    if (productCard) productCard.remove();
-
-    // if favorite container is empty, show empty message
-    if (!favoriteContainer.children.length) {
-      favoriteContainer.innerHTML += createEmptyContent();
-    }
-
-    showSnackbar('Product removed from favorites');
+    removeProductCardFromUI(productId);
   }
 };
 
-const updateFavoriteButton = (productId) => {
+export const removeProductCardFromUI = (productId) => {
+  const productCard = favoriteContainer.querySelector(`.product__favorite-card[data-id="${productId}"]`);
+  if (productCard) productCard.remove();
+
+  // if favorite container is empty, show empty message
+  if (!favoriteContainer.children.length) {
+    favoriteContainer.innerHTML += createEmptyContent();
+  }
+};
+
+export const updateFavoriteButton = (productId) => {
   const button = document.querySelector(`.product__favorite-button[data-id="${productId}"]`);
-  if (!button) return; // some favorite buttons may not exist on the current page
+  if (!button) return;
 
   const isFavorite = button.classList.contains('active');
 

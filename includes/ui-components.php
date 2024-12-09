@@ -42,6 +42,7 @@ function createFavoriteCard($product) {
     $price = $product["price"];
     $close = getIcon("close");
 
+
     echo
     <<<HTML
         <div class="product__favorite-card" data-id="$productId">  
@@ -54,7 +55,11 @@ function createFavoriteCard($product) {
                     <span class="product__favorite-brand">$brand</span>
                     <a  href="./product.php?id=$productId" class="product__favorite-name">$name</a>
                 </div>
-                <button class="button-link product__favorite-action">Add to bag</button>
+                <form action="./handlers/products/bag.php" method="POST" class="product__favorite-form">
+                    <input type="hidden" name="product_id" value="$productId">
+                    <input type="hidden" name="add" value="add">
+                    <button class="button-link product__favorite-action" type="submit">Add to bag</button>
+                </form>
             </div>
             <span class="product__favorite-price">₱$price</span>
         </div>

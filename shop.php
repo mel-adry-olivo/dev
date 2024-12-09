@@ -65,6 +65,7 @@ $products = getProductsbyType($conn, $type);
         </section>
     </div>
     <?php require './includes/components/footer.php'?>
+    <?php include './includes/components/confirm-dialog.php';?>
     <div class="snackbar"></div>
 </body>
 </html>
