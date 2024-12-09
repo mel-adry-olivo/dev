@@ -160,12 +160,11 @@ input {
   width: 100%;
   z-index: 99;
   background-color: hsla(0, 0%, 0%, 0.3);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(4px);
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s ease;
 }
-
 .page-overlay.show {
   visibility: visible;
   opacity: 1;

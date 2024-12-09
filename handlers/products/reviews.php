@@ -2,14 +2,12 @@
 
 session_start();
 
-require '../../includes/db-utils.php';
+require '../../includes/db-functions.php';
 
 $productId = $_POST['product_id'] ?? ''; 
 $action = $_POST['action'] ?? '';
 $reviewId = $_POST['review_id'] ?? '';
 $userId = $_SESSION['user_id'] ?? '';
-
-var_dump($productId, $action, $reviewId, $userId);
 
 if($action === 'create') {
     $review = [

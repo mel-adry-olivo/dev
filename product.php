@@ -2,10 +2,9 @@
 
 session_start();
 
-require './includes/templates.php';
+require './includes/ui-components.php';
 require './includes/icons.php';
-require './includes/db-utils.php';
-require './includes/utils.php';
+require './includes/db-functions.php';
 
 $conn = require './includes/db-conn.php';
 $isFavorite = '';

@@ -2,7 +2,7 @@
 
 session_start();
 
-require '../../includes/db-utils.php';
+require '../../includes/db-functions.php';
 
 $conn = require '../../includes/db-conn.php';
 $productId = $_GET['id'] ?? null;   

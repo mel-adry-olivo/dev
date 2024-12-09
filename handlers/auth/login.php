@@ -1,6 +1,6 @@
 <?php
 
-require '../../includes/db-utils.php';
+require '../../includes/db-functions.php';
 
 
 session_start();

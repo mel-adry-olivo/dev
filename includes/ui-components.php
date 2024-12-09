@@ -34,13 +34,13 @@ function createProductCard($product) {
 }
 
 function createFavoriteCard($product) {
+
     $productId = $product["product_id"];
     $imagePath = $product["image_main"];
     $brand = $product["brand"];
     $name = $product["name"];
     $price = $product["price"];
     $close = getIcon("close");
-
 
     echo
     <<<HTML
@@ -135,7 +135,8 @@ function createReviewCard($review) {
 
     if(isset($currentUser)) {
         $isCurrentUser = $userId == $currentUser ? '<button  class="product__review-close">'. $closeIcon .'</button>' : '';
-        $editForm = <<<HTML
+        $editForm = 
+        <<<HTML
             <form class="product__review-close-form" method="post" action="./handlers/products/reviews.php">
                 <input type="hidden" name="action" value="remove"/>
                 <input type="hidden" name="review_id" value="$reviewId"/>
@@ -233,10 +234,8 @@ function createRatingStars($rating, $class = null) {
     $emptyStarHTML = '<span class="icon-container '. $class .'">' . $starEmpty. '</span>';
     $fullStarHTML = '<span class="icon-container '. $class .'">' . $starFilled . '</span>';
 
-
     $fullStars = $rating; 
     $emptyStars = 5 - $fullStars;
-
 
     for ($i = 0; $i < $fullStars; $i++) {
         $ratingHTML .= $fullStarHTML;
@@ -246,7 +245,6 @@ function createRatingStars($rating, $class = null) {
     for ($i = 0; $i < $emptyStars; $i++) {
         $ratingHTML .= $emptyStarHTML;
     }
-
 
     return $ratingHTML;
 }

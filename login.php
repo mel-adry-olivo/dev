@@ -2,9 +2,9 @@
 
 session_start();
 
-require './includes/templates.php';
+require './includes/ui-components.php';
 require './includes/icons.php';
-require './includes/db-utils.php';
+require './includes/db-functions.php';
 
 
 $title = "Login | INSPEC®"; 

@@ -1,5 +1,7 @@
 <?php 
 
+// TO REORDER
+
 function createUser($conn, $user) {
     $sql = "INSERT INTO users (fname, lname, email, password) VALUES ('{$user['fname']}', '{$user['lname']}', '{$user['email']}', '{$user['password']}')";
     return mysqli_query($conn, $sql);
@@ -34,7 +36,6 @@ function getAllCategories($conn) {
     }
     return $categories;
 }
-
 
 function addProduct($conn, $product) {
     $sql = "
@@ -303,6 +304,7 @@ function getProductColors($conn) {
 
 function getProductsbyType($conn, $type) {
     $formattedType = ucfirst($type);
+    if($formattedType == 'All') return getAllProducts($conn);
     $sql = "
         SELECT 
             products.*,
@@ -605,8 +607,24 @@ function getAverageRating($conn, $id) {
     return $formattedAvg;
 }
 
-
 function getProductReviewCount($conn, $id) {
     $reviews = getProductReviews($conn, $id);
     return count($reviews);
 }
+function getOrCreateBrand($conn, $brandId, $brandInput) {
+    if($brandId !== 'new' && empty($brandInput)) {
+        $brand = getProductBrandById($conn, $brandId);
+        return $brand;
+    }
+
+    // return id of new brand
+    return addProductBrand($conn, $brandInput);
+}
+function getOrCreateAttribute($conn, $categoryId, $attributeId, $attributeIdInput) {
+    if($attributeId !== 'new' && empty($attributeIdInput)) {
+        return $attributeId;
+    }
+
+    return addProductAttribute($conn, $categoryId, $attributeIdInput);
+}
+
