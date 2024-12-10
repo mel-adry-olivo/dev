@@ -61,19 +61,34 @@ export default function initFilter() {
         }
     });
 
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('shape')) {
+        setSelectedFilter('Shape', params.get('shape'));
+    }
+
     pageOverlay.addEventListener('click', handlePageOverlayClick);
 
     sortProducts('DESC');
 }
 
-const handleFilterItemClick = (item) => {
+export function setSelectedFilter(filter, item) {
+    const dropdownItem = element(
+        `.shop__dropdown-item[filter="${filter}"][data-value="${item}"]`,
+    );
+
+    if (dropdownItem) {
+        handleFilterItemClick(dropdownItem);
+    }
+}
+
+function handleFilterItemClick(item) {
     toggleClass(item, 'active');
     updateCategoryText(item);
     checkResetFilter();
     applyFilters();
-};
+}
 
-const handleSortItemClick = async (item) => {
+async function handleSortItemClick(item) {
     if (!item.hasAttribute('sort-order')) return;
     if (item.classList.contains('active')) return;
 
@@ -81,9 +96,9 @@ const handleSortItemClick = async (item) => {
     const sortOrder = item.getAttribute('sort-order');
 
     sortProducts(sortOrder);
-};
+}
 
-const applyFilters = async () => {
+async function applyFilters() {
     const activeFilterItems = elements('.shop__dropdown-item.active[filter]');
     const filters = {};
 
@@ -101,7 +116,7 @@ const applyFilters = async () => {
 
     const filteredProducts = await fetch.filteredItems(filters, productType);
     updateProductUI(filteredProducts);
-};
+}
 
 function sortProducts(sortOrder) {
     const currentProducts = element('.product__card');
@@ -118,16 +133,16 @@ function sortProducts(sortOrder) {
     updateProductUI(sortedProducts);
 }
 
-const handleResetFilterClick = async () => {
+async function handleResetFilterClick() {
     filterItems.forEach((item) => item.classList.remove('active'));
     checkResetFilter();
 
     const products = await fetch.productsWithType(productType);
     updateProductUI(products);
     resetCategoryButtonTexts();
-};
+}
 
-const updateProductUI = (data) => {
+function updateProductUI(data) {
     const productCount = element('.shop__toolbar-count');
     const productContainer = element('.product-catalog');
 
@@ -144,10 +159,10 @@ const updateProductUI = (data) => {
             productContainer.appendChild(product);
         });
     }
-};
+}
 
 // adding '(n)' to the category text if there are active items
-const updateCategoryText = (item) => {
+function updateCategoryText(item) {
     const itemsContainer = item.closest('.shop__dropdown-container');
     const categoryButton = itemsContainer.parentElement.querySelector(
         '.shop__dropdown-button-text',
@@ -159,24 +174,24 @@ const updateCategoryText = (item) => {
     const activeCount = activeItems.length;
     categoryButton.textContent =
         activeCount > 0 ? `${categoryName} (${activeCount})` : categoryName;
-};
+}
 
 // if filter container is open while resizing, close it
-const handleResize = () => {
+function handleResize() {
     if (pageOverlay.classList.contains('show')) {
         toggleMobileFilters();
     }
-};
+}
 
 // if click outside filter container, close it
 
-const closeAllDropdowns = () => {
+function closeAllDropdowns() {
     filterCategoryButtons.forEach((button) => {
         if (button) button.classList.remove('active');
     });
-};
+}
 
-const checkResetFilter = () => {
+function checkResetFilter() {
     const activeCount = elements('.shop__dropdown-item.active[filter]').length;
     if (activeCount > 0) {
         filterResetButtonMobile.classList.add('show');
@@ -185,31 +200,31 @@ const checkResetFilter = () => {
         filterResetButtonMobile.classList.remove('show');
         filterResetButton.classList.remove('show');
     }
-};
+}
 
-const resetCategoryButtonTexts = () => {
+function resetCategoryButtonTexts() {
     filterCategoryButtons.forEach((btn) => {
         const categoryText = btn.querySelector('.shop__dropdown-button-text');
         const baseText = categoryText.dataset.text || categoryText.textContent;
         categoryText.textContent = btn.getAttribute('filter') || baseText;
     });
-};
+}
 
-const handlePageOverlayClick = (e) => {
+function handlePageOverlayClick(e) {
     if (
         e.target === pageOverlay &&
         filterContainer.classList.contains('show')
     ) {
         toggleMobileFilters();
     }
-};
-const toggleMobileFilters = () => {
+}
+function toggleMobileFilters() {
     toggleClass(pageOverlay, 'show');
     toggleClass(filterContainer, 'show');
     toggleClass(body, 'no-scroll');
-};
+}
 
-const toggleFilterDropdown = (filterButton) => {
+function toggleFilterDropdown(filterButton) {
     toggleClass(filterButton, 'active');
 
     if (window.innerWidth > 900) {
@@ -218,4 +233,4 @@ const toggleFilterDropdown = (filterButton) => {
             btn.classList.toggle('active', btn === filterButton && isActive),
         );
     }
-};
+}

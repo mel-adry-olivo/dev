@@ -59,7 +59,7 @@ $popularProducts = getPopularProducts($conn);
             </header> 
             <main class="standard__content">
                 <div class="shapes__grid">
-                    <a href="#" class="shapes__item">
+                    <a href="./shop.php?type=all&shape=Rectangle" class="shapes__item" data-shape="Round">
                         <img src="assets/images/shapes/rectangle.png" alt="Rectangle" class="shapes__item-image">
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z"></path></svg></div>
@@ -67,7 +67,7 @@ $popularProducts = getPopularProducts($conn);
                             <div class="shapes__item-arrow"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path></svg></div>
                         </div>
                     </a>    
-                    <a href="#" class="shapes__item">
+                    <a href="./shop.php?type=all&shape=Square" class="shapes__item" data-shape="Square">
                         <img src="assets/images/shapes/enirco.jpg" alt="Square" class="shapes__item-image enirco">
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z"></path></svg></div>
@@ -75,7 +75,7 @@ $popularProducts = getPopularProducts($conn);
                             <div class="shapes__item-arrow"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path></svg></div>
                         </div>
                     </a>    
-                    <a href="#" class="shapes__item">
+                    <a href="./shop.php?type=all&shape=Round" class="shapes__item" data-shape="Round">
                         <img src="assets/images/shapes/round.png" alt="Round" class="shapes__item-image">
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z"></path></svg></div>

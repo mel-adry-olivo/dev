@@ -3,7 +3,9 @@ import { showSnackbar } from './snackbar.js';
 import { showConfirmDialog } from './confirm-dialog.js';
 import * as fetch from '../services/fetch.js';
 
-const productFavoriteButtons = document.querySelectorAll('.product__favorite-button');
+const productFavoriteButtons = document.querySelectorAll(
+    '.product__favorite-button',
+);
 const favoriteContainer = document.querySelector('.favorites__content');
 
 const initFavorites = () => {
@@ -20,7 +22,11 @@ const initFavorites = () => {
             handleRemoveFavorite(e.target);
         }
 
-        if (e.target.matches('.product__favorite-form .product__favorite-action')) {
+        if (
+            e.target.matches(
+                '.product__favorite-form .product__favorite-action',
+            )
+        ) {
             e.preventDefault();
             handleAddToBagFromFavorite(e.target);
         }
@@ -52,6 +58,13 @@ async function handleFavoriteClick(button) {
     if (!isUserLoggedIn) {
         toggleActionMenu('user');
         showSnackbar('You need to be logged in to add favorites');
+        return;
+    }
+
+    const isReserved = await fetch.isProductReserved(productId);
+
+    if (isReserved) {
+        showSnackbar('Product is already reserved');
         return;
     }
 
@@ -92,7 +105,9 @@ async function removeProductFromFavorite(productId) {
 }
 
 function addFavoriteCardToUI(product) {
-    const emptyContent = favoriteContainer.querySelector('.favorites__empty-content');
+    const emptyContent = favoriteContainer.querySelector(
+        '.favorites__empty-content',
+    );
     if (emptyContent) {
         emptyContent.remove();
     }
@@ -100,7 +115,9 @@ function addFavoriteCardToUI(product) {
 }
 
 function removeProductCardFromUI(productId) {
-    const productCard = favoriteContainer.querySelector(`.product__favorite-card[data-id="${productId}"]`);
+    const productCard = favoriteContainer.querySelector(
+        `.product__favorite-card[data-id="${productId}"]`,
+    );
     if (productCard) productCard.remove();
     if (!favoriteContainer.children.length) {
         favoriteContainer.innerHTML += createEmptyContent();
@@ -108,11 +125,16 @@ function removeProductCardFromUI(productId) {
 }
 
 function updateFavoriteButton(productId) {
-    const button = document.querySelector(`.product__favorite-button[data-id="${productId}"]`);
+    const button = document.querySelector(
+        `.product__favorite-button[data-id="${productId}"]`,
+    );
     if (!button) return; // could be in pages where favorite button are not displayed
 
     const isFavorite = button.classList.contains('active');
-    button.setAttribute('data-tooltip', isFavorite ? 'Add to favorites' : 'Remove from favorites');
+    button.setAttribute(
+        'data-tooltip',
+        isFavorite ? 'Add to favorites' : 'Remove from favorites',
+    );
     button.classList.toggle('active');
 }
 

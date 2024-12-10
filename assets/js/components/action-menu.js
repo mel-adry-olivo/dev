@@ -12,7 +12,7 @@ export function initActionMenu() {
     document.addEventListener('click', (e) => {
         if (e.target.matches('.header__action-button')) {
             const action = e.target.getAttribute('data-action');
-            toggleActionMenu(action, toggleActionMenu);
+            handleAction(action, toggleActionMenu);
         }
 
         if (e.target.matches('.action-menu__button')) {
