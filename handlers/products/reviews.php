@@ -3,6 +3,7 @@
 session_start();
 
 require '../../includes/db-functions.php';
+$conn = require '../../includes/db-conn.php';
 
 $productId = $_POST['product_id'] ?? ''; 
 $action = $_POST['action'] ?? '';
@@ -16,9 +17,9 @@ if($action === 'create') {
         'rating' => $_POST['rating'],
         'review_text' => $_POST['text'],  
     ];
-    createProductReview($review);
+    createProductReview($conn, $review);
 } else if ($action === 'remove') {
-    removeProductReview($reviewId);
+    removeProductReview($conn, $reviewId);
 }
 
 header('Location: ' . $_SERVER['HTTP_REFERER' ?? './../index.php']);

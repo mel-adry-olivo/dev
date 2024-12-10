@@ -24,7 +24,7 @@ if(isset($_POST['remove'])) {
 
 if(isset($_POST['reserve']))  {
     reserveBagProducts($conn, $userId);
-    header('Location: ../../index.php');
+    header('Location: ../../reservations.php');
     exit();
 }
 

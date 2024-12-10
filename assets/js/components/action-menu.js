@@ -1,75 +1,78 @@
 import { showSnackbar } from './snackbar.js';
-import { handleAddToBagFromFavorite } from './product.js';
 import * as fetch from '../services/fetch.js';
+import { element, toggleClass } from '../utils/dom.js';
 
-const pageOverlay = document.querySelector('.page-overlay-action-menu');
-const actionMenu = document.querySelector('.action-menu');
-const actionMenuCloseButton = document.querySelector('.action-menu__close-button');
-const headerActionButtons = document.querySelectorAll('.header__action-button');
-const actionMenuButtons = document.querySelectorAll('.action-menu__button');
-const actionMenuContent = document.querySelector('.action-menu__content');
-const authForm = document.querySelector('.auth');
-const authCtaButtons = document.querySelectorAll('.auth__cta-button');
+const pageOverlay = element('.page-overlay-action-menu');
+const actionMenuButtons = element('.header__action-button');
+const actionMenu = element('.action-menu');
+const authForm = element('.auth');
 const body = document.body;
 
-const initActionMenu = () => {
-    setActionEvent(headerActionButtons, toggleActionMenu);
-    setActionEvent(actionMenuButtons, updateActionMenuContent);
+export function initActionMenu() {
+    document.addEventListener('click', (e) => {
+        if (e.target.matches('.header__action-button')) {
+            const action = e.target.getAttribute('data-action');
+            toggleActionMenu(action, toggleActionMenu);
+        }
 
-    actionMenuCloseButton.addEventListener('click', toggleActionMenu);
+        if (e.target.matches('.action-menu__button')) {
+            const action = e.target.getAttribute('data-action');
+            handleAction(action, updateActionMenuContent);
+        }
 
-    authCtaButtons.forEach((btn) =>
-        btn.addEventListener('click', () => {
+        if (e.target.matches('.action-menu__close-button')) {
+            toggleActionMenu();
+        }
+
+        if (e.target.matches('.auth__cta-button')) {
             const isLogin = authForm.getAttribute('data-state') === 'login';
             authForm.setAttribute('data-state', isLogin ? 'register' : 'login');
-        }),
-    );
+        }
+    });
+
     pageOverlay.addEventListener('click', (e) => {
         if (e.target === pageOverlay && actionMenu.classList.contains('show')) {
             toggleActionMenu();
         }
     });
-};
+}
 
-const setActionEvent = (buttons, callback) => {
-    buttons.forEach((btn) =>
-        btn.addEventListener('click', () => {
-            const action = btn.getAttribute('data-action');
-            callback(action);
-        }),
-    );
-};
-
-const toggleActionMenu = (action = null) => {
-    if (action === 'bag') {
-        handleBagClick(toggleActionMenu);
-        return;
-    }
+export function toggleActionMenu(action = null) {
     updateActionMenuContent(action);
-    pageOverlay.classList.toggle('show');
-    actionMenu.classList.toggle('show');
-    body.classList.toggle('no-scroll');
-};
+    toggleClass(actionMenu, 'show');
+    toggleClass(pageOverlay, 'show');
+    toggleClass(body, 'no-scroll');
+}
 
-const updateActionMenuContent = (action) => {
+function updateActionMenuContent(action) {
+    const contentItems = element('.action-menu__content-item');
+    contentItems.forEach((content) =>
+        content.classList.toggle('active', content.classList.contains(action)),
+    );
+
+    actionMenuButtons.forEach((btn) =>
+        btn.classList.toggle(
+            'active',
+            btn.getAttribute('data-action') === action,
+        ),
+    );
+}
+
+function handleAction(action, callback) {
     if (action === 'bag') {
-        handleBagClick(updateActionMenuContent);
+        handleBagClick(callback);
         return;
+    } else {
+        callback(action);
     }
+}
 
-    const contentItems = actionMenuContent.querySelectorAll('.action-menu__content-item');
-    contentItems.forEach((content) => content.classList.toggle('active', content.classList.contains(action)));
-
-    actionMenuButtons.forEach((btn) => btn.classList.toggle('active', btn.getAttribute('data-action') === action));
-};
-
-const handleBagClick = async (callback) => {
-    if (!fetch.isUserLoggedIn()) {
+async function handleBagClick(callback) {
+    const isUserLoggedIn = await fetch.isUserLoggedIn();
+    if (!isUserLoggedIn) {
         callback('user');
         showSnackbar('You need to be logged in to view your bag');
     } else {
         window.location.href = './summary.php';
     }
-};
-
-export { initActionMenu, toggleActionMenu };
+}

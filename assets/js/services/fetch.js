@@ -1,5 +1,3 @@
-// all fetch calls here
-
 export async function product(productId) {
     const url = `./handlers/products/product.php?id=${productId}`;
 
@@ -48,6 +46,7 @@ export async function favoriteProductCard(productId) {
         console.error(error);
     }
 }
+
 export async function isUserLoggedIn() {
     const url = './handlers/auth/check-login.php';
 
@@ -68,6 +67,19 @@ export async function isProductInBag(productId) {
         const response = await fetch(url);
         const data = await response.json();
         return data.inBag || false;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+}
+
+export async function isProductReserved(productId) {
+    const url = './handlers/products/check-reservations.php?id=' + productId;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.reserved || false;
     } catch (error) {
         console.error(error);
         return false;

@@ -404,6 +404,14 @@ function isProductInBag($conn, $productId, $userId) {
     return mysqli_num_rows($result) > 0;
 }
 
+function isProductReserved($conn, $productId, $userId) {
+    if(!$userId) return false;
+
+    $sql = "SELECT * FROM reserved WHERE user_id = $userId AND product_id = $productId";
+    $result = mysqli_query($conn, $sql);
+    return mysqli_num_rows($result) > 0;
+}
+
 function addProductToBag($conn, $productId, $userId) {
     if(!$userId) return [];
 
@@ -540,8 +548,7 @@ function getProductReviews($conn, $id) {
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function createProductReview($review) {
-    global $conn;
+function createProductReview($conn, $review) {
     $sql = "
         INSERT INTO reviews (product_id, user_id, rating, review_text) 
         VALUES ({$review['product_id']}, {$review['user_id']}, {$review['rating']}, '{$review['review_text']}')
@@ -549,14 +556,12 @@ function createProductReview($review) {
     mysqli_query($conn, $sql);
 }
 
-function removeProductReview($id) {
-    global $conn;
+function removeProductReview($conn, $id) {
     $sql = "DELETE FROM reviews WHERE review_id = $id";
     mysqli_query($conn, $sql);
 }
 
-function getProductReviewsByDate($id) {
-    global $conn;
+function getProductReviewsByDate($conn, $id) {
     $sql = "
         SELECT 
             reviews.*,

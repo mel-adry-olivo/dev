@@ -161,7 +161,8 @@ window.onload = () => {
     });
 };
 
-function handleSubmit() {
+function handleSubmit(e) {
+    e.preventDefault();
     const isEditMode = productForm.action.includes('edit.php');
     if (!validateForm(isEditMode)) return;
     isEditMode ? handleAddSubmit() : handleEditSubmit();

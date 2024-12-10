@@ -26,7 +26,7 @@ $title = 'Reservations | INSPEC®';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title; ?></title>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
-    <script type="module" src="./assets/js/pages/reservation.js" defer></script>
+    <script type="module" src="./assets/js/pages/summary.js" defer></script>
     <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
     <link href="https://fonts.cdnfonts.com/css/source-serif-pro" rel="stylesheet"/>
     <link href="./assets/styles/global/global.css" rel="stylesheet"/>

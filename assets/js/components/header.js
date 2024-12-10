@@ -1,38 +1,48 @@
-const initHeader = () => {
-  const navButton = document.querySelector('.header__nav-button');
-  const navCloseButton = document.querySelector('.header__nav-close-button');
-  const pageOverlay = document.querySelector('.page-overlay-nav');
-  const nav = document.querySelector('.header__nav-list');
-  let lastScrollY = 0;
-  const header = document.querySelector('.header__wrapper');
+import { addClass, removeClass } from '../utils/dom.js';
 
-  navButton.addEventListener('click', () => {
-    toggleNav();
-  });
+const pageOverlay = document.querySelector('.page-overlay-nav');
+const nav = document.querySelector('.header__nav-list');
+let lastScrollY = 0;
+const header = document.querySelector('.header__wrapper');
 
-  navCloseButton.addEventListener('click', () => {
-    toggleNav();
-  });
+function initHeader() {
+    window.addEventListener('resize', () => handleResize());
 
-  pageOverlay.addEventListener('click', () => {
-    toggleNav();
-  });
+    header.addEventListener('click', (e) => {
+        if (e.target.matches('.header__nav-button')) {
+            toggleNav();
+        }
 
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-    if (currentScroll > lastScrollY) {
-      header.classList.add('hidden');
-    } else {
-      header.classList.remove('hidden');
+        if (e.target.matches('.header__nav-close-button')) {
+            toggleNav();
+        }
+
+        if (e.target.matches('.page-overlay-nav')) {
+            toggleNav();
+        }
+    });
+
+    window.addEventListener('scroll', handleScroll);
+}
+
+function handleResize() {
+    if (pageOverlay.classList.contains('show')) {
+        toggleNav();
     }
+}
+
+function handleScroll() {
+    const currentScroll = window.scrollY;
+    currentScroll > lastScrollY
+        ? addClass(header, 'hidden')
+        : removeClass(header, 'hidden');
 
     lastScrollY = currentScroll;
-  });
+}
 
-  const toggleNav = () => {
+function toggleNav() {
     nav.classList.toggle('show');
     pageOverlay.classList.toggle('show');
-  };
-};
+}
 
 export default initHeader;

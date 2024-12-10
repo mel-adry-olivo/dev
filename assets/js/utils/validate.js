@@ -33,7 +33,6 @@ export function textInput(s) {
     }
 }
 
-// for product add/edit
 export function conditionalInputs(inputs) {
     for (const { select, input } of inputs) {
         if (select.value === 'new' && !textInput(input)) return false;

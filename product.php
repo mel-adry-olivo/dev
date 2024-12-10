@@ -98,7 +98,7 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                         <span class="product__info-reviews-count"><?php echo $count; ?> Reviews</span>
                     </div>
                 </div>
-                <form action="./handlers/products/bag.php" method="POST" class="product__info-form">
+                <form action="./handlers/products/bag.php" method="POST" class="product__info-form" data-id="<?php echo $product['product_id']; ?>">
                     <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
                     <input type="hidden" name="add" value="add">
                     <button type='submit' class="button button--filled-dark product__add-button">Add to Bag</button>

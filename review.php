@@ -16,7 +16,7 @@ if(isset($_GET['id'])) {
 
 
 $title = 'Review | INSPEC®';
-$reviews = getProductReviewsByDate($id);
+$reviews = getProductReviewsByDate($conn, $id);
 $averageRating = getAverageRating($conn, $id);
 $count = getProductReviewCount($conn, $id);
 
