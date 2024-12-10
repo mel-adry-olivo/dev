@@ -25,7 +25,7 @@ export async function filteredItems(filters, productType) {
 }
 
 export async function productsWithType(productType) {
-    const url = `./handlers'/products/products.php?type=${productType}`;
+    const url = `./handlers/products/products.php?type=${productType}`;
 
     try {
         const response = await fetch(url);
