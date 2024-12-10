@@ -1,5 +1,7 @@
 <?php
 
+require '../../includes/icons.php';
+require '../../includes/ui-components.php';
 require '../../includes/db-functions.php';
 
 $conn = require '../../includes/db-conn.php';
@@ -7,13 +9,20 @@ $type = $_GET['type'];
 
 if($type === 'all') {
     $allProducts = getAllProducts($conn);
-    header('Content-Type: application/json');
-    echo json_encode($allProducts);
+    $allProductsHTML = '';
+    foreach($allProducts as $product) {
+        $allProductsHTML .= createProductCard($conn, $product);
+    }
+    echo $allProductsHTML;
     exit();
 }
 
 $productsByType = getProductsbyType($conn, $type);
+$productsByTypeHTML = '';
 
-header('Content-Type: application/json');
-echo json_encode($productsByType);
+foreach($productsByType as $product) {
+    $productsByTypeHTML .= createProductCard($conn, $product);
+}
+
+echo $productsByTypeHTML;
 exit();

@@ -1,8 +1,7 @@
 <?php 
 
-function createProductCard($product) {
+function createProductCard($conn,$product) {
 
-    $conn = require './includes/db-conn.php';
     $userId = $_SESSION["user_id"] ?? null;
     $productId = $product["product_id"];
     $imagePath = $product["image_main"];
@@ -213,7 +212,7 @@ function createFilterCategory($category, $items) {
     <<<HTML
     <li class="shop__filter-category">
         <button class="shop__dropdown-button">
-            <span class="shop__dropdown-button-text">$formattedCategory</span>
+            <span class="shop__dropdown-button-text" data-text='$formattedCategory'>$formattedCategory</span>
             <span class="icon-container shop__dropdown-icon">$downArrow</span>
         </button>
         <div class="shop__dropdown-container">

@@ -72,7 +72,10 @@ $products = getAllProducts($conn);
                                 <td>
                                     <div class="actions-container">
                                         <button class="button-link product__edit" data-id="<?php echo $product['product_id']; ?>">Edit</button>
-                                        <button class="button-link product__delete" data-id="<?php echo $product['product_id']; ?>">Delete</button>
+                                        <form action="./handlers/products/delete.php" method="POST" class="product__delete-form">
+                                            <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                            <button class="button-link product__delete" data-id="<?php echo $product['product_id']; ?>">Delete</button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

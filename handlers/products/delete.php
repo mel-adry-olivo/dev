@@ -5,7 +5,7 @@ session_start();
 require '../../includes/db-functions.php';
 
 $conn = require '../../includes/db-conn.php';
-$productId = $_GET['id'] ?? null;   
+$productId = $_POST['product_id'] ?? null;   
 echo $productId;
 
 $product = getProductById($conn, $productId);

@@ -22,11 +22,11 @@ $shapes = getProductShapes($conn);
             <div class="file-chooser">
                 <div class="file-chooser-item">
                     <label for="product-image">Choose Main Image</label>
-                    <input type="file" name="product-image" id="product-image" accept="image/*">
+                    <input type="file" name="product-image" id="product-image" accept="image/*" placeholder="Please input the main image.">
                 </div>
                 <div class="file-chooser-item">
                     <label for="product-image2">Choose Alternate Image</label>
-                    <input type="file" name="product-image2" id="product-image2" accept="image/*" >
+                    <input type="file" name="product-image2" id="product-image2" accept="image/*" placeholder="Please input the alternate image.">
                 </div>
             </div>
             <div class="row-group brand-group">
@@ -41,23 +41,17 @@ $shapes = getProductShapes($conn);
                 </div>
                 <div class="field-group new-brand">
                     <label for="product-brand-input">New Brand</label>
-                    <input type="text" name="product-brand-input">
+                    <input type="text" name="product-brand-input" placeholder="Please enter a brand">
                 </div>
             </div>
             <div class="field-group">
                 <label for="product-name">Product Name</label>
-                <input type="text" name="product-name" placeholder="Enter product name">
+                <input type="text" name="product-name" placeholder="Please enter a valid product name">
             </div>
             <div class="row-group">
                 <div class="field-group">
                     <label for="product-price">Price</label>
-                    <input 
-                        type="number" 
-                        name="product-price" 
-                        value="0" 
-                        onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" 
-                        min="0" 
-                        step="1">
+                    <input type="number" name="product-price" value="0" min="0" step="1" placeholder="Please enter a valid price">
                 </div>
             </div>
         </div>
@@ -82,22 +76,22 @@ $shapes = getProductShapes($conn);
                 <div class="field-group">
                 <div class="field-group">
                     <label for="product-stock-quantity">Stock Quantity</label>
-                    <input type="number" name="product-stock-quantity" placeholder="Ex: 15"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-stock-quantity" value=0 min="0" step="1" placeholder="Please input a valid quantity"> 
                 </div>
                 </div>
             </div>
             <div class="row-group">
                 <div class="field-group">
                     <label for="product-lens-width">Lens Width</label>
-                    <input type="number" name="product-lens-width" placeholder="Ex: 50 (50mm)"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-lens-width" value=0 min="0" step="1" placeholder="Ex: Please input a valid lens-width"> 
                 </div>
                 <div class="field-group">
                     <label for="product-bridge-width">Bridge Width</label>
-                    <input type="number" name="product-bridge-width" placeholder="Ex: 23 (23mm)"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-bridge-width" value=0 min="0" step="1" placeholder="Ex: Please input a valid bridge-width"> 
                 </div>
                 <div class="field-group">
                     <label for="product-temple-length">Temple Length</label>
-                    <input type="number" name="product-temple-length" placeholder="Ex: 145 (145mm)"  onInput="event.target.value = event.target.value.replace(/[^0-9]/g, '')" min="0" step="1"> 
+                    <input type="number" name="product-temple-length" value=0 min="0" step="1" placeholder="Ex: Please input a valid temple length"> 
                 </div>
             </div>
             <div class="row-group">
@@ -113,7 +107,7 @@ $shapes = getProductShapes($conn);
                 </div>
                 <div class="field-group new-color">
                     <label for="product-color-input">New Color</label>
-                    <input type="text" name="product-color-input" placeholder="Enter a color">
+                    <input type="text" name="product-color-input" placeholder="Please enter a color.">
                 </div>
             </div>
             <div class="row-group">
@@ -129,7 +123,7 @@ $shapes = getProductShapes($conn);
                 </div>
                 <div class="field-group new-material">
                     <label for="product-material-input">New Material</label>
-                    <input type="text" name="product-material-input" placeholder="Enter a material">
+                    <input type="text" name="product-material-input" placeholder="Please enter a material.">
                 </div>
             </div>
             <div class="row-group">
@@ -145,7 +139,7 @@ $shapes = getProductShapes($conn);
                 </div>
                 <div class="field-group new-shape">
                     <label for="product-shape-input">New Shape</label>
-                    <input type="text" name="product-shape-input" placeholder="Enter a shape">
+                    <input type="text" name="product-shape-input" placeholder="Please enter a shape.">
                 </div>
             </div>
             <div class="field-group">

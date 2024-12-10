@@ -93,7 +93,7 @@ $popularProducts = getPopularProducts($conn);
             <main class="standard__content">
                 <div class="products__showcase">
                     <div class="products__carousel">
-                        <?php foreach($popularProducts as $product) createProductCard($product); ?>
+                        <?php foreach($popularProducts as $product) createProductCard($conn, $product); ?>
                     </div>
                     <div class="products__carousel-control-group">
                         <button class="icon-container products__carousel-control products__carousel-control--prev"><?php echo getIcon('arrow-left'); ?></button>

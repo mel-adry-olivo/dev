@@ -60,7 +60,7 @@ $products = getProductsbyType($conn, $type);
             </header>
             <?php require './includes/components/shop-toolbar.php'?>
             <main class="product-catalog">
-                <?php foreach($products as $product) createProductCard($product);?>
+                <?php foreach($products as $product) createProductCard($conn, $product);?>
             </main>
         </section>
     </div>

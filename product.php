@@ -142,7 +142,7 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                 <div class="products__showcase">
                     <?php if(!empty($productsByBrand)) : ?>
                         <div class="products__carousel">
-                            <?php foreach($productsByBrand as $product) createProductCard($product); ?>
+                            <?php foreach($productsByBrand as $product) createProductCard($conn, $product); ?>
                         </div>
                         <?php if(count($productsByBrand) > 4) : ?>
                             <div class="products__carousel-control-group">
@@ -168,7 +168,7 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                 <div class="products__showcase">
                     <?php if(!empty($productsByShape)) : ?>
                         <div class="products__carousel">
-                            <?php foreach($productsByShape as $product) createProductCard($product); ?>
+                            <?php foreach($productsByShape as $product) createProductCard($conn, $product); ?>
                         </div>
                         <?php if(count($productsByShape) > 4) : ?>
                             <div class="products__carousel-control-group">
