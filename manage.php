@@ -37,10 +37,6 @@ $products = getAllProducts($conn);
             </div>
             <div class="manage__content">
                 <div class="content__header">
-                    <div class="content__searchbar">
-                        <span class="icon-container search-icon"><?php echo getIcon("search"); ?></span>
-                        <input type="text" name="search" placeholder="Search product" >
-                    </div>
                     <button class="button button--filled-dark content__add-button">
                         <span class="icon-container add-icon"><?php echo getIcon("add"); ?></span>
                         <span>Add Product</span>

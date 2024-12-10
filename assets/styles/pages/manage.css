@@ -25,7 +25,7 @@
 
 .content__header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding-block: 1.5rem;
 }
 

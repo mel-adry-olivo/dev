@@ -3,7 +3,10 @@
 
 session_start();
 
+require '../../includes/db-functions.php';
+
 $conn = require '../../includes/db-conn.php';
+
 $inputFname = $_POST['register-fname'];
 $inputLname = $_POST['register-lname'];
 $inputEmail = $_POST['register-email'];

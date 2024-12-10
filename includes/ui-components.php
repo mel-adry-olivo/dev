@@ -136,10 +136,12 @@ function createReviewCard($review) {
     $ratingHTML = createRatingStars($rating);
     $closeIcon = getIcon('close');
     $currentUser = $_SESSION['user_id'] ?? '';
+    $isAdmin = $_SESSION['role'] == 'admin' ?? 'customer';
 
     if(isset($currentUser)) {
-        $isCurrentUser = $userId == $currentUser ? '<button  class="product__review-close">'. $closeIcon .'</button>' : '';
-        $editForm = 
+        $hasClose = $userId == $currentUser || $isAdmin;
+        $isCurrentUser = $hasClose  ? '<button  class="product__review-close">'. $closeIcon .'</button>' : '';
+        $deleteForm = 
         <<<HTML
             <form class="product__review-close-form" method="post" action="./handlers/products/reviews.php">
                 <input type="hidden" name="action" value="remove"/>
@@ -160,7 +162,7 @@ function createReviewCard($review) {
                     <span class="product__review-card-date">$formattedDate</span>
 
                 </div>
-                $editForm 
+                $deleteForm 
             </div>
             <div class="product__review-card-stars">
                     $ratingHTML
