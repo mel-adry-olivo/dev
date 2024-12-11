@@ -5,6 +5,7 @@ function createProductCard($conn,$product) {
     $userId = $_SESSION["user_id"] ?? null;
     $productId = $product["product_id"];
     $imagePath = $product["image_main"];
+    $imageAlt = $product["image_alternate"];
     $brand = $product["brand"];
     $name = $product["name"];
     $price = $product["price"];
@@ -17,7 +18,8 @@ function createProductCard($conn,$product) {
     <<<HTML
         <a href="./product.php?id=$productId" class="product__card" data-id="$productId">  
             <div class="product__image-container">
-                <img src="$imagePath" alt="" class="product__image" width="316" height="">
+                <img src="$imagePath" alt="$name" class="product__image product__image--main" width="316" >
+                <img src="$imageAlt" alt="$name" class="product__image product__image--alternate" width="316" >                
                 <button class="product__favorite-button $isFavorite" data-tooltip="$tooltip" data-id="$productId">
                     <span class="product__favorite-icon product__favorite-icon--unchecked">$favoriteUnchecked</span>
                     <span class="product__favorite-icon product__favorite-icon--checked" data-tooltip="Remove from favorites">$favoriteChecked</span>

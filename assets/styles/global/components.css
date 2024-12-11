@@ -303,6 +303,19 @@
 .product__image {
     mix-blend-mode: multiply;
 }
+
+.product__image--alternate {
+    display: none;
+}
+
+.product__image-container:hover .product__image--alternate {
+    display: inline-flex;
+}
+
+.product__image-container:hover .product__image--main {
+    display: none;
+}
+
 .product__favorite-button {
     display: inline-flex;
     position: absolute;
