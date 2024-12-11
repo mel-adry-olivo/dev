@@ -183,15 +183,11 @@ function getPopularProducts($conn) {
             b.name AS brand,
             AVG(r.rating) AS average_rating,
             COUNT(r.review_id) AS review_count
-        FROM 
-            products p
+        FROM products p
         JOIN brands b ON p.brand_id = b.brand_id
-        LEFT JOIN 
-            reviews r ON p.product_id = r.product_id
-        GROUP BY 
-            p.product_id
-        HAVING 
-            review_count > 0 
+        LEFT JOIN reviews r ON p.product_id = r.product_id
+        GROUP BY p.product_id
+        HAVING review_count > 0 
         ORDER BY 
             average_rating DESC, 
             review_count DESC
@@ -209,6 +205,7 @@ function getProductsByBrand($conn, $brand) {
         FROM products
         JOIN brands ON products.brand_id = brands.brand_id
         WHERE brands.name = '$brand'
+        ORDER BY RAND()
     ";
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -225,6 +222,7 @@ function getProductsByShape($conn, $shape) {
         JOIN attributes a ON pa.attribute_id = a.attribute_id
         JOIN categories c ON a.category_id = c.category_id
         WHERE c.name = 'Shape' AND a.name = '$shape'
+        ORDER BY RAND()
     ";
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);

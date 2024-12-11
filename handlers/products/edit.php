@@ -37,10 +37,10 @@ $materialId = getOrCreateAttribute($conn, 3, $_POST['product-material'], $_POST[
 
 
 // if new images are uploaded
-if (isset($_FILES['product-image']) && $_FILES['product-image']['size'] > 0) {
+if ($_FILES['product-image']['size'] > 0) {
     $image1Path = uploadImage($_FILES['product-image'], $uploadDir, $name, $brand['name'], '0');
 }
-if (isset($_FILES['product-image']) && $_FILES['product-image']['size'] > 0) {
+if ($_FILES['product-image2']['size'] > 0) {
     $image2Path = uploadImage($_FILES['product-image2'], $uploadDir, $name, $brand['name'], '1');
 }
 
