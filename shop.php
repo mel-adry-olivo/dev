@@ -22,7 +22,7 @@ switch($_GET['type']) {
         $title = "Eyeglasses | INSPEC®"; 
         break;
     case 'all':
-        $shopHeader = 'Shop';
+        $shopHeader = 'Shop All';
         $shopSubtitle = 'Discover our collection of sunglasses, eyeglasses, and more, crafted with precision lenses for crystal-clear vision.';
         $title = "Shop | INSPEC®"; 
         break;
