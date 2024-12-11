@@ -49,7 +49,7 @@ $popularProducts = getPopularProducts($conn);
                 </div>
                 <div class="hero__text-block-right hero__cta">
                     <h3 class="hero__cta-text"><?php echo $heroCtaText; ?></h3>
-                    <button class="button button--filled hero__cta-button"><?php echo $heroCtaButtonText; ?></button>
+                    <a href="./shop.php?type=all" class="button button--filled hero__cta-button"><?php echo $heroCtaButtonText; ?></a>
                 </div>
             </div>
         </div>
