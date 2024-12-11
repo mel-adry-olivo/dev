@@ -191,7 +191,7 @@ function getPopularProducts($conn) {
         ORDER BY 
             average_rating DESC, 
             review_count DESC
-        LIMIT 8
+        LIMIT 6
         ";
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
