@@ -122,8 +122,11 @@
     padding: 1rem 0rem;
 }
 .shop__dropdown-items {
+    max-height: 10rem;
+    width: 30%;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 .shop__dropdown-item {

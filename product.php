@@ -43,6 +43,7 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
 });
 
 
+$isAdmin = $_SESSION['role'] === 'admin' ?? false;
 ?>
 
 <!DOCTYPE html>
@@ -106,9 +107,9 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                 </form>
                 <?php if(isset($inBag)) : ?>
                     <span class="product__info-in-bag-text">Product is already in your bag</span>
-                <?php endif ?>
+                    <?php endif ?>
+                    <span class="product__info-reminder">You can only reserve 1 unit at a time</span>
                 <span class="product__info-reservation-count"><?php echo $reserveCount; ?> Reserved</span>
-                <span class="product__info-reminder">You can only reserve 1 unit at a time</span>
                 <div class="product__info-others">
                     <div class="product__info-others-item">
                         <span class="product__info-other-title">Size & Fit</span>

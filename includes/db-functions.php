@@ -152,7 +152,7 @@ function updateProductAttribute($conn, $product_attribute_id, $attributeId) {
     return mysqli_query($conn, $sql);
 }
 
-function addProductAttriute($conn, $productId, $attributeId) {
+function addProductAttribute($conn, $productId, $attributeId) {
     $sql = "INSERT INTO product_attributes (product_id, attribute_id) VALUES ($productId, $attributeId)";
     mysqli_query($conn, $sql);
 }
@@ -247,9 +247,8 @@ function getProductBrandById($conn, $id) {
     return mysqli_fetch_assoc($result);
 }
 
-
-function addProductAttribute($conn, $productId, $attributeId) {
-    $sql = "INSERT INTO product_attributes (product_id, attribute_id) VALUES ($productId, $attributeId)";
+function addAttribute($conn, $categoryId, $name) {
+    $sql = "INSERT INTO attributes (category_id, name) VALUES ($categoryId, '$name')";
     mysqli_query($conn, $sql);
     return mysqli_insert_id($conn);
 }
@@ -631,6 +630,5 @@ function getOrCreateAttribute($conn, $categoryId, $attributeId, $attributeIdInpu
         return $attributeId;
     }
 
-    return addProductAttribute($conn, $categoryId, $attributeIdInput);
+    return addAttribute($conn, $categoryId, $attributeIdInput);
 }
-

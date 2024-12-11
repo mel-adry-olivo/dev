@@ -97,6 +97,10 @@
 .content__products {
     display: flex;
     scrollbar-width: thin;
+    max-height: 60vh;
+    overflow-y: auto;
+    border: 1px solid var(--clr-surface-hover);
+    border-radius: 1rem;
 }
 
 .content__products::-webkit-scrollbar {
@@ -108,7 +112,8 @@
     flex: 1;
     border-collapse: collapse;
     border-spacing: 0;
-    font-size: 0.87rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
 }
 
 .product__table img {

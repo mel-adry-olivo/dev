@@ -34,9 +34,9 @@ $materialId = getOrCreateAttribute($conn, 3, $_POST['product-material'], $_POST[
 // bundle and add to db
 $product = [
     "brand_id" => $brand['brand_id'],
-    "name" => $name,
+    "name" => trim($name),
     "price" => $price,
-    "type" => $type,
+    "type" => trim($type),
     "lens_width" => $lensWidth,
     "bridge_width" => $bridgeWidth,
     "temple_length" => $templeLength,
