@@ -29,8 +29,16 @@ export function textInput(s) {
         return true;
     } else {
         showSnackbar(s.placeholder);
+
         return false;
     }
+}
+
+export function textInputs(inputs) {
+    for (const input of inputs) {
+        if (!textInput(input)) return false;
+    }
+    return true;
 }
 
 export function conditionalInputs(inputs) {

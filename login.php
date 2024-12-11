@@ -67,19 +67,19 @@ if(isset($_SESSION['login_success']) && $_SESSION['login_success'] == false) {
                     </header>
                     <form action="./handlers/auth/register.php" method="POST" class="auth__form">
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" name="register-fname" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="register-fname" autocomplete="off" required/>
                             <label for="register-fname" class="auth__label">First Name</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" name="register-lname" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="register-lname" autocomplete="off" required/>
                             <label for="register-lname" class="auth__label">Last Name</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="text" class="auth__field" name="register-email" autocomplete="off"/>
+                            <input type="text" class="auth__field" name="register-email" autocomplete="off" required>
                             <label for="register-email" class="auth__label">Email</label>
                         </div>
                         <div class="auth__field-group">
-                            <input type="password" class="auth__field" name="register-password"autocomplete="off"/>
+                            <input type="password" class="auth__field" name="register-password"autocomplete="off" required/>
                             <label for="register-password" class="auth__label">Password</label>
                         </div>
                         <button type="submit" class="button button--filled-dark auth__submit">Create Account</button>
