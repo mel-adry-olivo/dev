@@ -53,21 +53,17 @@
     font-size: var(--font-size);
     margin-left: 1rem;
 }
-.shop__filter-reset-desktop {
-    display: none;
-}
-.shop__filter-reset-mobile {
-    display: none;
-}
-.shop__filter-reset-desktop.show {
-    display: inline;
-}
-.shop__filter-reset-mobile.show {
-    display: none;
-}
+.shop__filter-reset-desktop,
+.shop__filter-reset-mobile,
+.shop__filter-reset-mobile.show,
 .shop__filter-close-button {
     display: none;
 }
+
+.shop__filter-reset-desktop.show {
+    display: inline;
+}
+
 .shop__toolbar-actions {
     display: flex;
     gap: 1rem;

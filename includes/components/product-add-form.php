@@ -73,12 +73,6 @@ $shapes = getProductShapes($conn);
                         <option value="16">Unisex</option>
                     </select>
                 </div>
-                <div class="field-group">
-                <div class="field-group">
-                    <label for="product-stock-quantity">Stock Quantity</label>
-                    <input type="number" name="product-stock-quantity" value=0 min="0" step="1" placeholder="Please input a valid quantity"> 
-                </div>
-                </div>
             </div>
             <div class="row-group">
                 <div class="field-group">

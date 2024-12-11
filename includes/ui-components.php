@@ -136,7 +136,8 @@ function createReviewCard($review) {
     $ratingHTML = createRatingStars($rating);
     $closeIcon = getIcon('close');
     $currentUser = $_SESSION['user_id'] ?? '';
-    $isAdmin = $_SESSION['role'] == 'admin' ?? 'customer';
+    $role = $_SESSION['role'] ?? '';
+    $isAdmin = $role == 'admin' ?? 'customer';
 
     if(isset($currentUser)) {
         $hasClose = $userId == $currentUser || $isAdmin;

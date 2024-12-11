@@ -3,6 +3,7 @@
         <header class="auth__header">
             <span class="auth__title">Login</span>
             <span class="auth__subtitle">To access your account</span>
+            <span class="auth__subtitle">Use 'admin' as email and password for admin access</span>
         </header>
         <form action="./handlers/auth/login.php" method="POST" class="auth__form">
             <div class="auth__field-group">

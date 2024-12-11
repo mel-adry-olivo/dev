@@ -24,7 +24,6 @@ const productEditButtons = element('.product__edit');
 
 const productNameInput = element('[name="product-name"]');
 const productPriceInput = element('[name="product-price"]');
-const productStockQuantityInput = element('[name="product-stock-quantity"]');
 const productLensWidth = element('[name="product-lens-width"]');
 const productBridgeWidth = element('[name="product-bridge-width"]');
 const productTempleLength = element('[name="product-temple-length"]');
@@ -60,7 +59,6 @@ const body = document.body;
 
 const numberInputs = [
     productPriceInput,
-    productStockQuantityInput,
     productLensWidth,
     productBridgeWidth,
     productTempleLength,
@@ -221,7 +219,6 @@ function setFormMode(mode, productId = null) {
 function populateForm(product) {
     productNameInput.value = product.name;
     productPriceInput.value = product.price;
-    productStockQuantityInput.value = product.stock_quantity;
     productLensWidth.value = product.lens_width;
     productBridgeWidth.value = product.bridge_width;
     productTempleLength.value = product.temple_length;

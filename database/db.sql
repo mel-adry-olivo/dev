@@ -30,8 +30,6 @@ CREATE TABLE products (
     name VARCHAR(255) NOT NULL,
     type ENUM('Sunglasses', 'Eyeglasses') NOT NULL,
     price INT NOT NULL,
-    reserve_count INT NOT NULL,
-    stock_quantity INT NOT NULL,
     lens_width INT NOT NULL,
     bridge_width INT NOT NULL,
     temple_length INT NOT NULL,
@@ -132,13 +130,13 @@ VALUES
     (15, 5, 'Women'),
     (16, 5, 'Unisex');
 
-INSERT INTO products (product_id, brand_id, name, type, price, reserve_count, stock_quantity, lens_width, bridge_width, temple_length, image_main, image_alternate)
+INSERT INTO products (product_id, brand_id, name, type, price, lens_width, bridge_width, temple_length, image_main, image_alternate)
 VALUES
-    (1, 1, 'CD Link A1U', 'Sunglasses', 37000, 12, 45, 61, 13, 145, './assets/images/products/dior-cd-link-a1u-0.png', './assets/images/products/dior-cd-link-a1u-1.png'),
-    (2, 2, 'GG1509O', 'Eyeglasses', 21000, 8, 20, 54, 20, 145, './assets/images/products/gucci-gg1509o-0.png', './assets/images/products/gucci-gg1509o-1.png'),
-    (3, 3, 'CT03710 - Panthère De Cartier', 'Eyeglasses', 75000, 14, 35, 56, 18, 140, './assets/images/products/cartier-ct0371o-0.png', './assets/images/products/cartier-ct0371o-1.png'),
-    (4, 4, 'GU7538', 'Sunglasses', 3500, 32, 60, 54, 16, 140, './assets/images/products/guess-gu7538-0.png', './assets/images/products/guess-gu7538-1.png'),
-    (5, 3, 'CT0058O - Panthère De Cartier', 'Eyeglasses', 70000, 8, 15, 52, 18, 130, './assets/images/products/cartier-ct0058o-0.png', './assets/images/products/cartier-ct0058o-1.png');
+    (1, 1, 'CD Link A1U', 'Sunglasses', 37000, 61, 13, 145, './assets/images/products/dior-cd-link-a1u-0.png', './assets/images/products/dior-cd-link-a1u-1.png'),
+    (2, 2, 'GG1509O', 'Eyeglasses', 21000, 54, 20, 145, './assets/images/products/gucci-gg1509o-0.png', './assets/images/products/gucci-gg1509o-1.png'),
+    (3, 3, 'CT03710 - Panthère De Cartier', 'Eyeglasses', 75000, 56, 18, 140, './assets/images/products/cartier-ct0371o-0.png', './assets/images/products/cartier-ct0371o-1.png'),
+    (4, 4, 'GU7538', 'Sunglasses', 3500, 54, 16, 140, './assets/images/products/guess-gu7538-0.png', './assets/images/products/guess-gu7538-1.png'),
+    (5, 3, 'CT0058O - Panthère De Cartier', 'Eyeglasses', 70000, 52, 18, 130, './assets/images/products/cartier-ct0058o-0.png', './assets/images/products/cartier-ct0058o-1.png');
 
 INSERT INTO product_attributes (product_attribute_id, product_id, attribute_id)
 VALUES
@@ -169,7 +167,6 @@ VALUES
     (25, 5, 16);
 
 
--- Sample data (thanks chatgpt)
 INSERT INTO reviews (product_id, user_id, rating, review_text)
 VALUES
     (1, 1, 5, 'These sunglasses are perfect! They fit well and the design is top-notch. Highly recommend for anyone looking for a stylish accessory.'),

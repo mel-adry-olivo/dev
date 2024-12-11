@@ -30,6 +30,7 @@ if(isset($_SESSION['user_id'])) {
 $tooltip = $isFavorite ? 'Remove from favorites' : 'Add to favorites';
 $reviews = getLimitedProductReviews($conn, $id, 2);
 $averageRating = getAverageRating($conn, $id);
+$reserveCount = getProductReserveCount($conn, $id);
 $count = getProductReviewCount($conn, $id);
 $productsByBrand = getProductsByBrand($conn, $product['brand']);
 $productsByBrand = array_filter($productsByBrand, function ($product) use ($id) {
@@ -106,7 +107,7 @@ $productsByShape = array_filter($productsByShape, function ($product) use ($id) 
                 <?php if(isset($inBag)) : ?>
                     <span class="product__info-in-bag-text">Product is already in your bag</span>
                 <?php endif ?>
-                <span class="product__info-reservation-count"><?php echo $product['reserve_count']; ?> Reserved</span>
+                <span class="product__info-reservation-count"><?php echo $reserveCount; ?> Reserved</span>
                 <span class="product__info-reminder">You can only reserve 1 unit at a time</span>
                 <div class="product__info-others">
                     <div class="product__info-others-item">

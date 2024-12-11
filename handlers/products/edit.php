@@ -20,7 +20,6 @@ $brand = getOrCreateBrand($conn, $_POST['product-brand'], $_POST['product-brand-
 $name = $_POST['product-name'] ?? $product['name'];
 $price = $_POST['product-price'] ?? $product['price'];
 $type = $_POST['product-type'] ?? $product['type']; 
-$stockQuantity = $_POST['product-stock-quantity'] ?? $product['stock_quantity'];
 $lensWidth = $_POST['product-lens-width'] ?? $product['lens_width'];
 $bridgeWidth = $_POST['product-bridge-width'] ?? $product['bridge_width'];
 $templeLength = $_POST['product-temple-length'] ?? $product['temple_length'];
@@ -38,20 +37,19 @@ $materialId = getOrCreateAttribute($conn, 3, $_POST['product-material'], $_POST[
 
 
 // if new images are uploaded
-if (isset($_FILES['product-image'])) {
+if (isset($_FILES['product-image']) && $_FILES['product-image']['size'] > 0) {
     $image1Path = uploadImage($_FILES['product-image'], $uploadDir, $name, $brand['name'], '0');
 }
-if (isset($_FILES['product-image2'])) {
+if (isset($_FILES['product-image']) && $_FILES['product-image']['size'] > 0) {
     $image2Path = uploadImage($_FILES['product-image2'], $uploadDir, $name, $brand['name'], '1');
 }
 
 // bundle and update
 $productData = [
-    "brand_id" => $brandId, 
+    "brand_id" => $brand['brand_id'], 
     "name" => $name, 
     "price" => $price, 
     "type" => $type, 
-    "stock_quantity" => $stockQuantity,
     "lens_width" => $lensWidth, 
     "bridge_width" => $bridgeWidth, 
     "temple_length" => $templeLength, 

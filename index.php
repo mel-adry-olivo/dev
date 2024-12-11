@@ -8,6 +8,8 @@ require './includes/db-functions.php';
 
 $conn = require './includes/db-conn.php';
 
+
+
 $title = "INSPEC®"; 
 $heroHeadlinePrimary = "Redefining";
 $heroHeadlineSecondary = "eyewear";

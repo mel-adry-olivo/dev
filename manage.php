@@ -49,7 +49,7 @@ $products = getAllProducts($conn);
                                 <th>Product</th>
                                 <th>Type</th>
                                 <th>Price</th>
-                                <th>Stocks</th>
+                                <th>Gender</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -64,7 +64,7 @@ $products = getAllProducts($conn);
                                 </td>
                                 <td><?php echo $product['type']; ?></td>
                                 <td>₱<?php echo number_format($product['price'], '0', '.', ','); ?></td>
-                                <td><?php echo $product['stock_quantity']; ?></td>
+                                <td><?php echo $product['gender']; ?></td>
                                 <td>
                                     <div class="actions-container">
                                         <button class="button-link product__edit" data-id="<?php echo $product['product_id']; ?>">Edit</button>

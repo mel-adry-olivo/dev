@@ -45,8 +45,6 @@ function addProduct($conn, $product) {
             name, 
             type, 
             price, 
-            reserve_count, 
-            stock_quantity, 
             lens_width, 
             bridge_width, 
             temple_length, 
@@ -58,8 +56,6 @@ function addProduct($conn, $product) {
         '{$product['name']}', 
         '{$product['type']}', 
         {$product['price']}, 
-        {$product['reserve_count']}, 
-        {$product['stock_quantity']}, 
         {$product['lens_width']}, 
         {$product['bridge_width']}, 
         {$product['temple_length']}, 
@@ -104,7 +100,6 @@ function updateProduct($conn, $productId, $product) {
         name = '{$product['name']}', 
         type = '{$product['type']}', 
         price = {$product['price']}, 
-        stock_quantity = {$product['stock_quantity']}, 
         lens_width = {$product['lens_width']}, 
         bridge_width = {$product['bridge_width']}, 
         temple_length = {$product['temple_length']}, 
@@ -616,6 +611,14 @@ function getProductReviewCount($conn, $id) {
     $reviews = getProductReviews($conn, $id);
     return count($reviews);
 }
+
+function getProductReserveCount($conn, $id) {
+    $sql = "SELECT COUNT(*) as count FROM reserved WHERE product_id = $id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    return $row['count'];
+}
+
 function getOrCreateBrand($conn, $brandId, $brandInput) {
     if($brandId !== 'new' && empty($brandInput)) {
         $brand = getProductBrandById($conn, $brandId);

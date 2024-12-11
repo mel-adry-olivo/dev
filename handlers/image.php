@@ -1,5 +1,4 @@
 <?php
-
 function uploadImage($file, $uploadDir, $name, $brand, $suffix = '') {
     $fileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $brand = strtolower($brand);
