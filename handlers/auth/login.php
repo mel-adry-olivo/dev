@@ -11,7 +11,8 @@ $inputPassword = md5($_POST['login-password']);
 
 $user = getUserByEmail($conn, $inputEmail);
 
-if($user) {
+if($user && $user['password'] == $inputPassword) {
+
     $_SESSION['role'] = $user['user_id'] == 1 ? 'admin' : 'customer';
     $_SESSION['user_id'] = $user['user_id'];
     $_SESSION['fname'] = $user['fname'];
@@ -19,11 +20,6 @@ if($user) {
     $_SESSION['email'] = $user['email'];
     $_SESSION['login_success'] = true;
 
-
-    if(basename($_SERVER['HTTP_REFERER'], ".php") == 'login') { 
-        header("Location: ../../index.php");
-        exit();
-    }
     
     header("Location: ./../../");
     exit();
