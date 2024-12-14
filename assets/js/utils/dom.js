@@ -12,17 +12,19 @@ export function elements(selector) {
     return document.querySelectorAll(selector);
 }
 
-export function addClass(element, className) {
-    element.classList.add(className);
+export function addClass(e, c) {
+    if (!e.classList.contains(c)) {
+        e.classList.add(c);
+    }
 }
 
-export function removeClass(element, className) {
-    element.classList.remove(className);
+export function removeClass(e, c) {
+    e.classList.remove(c);
 }
 
-export function toggleClass(element, className, force = undefined) {
-    if (force !== undefined) element.classList.toggle(className, force);
-    else element.classList.toggle(className);
+export function toggleClass(e, c, force = undefined) {
+    if (force !== undefined) e.classList.toggle(c, force);
+    else e.classList.toggle(c);
 }
 
 export function setSelectedOption(select, value) {
