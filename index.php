@@ -42,16 +42,16 @@ $popularProducts = getPopularProducts($conn);
     <?php require './includes/components/action-menu.php'?>
     <section class="hero">
         <div class="hero__media-container">
-            <video preload="metadata" playsinline autoplay loop muted class="hero__media" poster="./assets/images/hero-image.png">
-                <source src="./assets/images/hero-video.webm" type="video/mp4">
+            <video preload="metadata" playsinline autoplay loop muted class="hero__media" poster="./assets/images/hero-image.webp">
+                <source src="./assets/images/hero-video.mp4" type="video/mp4">
             </video>
             <div class="hero__media-content">
                 <div class="hero__headline-wrapper">
-                    <h1 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h1>
-                    <h2 class="hero__headline-secondary"><?php echo $heroHeadlineSecondary; ?> </h2>
+                    <h2 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h2>
+                    <h3 class="hero__headline-secondary"><?php echo $heroHeadlineSecondary; ?> </h3>
                 </div>
                 <div class="hero__text-block-right hero__cta">
-                    <h3 class="hero__cta-text"><?php echo $heroCtaText; ?></h3>
+                    <h5 class="hero__cta-text"><?php echo $heroCtaText; ?></h5>
                     <a href="./shop.php?type=all" class="button button--filled hero__cta-button"><?php echo $heroCtaButtonText; ?></a>
                 </div>
             </div>
@@ -123,8 +123,5 @@ $popularProducts = getPopularProducts($conn);
     <?php require './includes/components/footer.php'?>
     <?php include './includes/components/confirm-dialog.php';?>
     <div class="snackbar"></div>
-    <div class="loader-container">
-        <div class="loader"></div>
-    </div>
 </body>
 </html>
