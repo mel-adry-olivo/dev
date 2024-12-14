@@ -43,16 +43,16 @@ $popularProducts = getPopularProducts($conn);
     <section class="hero">
         <div class="hero__media-container">
             <video preload="metadata" playsinline autoplay loop muted class="hero__media" poster="./assets/images/hero-image.webp">
-                <source src="./assets/images/hero-video.mp4" type="video/mp4">
+                <source src="./assets/images/hero-video.mp4" type="video/mp4"/>
             </video>
             <div class="hero__media-content">
                 <div class="hero__headline-wrapper">
-                    <h2 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h2>
-                    <h3 class="hero__headline-secondary"><?php echo $heroHeadlineSecondary; ?> </h3>
+                    <h3 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h3>
+                    <h4 class="hero__headline-secondary"><?php echo $heroHeadlineSecondary; ?> </h4>
                 </div>
                 <div class="hero__text-block-right hero__cta">
                     <h5 class="hero__cta-text"><?php echo $heroCtaText; ?></h5>
-                    <a href="./shop.php?type=all" class="button button--filled hero__cta-button"><?php echo $heroCtaButtonText; ?></a>
+                    <a href="./shop.php?type=all" class="button button--filled"><?php echo $heroCtaButtonText; ?></a>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ $popularProducts = getPopularProducts($conn);
             <main class="standard__content">    
                 <div class="shapes__grid">
                     <a href="./shop.php?type=all&shape=Rectangle" class="shapes__item" data-shape="Round">
-                        <img src="assets/images/shapes/rectangle.webp" alt="Rectangle" class="shapes__item-image">
+                        <img src="assets/images/shapes/rectangle.webp" alt="Rectangle" class="shapes__item-image" loading="lazy" width="640" height="960"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>
@@ -77,7 +77,7 @@ $popularProducts = getPopularProducts($conn);
                         </div>
                     </a>    
                     <a href="./shop.php?type=all&shape=Square" class="shapes__item" data-shape="Square">
-                        <img src="assets/images/shapes/enirco.webp" alt="Square" class="shapes__item-image enirco">
+                        <img src="assets/images/shapes/enirco.webp" alt="Square" class="shapes__item-image enirco" loading="lazy" width="640" height="692"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>
@@ -89,7 +89,7 @@ $popularProducts = getPopularProducts($conn);
                         </div>
                     </a>    
                     <a href="./shop.php?type=all&shape=Round" class="shapes__item" data-shape="Round">
-                        <img src="assets/images/shapes/round.webp" alt="Round" class="shapes__item-image">
+                        <img src="assets/images/shapes/round.webp" alt="Round" class="shapes__item-image" loading="lazy" width="640" height="692"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>
