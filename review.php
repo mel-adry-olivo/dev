@@ -31,7 +31,6 @@ $count = getProductReviewCount($conn, $id);
     <script type="module" src="./assets/js/pages/review.js" defer></script>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
-    <link href="https://fonts.cdnfonts.com/css/source-serif-pro" rel="stylesheet"/>
     <link href="./assets/styles/global/global.css" rel="stylesheet"/>
     <link href="./assets/styles/global/components.css" rel="stylesheet"/>
     <link href="./assets/styles/pages/review.css" rel="stylesheet"/>
