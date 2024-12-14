@@ -65,7 +65,7 @@ $popularProducts = getPopularProducts($conn);
             <main class="standard__content">    
                 <div class="shapes__grid">
                     <a href="./shop.php?type=all&shape=Rectangle" class="shapes__item" data-shape="Round">
-                        <img src="assets/images/shapes/rectangle.webp" alt="Rectangle" class="shapes__item-image" loading="lazy" width="640" height="960"/>
+                        <img src="assets/images/shapes/rectangle.webp" alt="Rectangle" class="shapes__item-image" loading="lazy" width="640" height="692"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>
@@ -77,7 +77,7 @@ $popularProducts = getPopularProducts($conn);
                         </div>
                     </a>    
                     <a href="./shop.php?type=all&shape=Square" class="shapes__item" data-shape="Square">
-                        <img src="assets/images/shapes/enirco.webp" alt="Square" class="shapes__item-image enirco" loading="lazy" width="640" height="692"/>
+                        <img src="assets/images/shapes/enirco.webp" alt="Square" class="shapes__item-image enirco" loading="lazy" width="640" height="960"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>

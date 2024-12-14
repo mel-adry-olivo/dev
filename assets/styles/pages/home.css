@@ -74,6 +74,7 @@
     text-align: center;
     letter-spacing: 0.05rem;
     text-wrap: pretty;
+    user-select: none;
 }
 
 .standard__content {
@@ -106,7 +107,8 @@
     border-radius: 1rem;
     z-index: -1;
     filter: brightness(80%) saturate(85%);
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+        filter 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .shapes__item-image.enirco {
     object-position: top;
