@@ -28,19 +28,23 @@ $popularProducts = getPopularProducts($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $title; ?></title>
-    <script type="module" src="./assets/js/pages/home.js" defer></script>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
-    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
+    <link rel="preload" href="./assets/styles/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/styles/fonts/Satoshi-Light.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/styles/fonts/Satoshi-Medium.woff2" as="font" type="font/woff2" crossorigin>
     <link href="./assets/styles/global/global.css" rel="stylesheet"/>
     <link href="./assets/styles/global/components.css" rel="stylesheet"/>
     <link href="./assets/styles/pages/home.css" rel="stylesheet"/>
+    <script type="module" src="./assets/js/pages/home.js" defer></script>
 </head>
 <body>
     <?php require './includes/components/header.php'?>
     <?php require './includes/components/action-menu.php'?>
     <section class="hero">
         <div class="hero__media-container">
-            <video preload="none" playsinline autoplay loop muted src="./assets/images/hero-video.webm" class="hero__media" poster="./assets/images/hero-image.png"></video>
+            <video preload="metadata" playsinline autoplay loop muted class="hero__media" poster="./assets/images/hero-image.png">
+                <source src="./assets/images/hero-video.webm" type="video/mp4">
+            </video>
             <div class="hero__media-content">
                 <div class="hero__headline-wrapper">
                     <h1 class="hero__headline-primary"><?php echo $heroHeadlinePrimary; ?></h1>
@@ -58,30 +62,42 @@ $popularProducts = getPopularProducts($conn);
             <header class="standard__header">
                 <h4 class="standard__header-text"><?php echo $shapesHeaderText; ?></h4>
             </header> 
-            <main class="standard__content">
+            <main class="standard__content">    
                 <div class="shapes__grid">
                     <a href="./shop.php?type=all&shape=Rectangle" class="shapes__item" data-shape="Round">
-                        <img src="assets/images/shapes/rectangle.png" alt="Rectangle" class="shapes__item-image">
+                        <img src="assets/images/shapes/rectangle.webp" alt="Rectangle" class="shapes__item-image">
                         <div class="shapes__item-link">
-                            <div class="icon-container shapes__item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z"></path></svg></div>
+                            <div class="icon-container shapes__item-icon">
+                                <?php echo getIcon('bag');?>
+                            </div>
                             <span class="shapes__item-text">Rectangle</span>
-                            <div class="shapes__item-arrow"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path></svg></div>
+                            <div class="shapes__item-arrow">
+                                <?php echo getIcon('arrow-right'); ?>
+                            </div>
                         </div>
                     </a>    
                     <a href="./shop.php?type=all&shape=Square" class="shapes__item" data-shape="Square">
-                        <img src="assets/images/shapes/enirco.jpg" alt="Square" class="shapes__item-image enirco">
+                        <img src="assets/images/shapes/enirco.webp" alt="Square" class="shapes__item-image enirco">
                         <div class="shapes__item-link">
-                            <div class="icon-container shapes__item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z"></path></svg></div>
+                            <div class="icon-container shapes__item-icon">
+                                <?php echo getIcon('bag');?>
+                            </div> 
                             <span class="shapes__item-text">Square</span>
-                            <div class="shapes__item-arrow"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path></svg></div>
+                            <div class="shapes__item-arrow">
+                                <?php echo getIcon('arrow-right'); ?>
+                            </div>
                         </div>
                     </a>    
                     <a href="./shop.php?type=all&shape=Round" class="shapes__item" data-shape="Round">
-                        <img src="assets/images/shapes/round.png" alt="Round" class="shapes__item-image">
+                        <img src="assets/images/shapes/round.webp" alt="Round" class="shapes__item-image">
                         <div class="shapes__item-link">
-                            <div class="icon-container shapes__item-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2m-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2m6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2z"></path></svg></div>
+                            <div class="icon-container shapes__item-icon">
+                                <?php echo getIcon('bag');?>
+                            </div> 
                             <span class="shapes__item-text">Round</span>
-                            <div class="shapes__item-arrow"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="currentColor"><path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path></svg></div>
+                            <div class="shapes__item-arrow">
+                                <?php echo getIcon('arrow-right'); ?>
+                            </div>
                         </div>
                     </a>  
                 </div>            

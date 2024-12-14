@@ -1,7 +1,9 @@
 <footer class="footer__wrapper">
     <div class="footer wrapper">
         <div class="footer__main">
-            <h3 class="footer__title">IN<span>SPEC</span></h3>
+            <a href="./" class="footer__logo">
+                <img src="./assets/images/icons/logo-xsmall-inverted.webp" alt="Inspec Logo" width="66" height="16">
+            </a>
             <div class="footer__content footer__content-contact">
                 <p class="footer__contact">official.inspec@company.com</p>
                 <p class="footer__contact">(+63) 927 590 3854</p>

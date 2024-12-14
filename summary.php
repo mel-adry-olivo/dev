@@ -36,7 +36,9 @@ foreach($bag as $bagproduct) {
     <title><?php echo $title; ?></title>
     <link rel="shortcut icon" href="./assets/images/icons/favicon.ico" type="image/x-icon">
     <script type="module" src="./assets/js/pages/summary.js" defer></script>
-    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet"/>
+    <link rel="preload" href="./assets/styles/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/styles/fonts/Satoshi-Light.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/styles/fonts/Satoshi-Medium.woff2" as="font" type="font/woff2" crossorigin>
     <link href="./assets/styles/global/global.css" rel="stylesheet"/>
     <link href="./assets/styles/global/components.css" rel="stylesheet"/>
     <link href="./assets/styles/pages/summary.css" rel="stylesheet"/>
