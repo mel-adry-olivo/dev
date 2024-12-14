@@ -2,8 +2,10 @@ import { addClass, removeClass } from '../utils/dom.js';
 
 const pageOverlay = document.querySelector('.page-overlay-nav');
 const nav = document.querySelector('.header__nav-list');
-let lastScrollY = 0;
 const header = document.querySelector('.header__wrapper');
+let lastScrollY = 0;
+let isScrolling = false;
+const throttleDelay = 120; // ms
 
 function initHeader() {
     window.addEventListener('resize', () => handleResize());
@@ -22,7 +24,16 @@ function initHeader() {
         }
     });
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            handleScroll();
+            isScrolling = true;
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, throttleDelay);
+        }
+    });
 }
 
 function handleResize() {
@@ -33,6 +44,7 @@ function handleResize() {
 
 function handleScroll() {
     const currentScroll = window.scrollY;
+
     currentScroll > lastScrollY
         ? addClass(header, 'hidden')
         : removeClass(header, 'hidden');
