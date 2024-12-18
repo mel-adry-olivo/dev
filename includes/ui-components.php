@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 function createProductCard($conn,$product) {
 
@@ -16,10 +16,10 @@ function createProductCard($conn,$product) {
 
     echo
     <<<HTML
-        <a href="./product.php?id=$productId" class="product__card" data-id="$productId">  
+        <a href="./product.php?id=$productId" class="product__card" data-id="$productId">
             <div class="product__image-container">
                 <img src="$imagePath" alt="$name" class="product__image product__image--main" width="316" >
-                <img src="$imageAlt" alt="$name" class="product__image product__image--alternate" width="316" >                
+                <img src="$imageAlt" alt="$name" class="product__image product__image--alternate" width="316" >
                 <button class="product__favorite-button $isFavorite" data-tooltip="$tooltip" data-id="$productId">
                     <span class="product__favorite-icon product__favorite-icon--unchecked">$favoriteUnchecked</span>
                     <span class="product__favorite-icon product__favorite-icon--checked" data-tooltip="Remove from favorites">$favoriteChecked</span>
@@ -46,7 +46,7 @@ function createFavoriteCard($product) {
 
     echo
     <<<HTML
-        <div class="product__favorite-card" data-id="$productId">  
+        <div class="product__favorite-card" data-id="$productId">
             <button class="icon-container product__card-close" data-id="$productId">$close</button>
             <div class="product__image-container">
                 <img src="$imagePath" alt="" class="product__image" width="316" height="">
@@ -77,7 +77,7 @@ function createBagCard($product) {
 
     echo
     <<<HTML
-        <div class="product__bag-card" data-id="$productId">  
+        <div class="product__bag-card" data-id="$productId">
             <form action="./handlers/products/bag.php" method="POST" class="product__bag-close-form">
                 <input type="hidden" name="remove">
                 <input type="hidden" name="product_id" value="$productId">
@@ -107,7 +107,7 @@ function createReservationCard($product) {
 
     echo
     <<<HTML
-        <div class="product__bag-card" data-id="$productId">  
+        <div class="product__bag-card" data-id="$productId">
             <form action="./handlers/products/reservation.php" method="POST" class="product__reserve-close-form">
                 <input type="hidden" name="remove">
                 <input type="hidden" name="product_id" value="$productId">
@@ -129,6 +129,7 @@ function createReservationCard($product) {
 
 function createReviewCard($review) {
     $reviewId = $review['review_id'];
+    $productId = $review['product_id'];
     $name = $review["fname"] . " " . $review["lname"];
     $userId = $review["user_id"];
     $date = $review["created_at"];
@@ -137,6 +138,7 @@ function createReviewCard($review) {
     $text = $review["review_text"];
     $ratingHTML = createRatingStars($rating);
     $closeIcon = getIcon('close');
+
     $currentUser = $_SESSION['user_id'] ?? '';
     $role = $_SESSION['role'] ?? '';
     $isAdmin = $role == 'admin' ?? 'customer';
@@ -144,17 +146,18 @@ function createReviewCard($review) {
     if(isset($currentUser)) {
         $hasClose = $userId == $currentUser || $isAdmin;
         $isCurrentUser = $hasClose  ? '<button  class="product__review-close">'. $closeIcon .'</button>' : '';
-        $deleteForm = 
+        $deleteForm =
         <<<HTML
             <form class="product__review-close-form" method="post" action="./handlers/products/reviews.php">
                 <input type="hidden" name="action" value="remove"/>
                 <input type="hidden" name="review_id" value="$reviewId"/>
+                <input type="hidden" name="product_id" value="$productId"/>
                 $isCurrentUser
             </form>
         HTML;
     }
 
-    
+
 
     echo
     <<<HTML
@@ -165,7 +168,7 @@ function createReviewCard($review) {
                     <span class="product__review-card-date">$formattedDate</span>
 
                 </div>
-                $deleteForm 
+                $deleteForm
             </div>
             <div class="product__review-card-stars">
                     $ratingHTML
@@ -186,7 +189,7 @@ function createShapeItem($shape) {
     $bagIcon = getIcon("bag");
     $arrowIcon = getIcon("arrow-right");
 
-    echo 
+    echo
     <<<HTML
         <a href="#" class="shapes__item">
             <img src="$imagePath" alt="$name" class="shapes__item-image">
@@ -243,7 +246,7 @@ function createRatingStars($rating, $class = null) {
     $emptyStarHTML = '<span class="icon-container '. $class .'">' . $starEmpty. '</span>';
     $fullStarHTML = '<span class="icon-container '. $class .'">' . $starFilled . '</span>';
 
-    $fullStars = $rating; 
+    $fullStars = $rating;
     $emptyStars = 5 - $fullStars;
 
     for ($i = 0; $i < $fullStars; $i++) {

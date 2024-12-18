@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -13,7 +13,6 @@ if(isset($_GET['id'])) {
     $product = getProductById($conn, $id);
     $productAttributes = getProductAttributesByID($conn, $id);
 }
-
 
 $title = 'Review | INSPEC®';
 $reviews = getProductReviewsByDate($conn, $id);

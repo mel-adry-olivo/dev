@@ -1,6 +1,5 @@
 <?php
 
-// TO REORDER
 
 function createUser($conn, $user) {
 
