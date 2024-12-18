@@ -28,6 +28,10 @@ export function initActionMenu() {
             const isLogin = authForm.getAttribute('data-state') === 'login';
             authForm.setAttribute('data-state', isLogin ? 'register' : 'login');
         }
+
+        if (e.target.matches('.favorites__not-logged-button')) {
+            updateActionMenuContent('user');
+        }
     });
 
     pageOverlay.addEventListener('click', (e) => {
