@@ -12,6 +12,14 @@ export function elements(selector) {
     return document.querySelectorAll(selector);
 }
 
+export function elementIn(element, selector) {
+    return element.querySelector(selector);
+}
+
+export function elementsIn(element, selector) {
+    return element.querySelectorAll(selector);
+}
+
 export function parentElement(child, selector) {
     return child.parentElement.querySelector(selector);
 }

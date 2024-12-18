@@ -1,5 +1,5 @@
 import * as fetch from '../services/fetch.js';
-import { toggleClass } from '../utils/dom.js';
+import { elementIn, elementsIn, parentElement, toggleClass } from '../utils/dom.js';
 import { element, elements, addClass, removeClass } from '../utils/dom.js';
 
 const filterCategoryButtons = element('.shop__dropdown-button');
@@ -120,7 +120,7 @@ function sortProducts(sortOrder) {
     const currentProducts = element('.product__card');
     const sortedProducts = [...currentProducts].sort((a, b) => {
         function getPrice(product) {
-            const price = product.querySelector('.product__price').textContent;
+            const price = elementIn(product, '.product__price').textContent;
             return parseFloat(price.replace('₱', '').trim());
         }
         return getPrice(a) - getPrice(b);
@@ -162,9 +162,9 @@ function updateProductUI(data) {
 // adding '(n)' to the category text if there are active items
 function updateCategoryText(item) {
     const itemsContainer = item.closest('.shop__dropdown-container');
-    const categoryButton = itemsContainer.parentElement.querySelector('.shop__dropdown-button-text');
+    const categoryButton = parentElement(itemsContainer, '.shop__dropdown-button-text');
+    const activeItems = elementsIn(itemsContainer, '.shop__dropdown-item.active');
     const categoryName = item.getAttribute('filter');
-    const activeItems = itemsContainer.querySelectorAll('.shop__dropdown-item.active');
     const activeCount = activeItems.length;
     categoryButton.textContent = activeCount > 0 ? `${categoryName} (${activeCount})` : categoryName;
 }
@@ -198,7 +198,7 @@ function checkResetFilter() {
 
 function resetCategoryButtonTexts() {
     filterCategoryButtons.forEach((btn) => {
-        const categoryText = btn.querySelector('.shop__dropdown-button-text');
+        const categoryText = elementIn(btn, '.shop__dropdown-button-text');
         const baseText = categoryText.dataset.text || categoryText.textContent;
         categoryText.textContent = btn.getAttribute('filter') || baseText;
     });

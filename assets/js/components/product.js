@@ -2,7 +2,7 @@ import { toggleActionMenu } from './action-menu.js';
 import { showSnackbar } from './snackbar.js';
 import { showConfirmDialog } from './confirm-dialog.js';
 import * as fetch from '../services/fetch.js';
-import { element, elements, toggleClass } from '../utils/dom.js';
+import { element, elementIn, elements, toggleClass } from '../utils/dom.js';
 
 const productFavoriteButtons = elements('.product__favorite-button');
 const favoriteContainer = element('.favorites__content');
@@ -100,7 +100,7 @@ async function removeProductFromFavorite(productId) {
 }
 
 function addFavoriteCardToUI(product) {
-    const emptyContent = favoriteContainer.querySelector('.favorites__empty-content');
+    const emptyContent = elementIn(favoriteContainer, '.favorites__empty-content');
     if (emptyContent) {
         emptyContent.remove();
     }
@@ -108,7 +108,7 @@ function addFavoriteCardToUI(product) {
 }
 
 function removeProductCardFromUI(productId) {
-    const productCard = favoriteContainer.querySelector(`.product__favorite-card[data-id="${productId}"]`);
+    const productCard = elementIn(favoriteContainer, `.product__favorite-card[data-id="${productId}"]`);
     if (productCard) productCard.remove();
     if (!favoriteContainer.children.length) {
         favoriteContainer.innerHTML += createEmptyContent();
