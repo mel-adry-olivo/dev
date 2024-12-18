@@ -12,6 +12,14 @@ export function elements(selector) {
     return document.querySelectorAll(selector);
 }
 
+export function parentElement(child, selector) {
+    return child.parentElement.querySelector(selector);
+}
+
+export function parentElements(child, selector) {
+    return child.parentElement.querySelectorAll(selector);
+}
+
 export function addClass(e, c) {
     if (!e.classList.contains(c)) {
         e.classList.add(c);

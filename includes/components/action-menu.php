@@ -1,7 +1,6 @@
 <?php
 ?>
 
-
 <div class="action-menu">
     <div class="action-menu__wrapper">
         <header class="action-menu__header">

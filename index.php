@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -10,7 +10,7 @@ $conn = require './includes/db-conn.php';
 
 
 
-$title = "INSPEC®"; 
+$title = "INSPEC®";
 $heroHeadlinePrimary = "Redefining";
 $heroHeadlineSecondary = "eyewear";
 $heroCtaText = "Vision meets artistry.";
@@ -61,8 +61,8 @@ $popularProducts = getPopularProducts($conn);
         <section class="standard">
             <header class="standard__header">
                 <h4 class="standard__header-text"><?php echo $shapesHeaderText; ?></h4>
-            </header> 
-            <main class="standard__content">    
+            </header>
+            <main class="standard__content">
                 <div class="shapes__grid">
                     <a href="./shop.php?type=all&shape=Rectangle" class="shapes__item" data-shape="Round">
                         <img src="assets/images/shapes/rectangle.webp" alt="Rectangle" class="shapes__item-image" loading="lazy" width="640" height="692"/>
@@ -75,34 +75,34 @@ $popularProducts = getPopularProducts($conn);
                                 <?php echo getIcon('arrow-right'); ?>
                             </div>
                         </div>
-                    </a>    
+                    </a>
                     <a href="./shop.php?type=all&shape=Square" class="shapes__item" data-shape="Square">
                         <img src="assets/images/shapes/enirco.webp" alt="Square" class="shapes__item-image enirco" loading="lazy" width="640" height="960"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>
-                            </div> 
+                            </div>
                             <span class="shapes__item-text">Square</span>
                             <div class="shapes__item-arrow">
                                 <?php echo getIcon('arrow-right'); ?>
                             </div>
                         </div>
-                    </a>    
+                    </a>
                     <a href="./shop.php?type=all&shape=Round" class="shapes__item" data-shape="Round">
                         <img src="assets/images/shapes/round.webp" alt="Round" class="shapes__item-image" loading="lazy" width="640" height="692"/>
                         <div class="shapes__item-link">
                             <div class="icon-container shapes__item-icon">
                                 <?php echo getIcon('bag');?>
-                            </div> 
+                            </div>
                             <span class="shapes__item-text">Round</span>
                             <div class="shapes__item-arrow">
                                 <?php echo getIcon('arrow-right'); ?>
                             </div>
                         </div>
-                    </a>  
-                </div>            
+                    </a>
+                </div>
             </main>
-        </section>  
+        </section>
         <section class="standard">
             <header class="standard__header">
                 <h4 class="standard__header-text"><?php echo $trendingHeaderText; ?></h4>
@@ -118,7 +118,7 @@ $popularProducts = getPopularProducts($conn);
                     </div>
                 </div>
             </main>
-        </section>  
+        </section>
     </main>
     <?php require './includes/components/footer.php'?>
     <?php include './includes/components/confirm-dialog.php';?>

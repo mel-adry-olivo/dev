@@ -46,25 +46,19 @@ export function toggleActionMenu(action = null) {
 
 function updateActionMenuContent(action) {
     const contentItems = element('.action-menu__content-item');
-    contentItems.forEach((content) =>
-        content.classList.toggle('active', content.classList.contains(action)),
-    );
 
-    actionMenuButtons.forEach((btn) =>
-        btn.classList.toggle(
-            'active',
-            btn.getAttribute('data-action') === action,
-        ),
-    );
+    for (const item of contentItems) {
+        const isCurrentItem = item.classList.contains(action);
+        item.classList.toggle('active', isCurrentItem);
+    }
+
+    for (const btn of actionMenuButtons) {
+        btn.classList.toggle('active', btn.getAttribute('data-action') === action);
+    }
 }
 
 function handleAction(action, callback) {
-    if (action === 'bag') {
-        handleBagClick(callback);
-        return;
-    } else {
-        callback(action);
-    }
+    action === 'bag' ? handleBagClick() : callback(action);
 }
 
 async function handleBagClick(callback) {

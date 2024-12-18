@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 session_start();
@@ -28,12 +28,10 @@ if(createUser($conn, $user)) {
     $_SESSION['login_success'] = true;
 
 
-    if(basename($_SERVER['HTTP_REFERER'], ".php") == 'login') { 
-        header("Location: ../../index.php");
-        exit();
-    }
-    
-    header("Location: ../../index.php?login=true");
+    header("Location: ../../index.php");
+    exit();
+} else {
+    $_SESSION['register_error'] = true;
+    header("Location: ../../login.php");
     exit();
 }
-

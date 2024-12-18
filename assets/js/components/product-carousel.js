@@ -1,13 +1,11 @@
+import { elements, parentElements } from '../utils/dom.js';
+
 const initCarousel = () => {
-    const carousels = document.querySelectorAll('.products__carousel');
+    const carousels = elements('.products__carousel');
 
     carousels.forEach((carousel) => {
-        const prevButton = carousel.parentElement.querySelectorAll(
-            '.products__carousel-control--prev',
-        );
-        const nextButton = carousel.parentElement.querySelectorAll(
-            '.products__carousel-control--next',
-        );
+        const prevButton = parentElements(carousel, '.products__carousel-control--prev');
+        const nextButton = parentElements(carousel, '.products__carousel-control--next');
         const carouselItems = Array.from(carousel.children);
         const itemGap = 32;
 
@@ -46,12 +44,8 @@ const initCarousel = () => {
             updateCarouselControls();
         };
 
-        prevButton.forEach((button) =>
-            button.addEventListener('click', () => shiftCarousel(1)),
-        );
-        nextButton.forEach((button) =>
-            button.addEventListener('click', () => shiftCarousel(-1)),
-        );
+        prevButton.forEach((button) => button.addEventListener('click', () => shiftCarousel(1)));
+        nextButton.forEach((button) => button.addEventListener('click', () => shiftCarousel(-1)));
         window.addEventListener('resize', handleResize);
 
         itemWidth = carouselItems[0].clientWidth;
