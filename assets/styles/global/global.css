@@ -600,4 +600,26 @@ input {
     .header__actions-list {
         gap: 0.75rem;
     }
+
+    /* /////////////////////////////// */
+    /* FOOTER STYLES  */
+    /* /////////////////////////////// */
+
+    .footer__main {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .footer__content-contact {
+        align-items: center;
+    }
+
+    .footer__content-cta {
+        align-items: center;
+    }
+
+    .footer__subsection {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }
