@@ -2,11 +2,10 @@ import { toggleActionMenu } from './action-menu.js';
 import { showSnackbar } from './snackbar.js';
 import { showConfirmDialog } from './confirm-dialog.js';
 import * as fetch from '../services/fetch.js';
+import { element, elements, toggleClass } from '../utils/dom.js';
 
-const productFavoriteButtons = document.querySelectorAll(
-    '.product__favorite-button',
-);
-const favoriteContainer = document.querySelector('.favorites__content');
+const productFavoriteButtons = elements('.product__favorite-button');
+const favoriteContainer = element('.favorites__content');
 
 const initFavorites = () => {
     productFavoriteButtons.forEach((button) =>
@@ -22,11 +21,7 @@ const initFavorites = () => {
             handleRemoveFavorite(e.target);
         }
 
-        if (
-            e.target.matches(
-                '.product__favorite-form .product__favorite-action',
-            )
-        ) {
+        if (e.target.matches('.product__favorite-form .product__favorite-action')) {
             e.preventDefault();
             handleAddToBagFromFavorite(e.target);
         }
@@ -105,9 +100,7 @@ async function removeProductFromFavorite(productId) {
 }
 
 function addFavoriteCardToUI(product) {
-    const emptyContent = favoriteContainer.querySelector(
-        '.favorites__empty-content',
-    );
+    const emptyContent = favoriteContainer.querySelector('.favorites__empty-content');
     if (emptyContent) {
         emptyContent.remove();
     }
@@ -115,9 +108,7 @@ function addFavoriteCardToUI(product) {
 }
 
 function removeProductCardFromUI(productId) {
-    const productCard = favoriteContainer.querySelector(
-        `.product__favorite-card[data-id="${productId}"]`,
-    );
+    const productCard = favoriteContainer.querySelector(`.product__favorite-card[data-id="${productId}"]`);
     if (productCard) productCard.remove();
     if (!favoriteContainer.children.length) {
         favoriteContainer.innerHTML += createEmptyContent();
@@ -125,17 +116,12 @@ function removeProductCardFromUI(productId) {
 }
 
 function updateFavoriteButton(productId) {
-    const button = document.querySelector(
-        `.product__favorite-button[data-id="${productId}"]`,
-    );
-    if (!button) return; // could be in pages where favorite button are not displayed
+    const button = element(`.product__favorite-button[data-id="${productId}"]`);
+    if (!button) return; // could be in pages where favorite button is not displayed
 
     const isFavorite = button.classList.contains('active');
-    button.setAttribute(
-        'data-tooltip',
-        isFavorite ? 'Add to favorites' : 'Remove from favorites',
-    );
-    button.classList.toggle('active');
+    button.setAttribute('data-tooltip', isFavorite ? 'Add to favorites' : 'Remove from favorites');
+    toggleClass(button, 'active');
 }
 
 const createEmptyContent = () => {

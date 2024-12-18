@@ -1,14 +1,15 @@
 import { hideForm } from '../utils/dom.js';
+import { element, addClass } from '../utils/dom.js';
 
-const pageOverlay = document.querySelector('.confirm__overlay');
-const confirmDialog = document.querySelector('.confirm__dialog');
-const confirmDialogMessage = document.querySelector('.confirm__message');
-const confirmDialogButtonCancel = document.querySelector('.confirm__cancel');
-const confirmDialogButtonOk = document.querySelector('.confirm__ok');
+const pageOverlay = element('.confirm__overlay');
+const confirmDialog = element('.confirm__dialog');
+const confirmDialogMessage = element('.confirm__message');
+const confirmDialogButtonCancel = element('.confirm__cancel');
+const confirmDialogButtonOk = element('.confirm__ok');
 
 export const showConfirmDialog = (message, callback) => {
-    pageOverlay.classList.add('show');
-    confirmDialog.classList.add('show');
+    addClass(confirmDialog, 'show');
+    addClass(pageOverlay, 'show');
     confirmDialogMessage.textContent = message;
 
     confirmDialogButtonOk.addEventListener('click', () => {

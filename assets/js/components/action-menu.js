@@ -53,11 +53,11 @@ function updateActionMenuContent(action) {
 
     for (const item of contentItems) {
         const isCurrentItem = item.classList.contains(action);
-        item.classList.toggle('active', isCurrentItem);
+        toggleClass(item, 'active', isCurrentItem);
     }
 
     for (const btn of actionMenuButtons) {
-        btn.classList.toggle('active', btn.getAttribute('data-action') === action);
+        toggleClass(btn, 'active', btn.getAttribute('data-action') === action);
     }
 }
 

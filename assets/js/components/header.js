@@ -1,8 +1,8 @@
-import { addClass, removeClass } from '../utils/dom.js';
+import { element, toggleClass } from '../utils/dom.js';
 
-const pageOverlay = document.querySelector('.page-overlay-nav');
-const nav = document.querySelector('.header__nav-list');
-const header = document.querySelector('.header__wrapper');
+const pageOverlay = element('.page-overlay-nav');
+const nav = element('.header__nav-list');
+const header = element('.header__wrapper');
 
 function initHeader() {
     window.addEventListener('resize', () => handleResize());
@@ -29,8 +29,8 @@ function handleResize() {
 }
 
 function toggleNav() {
-    nav.classList.toggle('show');
-    pageOverlay.classList.toggle('show');
+    toggleClass(nav, 'show');
+    toggleClass(pageOverlay, 'show');
 }
 
 export default initHeader;

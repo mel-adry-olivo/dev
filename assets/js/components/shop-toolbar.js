@@ -1,19 +1,15 @@
 import * as fetch from '../services/fetch.js';
 import { toggleClass } from '../utils/dom.js';
-import { element, elements } from '../utils/dom.js';
+import { element, elements, addClass, removeClass } from '../utils/dom.js';
 
 const filterCategoryButtons = element('.shop__dropdown-button');
 const filterItems = element('.shop__dropdown-item[filter]');
 const sortItems = element('.shop__dropdown-item[sort-order]');
-
-const filterButtonMobile = element('.shop__filter-button-mobile');
 const filterContainer = element('.shop__filter-container');
-const filterCloseButton = element('.shop__filter-close-button');
 const filterResetButtonMobile = element('.shop__filter-reset-mobile');
 const filterResetButton = element('.shop__filter-reset-desktop');
 const pageOverlay = element('.page-overlay-filter');
 const body = document.body;
-const productType = new URLSearchParams(window.location.search).get('type');
 
 const container = element('.shop__toolbar');
 
@@ -72,9 +68,7 @@ export default function initFilter() {
 }
 
 export function setSelectedFilter(filter, item) {
-    const dropdownItem = element(
-        `.shop__dropdown-item[filter="${filter}"][data-value="${item}"]`,
-    );
+    const dropdownItem = element(`.shop__dropdown-item[filter="${filter}"][data-value="${item}"]`);
 
     if (dropdownItem) {
         handleFilterItemClick(dropdownItem);
@@ -92,9 +86,12 @@ async function handleSortItemClick(item) {
     if (!item.hasAttribute('sort-order')) return;
     if (item.classList.contains('active')) return;
 
-    sortItems.forEach((it) => it.classList.toggle('active', it === item));
-    const sortOrder = item.getAttribute('sort-order');
+    sortItems.forEach((it) => {
+        const isClickedItem = it === item;
+        toggleClass(it, 'active', isClickedItem);
+    });
 
+    const sortOrder = item.getAttribute('sort-order');
     sortProducts(sortOrder);
 }
 
@@ -114,6 +111,7 @@ async function applyFilters() {
         filters[itemCategory].push(itemName);
     });
 
+    const productType = new URLSearchParams(window.location.search).get('type');
     const filteredProducts = await fetch.filteredItems(filters, productType);
     updateProductUI(filteredProducts);
 }
@@ -134,9 +132,10 @@ function sortProducts(sortOrder) {
 }
 
 async function handleResetFilterClick() {
-    filterItems.forEach((item) => item.classList.remove('active'));
+    filterItems.forEach((item) => removeClass(item, 'active'));
     checkResetFilter();
 
+    const productType = new URLSearchParams(window.location.search).get('type');
     const products = await fetch.productsWithType(productType);
     updateProductUI(products);
     resetCategoryButtonTexts();
@@ -151,8 +150,7 @@ function updateProductUI(data) {
     if (typeof data === 'string') {
         productContainer.innerHTML = data;
         const length = productContainer.children.length;
-        productCount.textContent =
-            data.length > 1 ? `${length} Products` : `${length} Product`;
+        productCount.textContent = data.length > 1 ? `${length} Products` : `${length} Product`;
     } else {
         // elements from sorting
         data.forEach((product) => {
@@ -164,16 +162,11 @@ function updateProductUI(data) {
 // adding '(n)' to the category text if there are active items
 function updateCategoryText(item) {
     const itemsContainer = item.closest('.shop__dropdown-container');
-    const categoryButton = itemsContainer.parentElement.querySelector(
-        '.shop__dropdown-button-text',
-    );
+    const categoryButton = itemsContainer.parentElement.querySelector('.shop__dropdown-button-text');
     const categoryName = item.getAttribute('filter');
-    const activeItems = itemsContainer.querySelectorAll(
-        '.shop__dropdown-item.active',
-    );
+    const activeItems = itemsContainer.querySelectorAll('.shop__dropdown-item.active');
     const activeCount = activeItems.length;
-    categoryButton.textContent =
-        activeCount > 0 ? `${categoryName} (${activeCount})` : categoryName;
+    categoryButton.textContent = activeCount > 0 ? `${categoryName} (${activeCount})` : categoryName;
 }
 
 // if filter container is open while resizing, close it
@@ -184,21 +177,22 @@ function handleResize() {
 }
 
 // if click outside filter container, close it
-
 function closeAllDropdowns() {
-    filterCategoryButtons.forEach((button) => {
-        if (button) button.classList.remove('active');
+    if (!filterCategoryButtons) return;
+
+    filterCategoryButtons.forEach((btn) => {
+        if (btn) removeClass(btn, 'active');
     });
 }
 
 function checkResetFilter() {
     const activeCount = elements('.shop__dropdown-item.active[filter]').length;
     if (activeCount > 0) {
-        filterResetButtonMobile.classList.add('show');
-        filterResetButton.classList.add('show');
+        addClass(filterResetButtonMobile, 'show');
+        addClass(filterResetButton, 'show');
     } else {
-        filterResetButtonMobile.classList.remove('show');
-        filterResetButton.classList.remove('show');
+        removeClass(filterResetButtonMobile, 'show');
+        removeClass(filterResetButton, 'show');
     }
 }
 
@@ -211,10 +205,7 @@ function resetCategoryButtonTexts() {
 }
 
 function handlePageOverlayClick(e) {
-    if (
-        e.target === pageOverlay &&
-        filterContainer.classList.contains('show')
-    ) {
+    if (e.target === pageOverlay && filterContainer.classList.contains('show')) {
         toggleMobileFilters();
     }
 }
@@ -229,8 +220,12 @@ function toggleFilterDropdown(filterButton) {
 
     if (window.innerWidth > 900) {
         const isActive = filterButton.classList.contains('active');
-        filterCategoryButtons.forEach((btn) =>
-            btn.classList.toggle('active', btn === filterButton && isActive),
-        );
+
+        // pra is lang ang open on bigger screens
+        // checked active so ma close ang dropdown kung active ang button
+        filterCategoryButtons.forEach((btn) => {
+            const isClickedButton = btn === filterButton;
+            toggleClass(btn, 'active', isClickedButton && isActive);
+        });
     }
 }

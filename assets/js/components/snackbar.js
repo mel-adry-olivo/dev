@@ -1,10 +1,12 @@
+import { element, addClass, removeClass } from '../utils/dom.js';
+
 export const showSnackbar = (message) => {
-    const snackbar = document.querySelector('.snackbar');
+    const snackbar = element('.snackbar');
 
     snackbar.textContent = message;
-    snackbar.classList.add('show');
+    addClass(snackbar, 'show');
 
     setTimeout(() => {
-        snackbar.classList.remove('show');
+        removeClass(snackbar, 'show');
     }, 2500);
 };

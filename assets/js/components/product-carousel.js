@@ -1,5 +1,6 @@
 import { elements, parentElements } from '../utils/dom.js';
 
+// with the help of chatgpt hahaha
 const initCarousel = () => {
     const carousels = elements('.products__carousel');
 

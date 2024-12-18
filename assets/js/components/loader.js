@@ -1,10 +1,8 @@
-import { element } from '../utils/dom.js';
+import { element, addClass, removeClass } from '../utils/dom.js';
 
 export function showLoader() {
     const loader = element('.loader-container');
-    const loaderText = element('.loader-container span');
-
-    loader.classList.remove('hidden');
+    removeClass(loader, 'hidden');
 }
 
 export function setLoaderText(text, duration = 0) {
@@ -17,7 +15,7 @@ export function setLoaderText(text, duration = 0) {
 export function hideLoader(callback = () => {}, duration = 0) {
     setTimeout(() => {
         const loader = element('.loader-container');
-        loader.classList.add('hidden');
+        addClass(loader, 'hidden');
         callback();
     }, duration);
 }
